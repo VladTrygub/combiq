@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.atott.combiq.web.utils.ViewUtils.getCountWord;
+
 @Controller
 public class SearchController extends BaseController {
 
@@ -103,6 +105,7 @@ public class SearchController extends BaseController {
         PagingBean paging = pagingBeanBuilder.build(questionsResponse.getQuestions(), questionsResponse.getQuestions().getNumber(), request);
         List<Question> questions = questionsResponse.getQuestions().getContent();
         dsl = StringUtils.defaultIfBlank(dsl, context.getDslQuery().toDsl());
+        Long totalElements=questionsResponse.getQuestions().getTotalElements();
 
         SearchViewBuilder viewBuilder = new SearchViewBuilder();
         viewBuilder.setQuestions(questions);
@@ -112,6 +115,8 @@ public class SearchController extends BaseController {
         viewBuilder.setSubTitle(subTitle);
         viewBuilder.setQuestionsCatalog(questionsCatalog);
         viewBuilder.setDslQuery(context.getDslQuery());
+        viewBuilder.setQuestionsCount(totalElements);
+        viewBuilder.setAnswerWord(getCountWord(totalElements));
         return viewBuilder.build();
     }
 

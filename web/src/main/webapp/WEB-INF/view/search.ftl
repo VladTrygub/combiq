@@ -89,7 +89,9 @@
         </div>
     </#if>
     <ul class="co-questions">
-    <#if questions?size==0>К сожалению по такому запросу ничего не найдено</#if>
+    <#if questions?size==0>К сожалению по такому запросу ничего не найдено
+        <#else>Нашлось ${questionsCount} ${answerWord}
+    </#if>
         <#list questions as question>
             <li>
               <div class="co-component-question">

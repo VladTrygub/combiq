@@ -1,6 +1,5 @@
 package ru.atott.combiq.web.view;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.Tag;
@@ -19,6 +18,24 @@ public class SearchViewBuilder {
     private String subTitle;
     private boolean questionsCatalog;
     private DslQuery dslQuery;
+    private Long questionsCount;
+    private String answerWord;
+
+    public String getAnswerWord() {
+        return answerWord;
+    }
+
+    public void setAnswerWord(String answerWord) {
+        this.answerWord = answerWord;
+    }
+
+    public Long getQuestionsCount() {
+        return questionsCount;
+    }
+
+    public void setQuestionsCount(Long questionsCount) {
+        this.questionsCount = questionsCount;
+    }
 
     public List<Question> getQuestions() {
         return questions;
@@ -88,6 +105,8 @@ public class SearchViewBuilder {
         mav.addObject("searchOnlyWithComments", dslQuery != null
                 && dslQuery.getMinCommentQuantity() != null
                 && dslQuery.getMinCommentQuantity() > 0);
+        mav.addObject("questionsCount",questionsCount);
+        mav.addObject("answerWord",answerWord);
         return mav;
     }
 }
