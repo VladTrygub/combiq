@@ -1,6 +1,7 @@
 package ru.atott.combiq.service.user.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.entity.UserEntity;
 import ru.atott.combiq.dao.repository.QuestionRepository;
@@ -16,6 +17,7 @@ import java.util.List;
 /**
  * Created by Леонид on 11.03.2016.
  */
+@Service
 public class UserStarsImp implements UserStars {
 
     @Autowired
@@ -24,8 +26,8 @@ public class UserStarsImp implements UserStars {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private QuestionMapper maper;
+
+    private QuestionMapper maper = new QuestionMapper();
 
     @Override
     public void like(String userId, String questionId) {

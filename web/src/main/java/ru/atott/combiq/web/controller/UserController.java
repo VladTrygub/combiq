@@ -36,7 +36,7 @@ public class UserController extends BaseController {
         return new SuccessBean();
     }
 
-    @RequestMapping(value = "/user/favorite", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/favorite", method = RequestMethod.GET)
     @ResponseBody
     @PreAuthorize("hasAnyRole('user','sa','contenter')")
     public ModelAndView getAll(){
