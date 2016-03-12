@@ -90,7 +90,7 @@
     </#if>
     <ul class="co-questions">
     <#if questions?size==0>К сожалению по такому запросу ничего не найдено
-        <#else>Нашлось ${questionsCount} ${answerWord}
+        <#else>Нашлось ${utils.pluralizeQuestionLabel(questionsCount)}
     </#if>
         <#list questions as question>
             <li>

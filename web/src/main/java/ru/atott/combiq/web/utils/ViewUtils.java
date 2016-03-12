@@ -22,12 +22,12 @@ public class ViewUtils {
         return (JsonObject) parser.parse(json);
     }
 
-    public static String getCountWord(Long count){
+    public static String pluralizeQuestionLabel(Long count){
         int lastDigit= (int) (count%10);
         String answer="";
-        if(lastDigit==1) answer="вопрос";
-        else if(lastDigit>1&&lastDigit<5)answer="вопроса";
-        else answer="вопросов";
-        return answer;
+        if(lastDigit==1) answer=" вопрос";
+        else if(lastDigit>1&&lastDigit<5)answer=" вопроса";
+        else answer=" вопросов";
+        return count+answer;
     }
 }
