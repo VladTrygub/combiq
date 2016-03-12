@@ -132,8 +132,26 @@
                 <div>
                     <div class="co-question-title">
                     ${question.title}
+                    <div class="right">
+                        <#if user??>
+                           <#if user.questions?? && user.questions?seq_contains(question.Id)>
+                                    <img  src="/static/images/site/dislike-star.png" width="35"
+                                     height="35" onclick="
+                                    $.post('/questions/${question.id}/dislike');
+                                     window.location.reload(true);"></img>
+                           <#else>
+                                    <img class="star" src="/static/images/site/like-star.png"
+                                     width="35" height="35"  onclick="
+                                    $.post('/questions/${question.id}/like');
+                                    window.location.reload(true);"></img>
+                           </#if>
+                        <#else>
+                            <img class="star" src="/static/images/site/like-star.png"
+                             width="35" height="35"  onclick="window.location.reload(true);"></img>
+                        </#if>
+                        <span>${question.stars}</span>
                     </div>
-
+                    </div>
                     <div class="co-question-body">
                         <@parts.contentEditor content=question.body url='/questions/${question.id}/content' />
                     </div>
@@ -201,6 +219,7 @@
         </li>
 
     </ul>
+
     <#if functions.hasRoleSaOrContenter()>
         <a  href="#" onclick="ko.openDialog('co-questionposter',{id: '${question.id?js_string}'}); return false;">
             Изменить вопрос

@@ -34,6 +34,8 @@ public class UserStarsImp implements UserStars {
         if(questionslist==null){questionslist=new ArrayList<String>();}
         if (!questionslist.contains(questionId)){
             questionslist.add(questionId);
+            user.setQuestions(questionslist);
+            userRepository.save(user);
             QuestionEntity questionEntity=questionRepository.findOne(questionId);
             questionEntity.setStars(questionEntity.getStars()+1);
             questionRepository.save(questionEntity);
@@ -47,6 +49,7 @@ public class UserStarsImp implements UserStars {
         if(questionslist==null){questionslist=new ArrayList<String>();}
         if (questionslist.contains(questionId)){
             questionslist.remove(questionId);
+            userRepository.save(user);
             QuestionEntity questionEntity=questionRepository.findOne(questionId);
             questionEntity.setStars(questionEntity.getStars()-1);
             questionRepository.save(questionEntity);

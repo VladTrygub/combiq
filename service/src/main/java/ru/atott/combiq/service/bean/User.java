@@ -15,6 +15,7 @@ public class User {
     private String avatarUrl;
     private List<String> roles;
     private Date registerDate;
+    private List<String> questions;
 
     public String getId() {
         return id;
@@ -106,5 +107,13 @@ public class User {
 
     public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
+    }
+
+    public List<String> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<String> questions) {
+        this.questions = questions;
     }
 }
