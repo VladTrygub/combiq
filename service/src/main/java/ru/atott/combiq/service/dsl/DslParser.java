@@ -95,6 +95,9 @@ public class DslParser {
                                     query.setUser(pair.getValue());
                                 }
                                 break;
+                            case "favorite":
+                                query.setFavorite(BooleanUtils.toBoolean(pair.getValue()));
+                                break;
                         }
                     });
 
