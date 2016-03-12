@@ -37,12 +37,25 @@
                         <ul class="co-menu-top-items pull-right">
                             <#if user??>
                                 <li class="co-auth">
-                                    <a class="co-inline" href="/logout.do" ">
-                                        <#if user.headAvatarUrl??>
-                                            <img style="position: absolute; margin-top: -12px; margin-left: -10px;" width="46" height="46" src="${user.headAvatarUrl!}">
-                                        </#if>
-                                        <span class="inline" style="${functions.if(user.headAvatarUrl??, 'margin-left: 50px;')}">Выйти</span>
-                                    </a>
+                                    <div class="btn-group co-profile-button">
+                                        <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <a class="co-inline" href="${urlResolver.getUserUrl(user.id)}">
+                                                <#if user.headAvatarUrl??>
+                                                    <img style="margin-top: -20px; margin-bottom: -15px;" width="46" height="46" src="${user.headAvatarUrl!}">
+                                                </#if>
+                                            </a>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li>
+                                                <a href="${urlResolver.getUserUrl(user.id)}">Мой профиль</a>
+                                            </li>
+                                            <li role="separator" class="divider"></li>
+                                            <li>
+                                                <a href="/logout.do">Выйти</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                             <#else>
                                 <li class="co-auth">

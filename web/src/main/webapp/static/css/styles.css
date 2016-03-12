@@ -1082,3 +1082,34 @@ ul.co-component-question-tags > li {
     padding: 20px;
     transition: background-color 300ms linear;
 }
+
+.co-profile-button {
+    vertical-align: inherit !important;
+}
+
+.co-profile-button button,
+.co-profile-button .btn-group.open .dropdown-toggle {
+    border: none;
+    background: none;
+    background-color: transparent;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    padding: 0 10px;
+}
+
+.co-profile-button button > a {
+    padding: 24px 10px;
+}
+
+.co-profile-button ul a {
+    display: block;
+}
+
+.co-profile-button .dropdown-menu {
+    border-radius: 0;
+    margin: 0;
+}
+
+.co-profile-button .dropdown-menu a {
+    padding: 12px 25px;
+}

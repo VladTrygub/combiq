@@ -35,7 +35,6 @@ public class CombiqUser extends User {
     public CombiqUser(String username, String password, Collection<String> roles) {
         super(username, password,
                 roles.stream()
-                        /*.flatMap(roleName -> Stream.of(roleName, "ROLE_" + roleName))*/
                         .map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
         this.roles = Sets.newHashSet(roles);
     }
@@ -62,7 +61,7 @@ public class CombiqUser extends User {
 
     public String getHeadAvatarUrl() {
         if (avatarUrl == null) {
-            return null;
+            return "/static/images/icons/user-48.png";
         }
 
         switch (type) {
