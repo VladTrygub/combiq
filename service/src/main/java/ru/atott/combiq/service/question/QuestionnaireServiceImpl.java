@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.question.impl;
+package ru.atott.combiq.service.question;
 
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;

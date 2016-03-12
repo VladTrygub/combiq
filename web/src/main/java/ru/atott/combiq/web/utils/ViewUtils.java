@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ViewUtils {
+
     public String toJson(Object object) {
         return serializeToJson(object);
     }

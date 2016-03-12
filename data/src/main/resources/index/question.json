@@ -43,27 +43,6 @@
         }
       }
     },
-    "questionAttrs": {
-      "properties": {
-        "userId": {
-          "type": "string",
-          "index": "not_analyzed"
-        },
-        "questionId": {
-          "type": "string",
-          "index": "not_analyzed"
-        },
-        "reputationVoteDate": {
-          "type": "date"
-        },
-        "reputation": {
-          "type": "long"
-        },
-        "comment": {
-          "type": "string"
-        }
-      }
-    },
     "questionnaire": {
       "properties": {
         "name": {

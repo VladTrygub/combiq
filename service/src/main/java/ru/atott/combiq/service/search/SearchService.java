@@ -1,8 +1,6 @@
 package ru.atott.combiq.service.search;
 
 import ru.atott.combiq.service.bean.Question;
-import ru.atott.combiq.service.question.impl.GetQuestionContext;
-import ru.atott.combiq.service.question.impl.GetQuestionResponse;
 import ru.atott.combiq.service.site.UserContext;
 
 import java.util.List;

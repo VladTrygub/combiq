@@ -4,7 +4,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.dao.entity.QuestionComment;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionTag;
-import ru.atott.combiq.service.question.impl.QuestionPositionInDsl;
+import ru.atott.combiq.service.search.QuestionPositionInDsl;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.question.impl;
+package ru.atott.combiq.service.question;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;

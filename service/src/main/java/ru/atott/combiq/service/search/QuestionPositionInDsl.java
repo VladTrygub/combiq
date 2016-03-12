@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.question.impl;
+package ru.atott.combiq.service.search;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import ru.atott.combiq.service.UrlResolver;
