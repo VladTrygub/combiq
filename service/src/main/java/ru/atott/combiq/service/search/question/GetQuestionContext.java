@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.search;
+package ru.atott.combiq.service.search.question;
 
 import ru.atott.combiq.service.dsl.DslQuery;
 
