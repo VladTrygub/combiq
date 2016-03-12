@@ -38,6 +38,8 @@ public class Question {
 
     private String authorName;
 
+    private int stars;
+
     public List<String> getTags() {
         return tags;
     }
@@ -166,6 +168,14 @@ public class Question {
         this.authorName = authorName;
     }
 
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
@@ -184,6 +194,7 @@ public class Question {
                 ", deleted=" + deleted +
                 ", authorId='" + authorId + '\'' +
                 ", authorName='" + authorName + '\'' +
+                ", stars=" + stars +
                 '}';
     }
 }

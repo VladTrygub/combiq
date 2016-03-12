@@ -41,6 +41,8 @@ public class QuestionEntity {
 
     private boolean deleted;
 
+    private int stars;
+
     @Field(index = FieldIndex.not_analyzed, type = FieldType.String)
     private String authorId;
 
@@ -175,5 +177,13 @@ public class QuestionEntity {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
     }
 }
