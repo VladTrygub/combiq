@@ -8,9 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.Question;
-import ru.atott.combiq.service.search.SearchContext;
-import ru.atott.combiq.service.search.SearchResponse;
-import ru.atott.combiq.service.search.SearchService;
+import ru.atott.combiq.service.search.question.SearchContext;
+import ru.atott.combiq.service.search.question.SearchResponse;
+import ru.atott.combiq.service.search.question.SearchService;
 import ru.atott.combiq.web.bean.CountQuestionSearchBean;
 import ru.atott.combiq.web.bean.PagingBean;
 import ru.atott.combiq.web.bean.PagingBeanBuilder;
@@ -20,8 +20,6 @@ import ru.atott.combiq.web.view.SearchViewBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
-
-import static ru.atott.combiq.web.utils.ViewUtils.getCountWord;
 
 @Controller
 public class SearchController extends BaseController {
@@ -105,7 +103,6 @@ public class SearchController extends BaseController {
         PagingBean paging = pagingBeanBuilder.build(questionsResponse.getQuestions(), questionsResponse.getQuestions().getNumber(), request);
         List<Question> questions = questionsResponse.getQuestions().getContent();
         dsl = StringUtils.defaultIfBlank(dsl, context.getDslQuery().toDsl());
-        Long totalElements=questionsResponse.getQuestions().getTotalElements();
 
         SearchViewBuilder viewBuilder = new SearchViewBuilder();
         viewBuilder.setQuestions(questions);
@@ -115,8 +112,7 @@ public class SearchController extends BaseController {
         viewBuilder.setSubTitle(subTitle);
         viewBuilder.setQuestionsCatalog(questionsCatalog);
         viewBuilder.setDslQuery(context.getDslQuery());
-        viewBuilder.setQuestionsCount(totalElements);
-        viewBuilder.setAnswerWord(getCountWord(totalElements));
+        viewBuilder.setQuestionsCount(questionsResponse.getQuestions().getTotalElements());
         return viewBuilder.build();
     }
 

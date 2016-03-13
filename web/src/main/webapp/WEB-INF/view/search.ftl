@@ -31,7 +31,7 @@
 
     <div>
         <h4>Популярное</h4>
-        <ul class="co-popularTags">
+        <ul class="co-popularTags" style="margin-left: 30px;">
            <#list popularTags as tag>
             <li>
                 <a  class="co-tag" href="/questions/tagged/${tag.value}">
@@ -45,10 +45,12 @@
             </li>
            </#list>
         </ul>
-        <p>
+        <p style="padding-left: 30px;">
             <a href="/tags">Смотреть все тэги →</a>
         </p>
     </div>
+
+    <@parts.latestCommentFeedList />
 </#assign>
 
 <#assign pageTitle>
@@ -90,7 +92,7 @@
     </#if>
     <ul class="co-questions">
     <#if questions?size==0>К сожалению по такому запросу ничего не найдено
-        <#else>Нашлось ${questionsCount} ${answerWord}
+        <#else>Нашлось ${utils.pluralizeQuestionLabel(questionsCount)}
     </#if>
         <#list questions as question>
             <li>

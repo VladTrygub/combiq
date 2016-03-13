@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.service.site.UserContext;
 
-import java.util.Collections;
 import java.util.List;
 
 import static java.util.Collections.emptyMap;
@@ -21,17 +20,23 @@ public class MarkdownServiceImpl implements MarkdownService {
 
     @Override
     public String toHtml(UserContext uc, String markdown) {
-        if (StringUtils.isBlank(markdown)) {
-            return "";
+        return toHtml(markdown, new DefaultToHtmlSerializer(uc));
+    }
+
+    @Override
+    public String toSimplifiedHtml(UserContext uc, String markdown) {
+        return toHtml(markdown, new ToSimplifiedHtmlSerializer(uc));
+    }
+
+    @Override
+    public String toSimplifiedHtml(UserContext uc, String markdown, int outputLength) {
+        String result = toSimplifiedHtml(uc, markdown);
+
+        if (result.length() > outputLength) {
+            result = result.substring(0, outputLength) + "...";
         }
 
-        PegDownPlugins plugins = new PegDownPlugins.Builder().build();
-        PegDownProcessor processor = new PegDownProcessor(0, plugins);
-        RootNode rootNode = processor.parseMarkdown(markdown.toCharArray());
-        LinkRenderer linkRenderer = new LinkRenderer();
-        List<ToHtmlSerializerPlugin> htmlSerializerPlugins = plugins.getHtmlSerializerPlugins();
-        ToHtmlSerializer serializer = new CombiqToHtmlSerializer(uc, linkRenderer, emptyMap(), htmlSerializerPlugins);
-        return serializer.toHtml(rootNode);
+        return result;
     }
 
     @Override
@@ -46,5 +51,15 @@ public class MarkdownServiceImpl implements MarkdownService {
         content.setHtml(toHtml(uc, markdown));
         content.setMarkdown(markdown);
         return content;
+    }
+
+    private String toHtml(String markdown, ToHtmlSerializer toHtmlSerializer) {
+        if (StringUtils.isBlank(markdown)) {
+            return "";
+        }
+
+        PegDownProcessor processor = new PegDownProcessor(0);
+        RootNode rootNode = processor.parseMarkdown(markdown.toCharArray());
+        return toHtmlSerializer.toHtml(rootNode);
     }
 }

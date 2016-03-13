@@ -19,15 +19,6 @@ public class SearchViewBuilder {
     private boolean questionsCatalog;
     private DslQuery dslQuery;
     private Long questionsCount;
-    private String answerWord;
-
-    public String getAnswerWord() {
-        return answerWord;
-    }
-
-    public void setAnswerWord(String answerWord) {
-        this.answerWord = answerWord;
-    }
 
     public Long getQuestionsCount() {
         return questionsCount;
@@ -106,7 +97,6 @@ public class SearchViewBuilder {
                 && dslQuery.getMinCommentQuantity() != null
                 && dslQuery.getMinCommentQuantity() > 0);
         mav.addObject("questionsCount",questionsCount);
-        mav.addObject("answerWord",answerWord);
         return mav;
     }
 }

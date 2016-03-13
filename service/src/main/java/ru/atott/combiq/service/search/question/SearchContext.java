@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.search;
+package ru.atott.combiq.service.search.question;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import ru.atott.combiq.service.dsl.DslQuery;

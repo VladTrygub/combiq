@@ -705,8 +705,28 @@ button:hover, .btn:hover {
     margin-left: 40px !important;
 }
 
-.co-comments-question-comments {
+.co-comments-latest .co-comments-question-comment {
+    font-size: 12px;
+    line-height: 18px;
+    padding-left: 45px;
+}
 
+.co-comments-latest .co-level-bound {
+    display: inline-block;
+    min-width: 45px;
+}
+
+.co-comments-latest-feed .co-comments-latest .co-comments-question-comment {
+    padding-left: 0;
+    line-height: 14px;
+}
+
+.co-comments-latest-feed .co-comments-latest {
+    margin-left: 30px !important;
+}
+
+.co-comments-latest-feed .co-comments-question-title {
+    font-size: 12px;
 }
 
 .co-comments-question-title,

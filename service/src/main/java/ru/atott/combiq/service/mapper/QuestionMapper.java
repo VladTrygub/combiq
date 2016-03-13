@@ -3,23 +3,14 @@ package ru.atott.combiq.service.mapper;
 import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.service.bean.Question;
-import ru.atott.combiq.service.bean.QuestionAttrs;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class QuestionMapper implements Mapper<QuestionEntity, Question> {
-    private Map<String, QuestionAttrs> attrsMap;
-    private String userId;
 
     public QuestionMapper() { }
-
-    public QuestionMapper(String userId, Map<String, QuestionAttrs> attrsMap) {
-        this.userId = userId;
-        this.attrsMap = attrsMap;
-    }
 
     @Override
     public Question map(QuestionEntity source) {
@@ -37,9 +28,6 @@ public class QuestionMapper implements Mapper<QuestionEntity, Question> {
             question.setReputation(0);
         } else {
             question.setReputation(source.getReputation());
-        }
-        if (userId != null) {
-            question.setAttrs(attrsMap.getOrDefault(questionId, QuestionAttrs.defaultOf(userId, questionId)));
         }
         question.setTip(source.getTip());
         if (source.getBody() != null) {

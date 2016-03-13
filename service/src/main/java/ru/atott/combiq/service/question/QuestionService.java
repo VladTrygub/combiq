@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface QuestionService {
 
-    void saveUserComment(String userId, String questionId, String comment);
-
     void saveComment(UserContext uc, String questionId, String comment);
 
     void updateComment(UserContext uc, String questionId, String commentId, String comment);

@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.question.impl;
+package ru.atott.combiq.service.question;
 
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -10,10 +10,9 @@ import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.Questionnaire;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
 import ru.atott.combiq.service.mapper.QuestionnaireHeadMapper;
-import ru.atott.combiq.service.search.SearchContext;
-import ru.atott.combiq.service.search.SearchResponse;
-import ru.atott.combiq.service.search.SearchService;
-import ru.atott.combiq.service.question.QuestionnaireService;
+import ru.atott.combiq.service.search.question.SearchContext;
+import ru.atott.combiq.service.search.question.SearchResponse;
+import ru.atott.combiq.service.search.question.SearchService;
 import ru.atott.combiq.service.markdown.MarkdownService;
 import ru.atott.combiq.service.site.UserContext;
 

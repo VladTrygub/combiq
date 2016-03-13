@@ -1,24 +1,22 @@
-package ru.atott.combiq.service.question.impl;
+package ru.atott.combiq.service.question;
 
 import com.google.common.collect.Sets;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.atott.combiq.dao.entity.QuestionAttrsEntity;
 import ru.atott.combiq.dao.entity.QuestionComment;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.repository.Jdk8ClassRepository;
-import ru.atott.combiq.dao.repository.QuestionAttrsRepository;
 import ru.atott.combiq.dao.repository.QuestionRepository;
 import ru.atott.combiq.service.AccessException;
 import ru.atott.combiq.service.CombiqConstants;
 import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.mapper.QuestionMapper;
+import ru.atott.combiq.service.markdown.MarkdownService;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.site.EventService;
-import ru.atott.combiq.service.markdown.MarkdownService;
 import ru.atott.combiq.service.site.UserContext;
 import ru.atott.combiq.service.util.NumberService;
 import ru.atott.combiq.service.util.TransletirateService;
@@ -40,12 +38,6 @@ public class QuestionServiceImpl implements QuestionService {
     private MarkdownService markdownService;
 
     @Autowired
-    private QuestionAttrsRepository questionAttrsRepository;
-
-    @Autowired
-    private QuestionAttrsEntityBuilder questionAttrsEntityBuilder;
-
-    @Autowired
     private QuestionRepository questionRepository;
 
     @Autowired
@@ -59,16 +51,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     TransletirateService transletirateService;
-
-    @Override
-    public void saveUserComment(String userId, String questionId, String comment) {
-        QuestionAttrsEntity attrsEntity = questionAttrsRepository.findByUserIdAndQuestionId(userId, questionId);
-        if (attrsEntity == null) {
-            attrsEntity = questionAttrsEntityBuilder.build(questionId, userId);
-        }
-        attrsEntity.setComment(comment);
-        questionAttrsRepository.save(attrsEntity);
-    }
 
     @Override
     public void saveComment(UserContext uc, String questionId, String comment) {

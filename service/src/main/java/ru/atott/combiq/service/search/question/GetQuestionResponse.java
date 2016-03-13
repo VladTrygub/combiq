@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.question.impl;
+package ru.atott.combiq.service.search.question;
 
 import ru.atott.combiq.service.bean.Question;
 

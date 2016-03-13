@@ -1,6 +1,6 @@
 <#-- @ftlvariable name="question" type="ru.atott.combiq.service.bean.Question" -->
 <#-- @ftlvariable name="comment" type="ru.atott.combiq.dao.entity.QuestionComment" -->
-<#-- @ftlvariable name="position" type="ru.atott.combiq.service.question.impl.QuestionPositionInDsl" -->
+<#-- @ftlvariable name="position" type="ru.atott.combiq.service.search.question.QuestionPositionInDsl" -->
 
 <#import "_layout/templates.ftl" as templates />
 <#import "_layout/parts.ftl" as parts />
@@ -99,12 +99,7 @@
         </div>
     </#if>
 
-    <#--<#if questionsFeed?size != 0>
-        <div>
-            <h4>Лента обновлений</h4>
-            <@listQuestionsFeed questionsFeed=questionsFeed />
-        </div>
-    </#if>-->
+    <@parts.latestCommentFeedList />
 
     <#if landing>
         <div>
@@ -317,39 +312,12 @@
                         наших пользователей к другим вопросам:
                     </div>
 
-                    <ul class="co-comments co-comments-latest">
-                        <#list questionsWithLatestComments as question>
-                            <li>
-                                <div class="co-comments-question-title">
-                                    <@parts.questionLevel level=question.level class='co-small' />
-                                    <a href="${urlResolver.getQuestionUrl(question)}">${question.title}</a>
-                                </div>
-                                <div class="co-comments-question-comments">
-                                    <@outComment comment=question.lastComment />
-                                </div>
-                            </li>
-                        </#list>
-                    </ul>
+                    <@parts.latestCommentList list=questionsWithLatestComments />
                 </#if>
 
             </#if>
         </div>
     </div>
-</#macro>
-
-<#macro listQuestionsFeed questionsFeed>
-    <ol class="list-unstyled">
-        <#list questionsFeed as question>
-           <li>
-               <div class="co-questionsFeeds-question-title">
-                   <a href="${urlResolver.getQuestionUrl(question)}">${question.title}</a>
-               </div>
-               <div class="co-comments-question-comments">
-                   <@outComment comment=question.lastComment />
-               </div>
-           </li>
-        </#list>
-    </ol>
 </#macro>
 
 <#macro outComment comment>

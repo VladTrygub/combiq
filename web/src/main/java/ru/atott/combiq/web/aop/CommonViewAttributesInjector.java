@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.atott.combiq.service.UrlResolver;
+import ru.atott.combiq.service.search.comment.LatestCommentSearchService;
 import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.security.CombiqUser;
 import ru.atott.combiq.web.utils.RequestUrlResolver;
@@ -47,6 +48,9 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
 
     @Autowired
     private InstantMessageHolder instantMessageHolder;
+
+    @Autowired
+    private LatestCommentSearchService latestCommentSearchService;
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
@@ -90,6 +94,7 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
             modelAndView.addObject("facebookCallbackUrl", urlResolver.externalize("/login/callback/facebook.do"));
             modelAndView.addObject("instantMessage", instantMessageHolder.get());
             modelAndView.addObject("toolboxVisible", toolboxVisible);
+            modelAndView.addObject("latestCommentFeed", latestCommentSearchService.get5LatestComments());
         }
     }
 }

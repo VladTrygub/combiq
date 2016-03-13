@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.search;
+package ru.atott.combiq.service.search.question;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.Validate;
