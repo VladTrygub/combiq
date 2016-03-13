@@ -1,6 +1,7 @@
 package ru.atott.combiq.service.bean;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.dao.entity.QuestionComment;
 
@@ -17,8 +18,6 @@ public class Question {
     private String level;
 
     private long reputation;
-
-    private QuestionAttrs attrs;
 
     private String tip;
 
@@ -78,14 +77,6 @@ public class Question {
 
     public void setReputation(long reputation) {
         this.reputation = reputation;
-    }
-
-    public QuestionAttrs getAttrs() {
-        return attrs;
-    }
-
-    public void setAttrs(QuestionAttrs attrs) {
-        this.attrs = attrs;
     }
 
     public String getTip() {
@@ -184,7 +175,6 @@ public class Question {
                 ", tags=" + tags +
                 ", level='" + level + '\'' +
                 ", reputation=" + reputation +
-                ", attrs=" + attrs +
                 ", tip='" + tip + '\'' +
                 ", body=" + body +
                 ", comments=" + comments +
@@ -198,3 +188,4 @@ public class Question {
                 '}';
     }
 }
+

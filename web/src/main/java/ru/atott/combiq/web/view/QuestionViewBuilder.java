@@ -4,7 +4,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.dao.entity.QuestionComment;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionTag;
-import ru.atott.combiq.service.question.impl.QuestionPositionInDsl;
+import ru.atott.combiq.service.search.comment.LatestComment;
+import ru.atott.combiq.service.search.question.QuestionPositionInDsl;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,8 +18,7 @@ public class QuestionViewBuilder {
     private List<QuestionTag> tags;
     private String canonicalUrl;
     private List<Question> anotherQuestions;
-    private List<Question> questionsWithLatestComments;
-    private List<Question> questionsFeed;
+    private List<LatestComment> questionsWithLatestComments;
 
     private boolean userFavorite;
 
@@ -78,20 +78,12 @@ public class QuestionViewBuilder {
         this.anotherQuestions = anotherQuestions;
     }
 
-    public List<Question> getQuestionsWithLatestComments() {
+    public List<LatestComment> getQuestionsWithLatestComments() {
         return questionsWithLatestComments;
     }
 
-    public void setQuestionsWithLatestComments(List<Question> questionsWithLatestComments) {
+    public void setQuestionsWithLatestComments(List<LatestComment> questionsWithLatestComments) {
         this.questionsWithLatestComments = questionsWithLatestComments;
-    }
-
-    public List<Question> getQuestionsFeed() {
-        return questionsFeed;
-    }
-
-    public void setQuestionsFeed(List<Question> questionsFeed) {
-        this.questionsFeed = questionsFeed;
     }
 
     public ModelAndView build() {
@@ -113,7 +105,6 @@ public class QuestionViewBuilder {
         mav.addObject("canonicalUrl", canonicalUrl);
         mav.addObject("anotherQuestions", anotherQuestions);
         mav.addObject("questionsWithLatestComments", questionsWithLatestComments);
-        mav.addObject("questionsFeed", questionsFeed);
         mav.addObject("userFavorite", userFavorite);
         return mav;
     }

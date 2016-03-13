@@ -14,9 +14,11 @@ import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.question.TagService;
-import ru.atott.combiq.service.question.impl.GetQuestionContext;
-import ru.atott.combiq.service.question.impl.GetQuestionResponse;
-import ru.atott.combiq.service.search.SearchService;
+import ru.atott.combiq.service.search.comment.LatestComment;
+import ru.atott.combiq.service.search.comment.LatestCommentSearchService;
+import ru.atott.combiq.service.search.question.GetQuestionContext;
+import ru.atott.combiq.service.search.question.GetQuestionResponse;
+import ru.atott.combiq.service.search.question.SearchService;
 import ru.atott.combiq.service.markdown.MarkdownService;
 import ru.atott.combiq.service.user.UserStars;
 import ru.atott.combiq.web.bean.QuestionBean;
@@ -44,6 +46,9 @@ public class QuestionController extends BaseController {
 
     @Autowired
     private SearchService searchService;
+
+    @Autowired
+    private LatestCommentSearchService latestCommentSearchService;
 
     @Autowired
     private QuestionService questionService;
@@ -114,9 +119,9 @@ public class QuestionController extends BaseController {
             throw new QuestionNotFoundException();
         }
 
-        List<Question> questionsWithLatestComments = Collections.emptyList();
+        List<LatestComment> questionsWithLatestComments = Collections.emptyList();
         if (CollectionUtils.isEmpty(question.getComments())) {
-            questionsWithLatestComments = searchService.get3QuestionsWithLatestComments();
+            questionsWithLatestComments = latestCommentSearchService.get3LatestComments();
         }
         QuestionViewBuilder viewBuilder = new QuestionViewBuilder();
         viewBuilder.setQuestion(question);
@@ -126,7 +131,6 @@ public class QuestionController extends BaseController {
         viewBuilder.setCanonicalUrl(urlResolver.externalize(urlResolver.getQuestionUrl(question)));
         viewBuilder.setAnotherQuestions(anotherQuestions);
         viewBuilder.setQuestionsWithLatestComments(questionsWithLatestComments);
-        viewBuilder.setQuestionsFeed(searchService.get7QuestionsWithLatestComments());
         if(getUc().getUserId()!=null){
             viewBuilder.setUserFavorite(userStars.starsQuestions(getUc().getUserId()).contains(question.getId()));
         } else { viewBuilder.setUserFavorite(false);}
