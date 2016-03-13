@@ -36,12 +36,4 @@ public class UserController extends BaseController {
         return new SuccessBean();
     }
 
-    @RequestMapping(value = "/user/favorite", method = RequestMethod.GET)
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('user','sa','contenter')")
-    public ModelAndView getAll(){
-        SearchViewBuilder viewBuilder = new SearchViewBuilder();
-        viewBuilder.setQuestions(userStars.getAll(getUc().getUserId()));
-        return viewBuilder.build();
-    }
 }

@@ -20,6 +20,16 @@ public class QuestionViewBuilder {
     private List<Question> questionsWithLatestComments;
     private List<Question> questionsFeed;
 
+    private boolean userFavorite;
+
+    public boolean isUserFavorite() {
+        return userFavorite;
+    }
+
+    public void setUserFavorite(boolean userFavorite) {
+        this.userFavorite = userFavorite;
+    }
+
     public String getDsl() {
         return dsl;
     }
@@ -104,6 +114,7 @@ public class QuestionViewBuilder {
         mav.addObject("anotherQuestions", anotherQuestions);
         mav.addObject("questionsWithLatestComments", questionsWithLatestComments);
         mav.addObject("questionsFeed", questionsFeed);
+        mav.addObject("userFavorite", userFavorite);
         return mav;
     }
 }

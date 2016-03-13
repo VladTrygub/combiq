@@ -67,4 +67,9 @@ public class UserStarsImp implements UserStars {
         }
         return questionslist;
     }
+
+    @Override
+    public List<String> starsQuestions(String userId) {
+        return userRepository.findOne(userId).getQuestions();
+    }
 }

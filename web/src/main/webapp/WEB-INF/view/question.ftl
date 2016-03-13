@@ -132,22 +132,22 @@
                 <div>
                     <div class="co-question-title">
                     ${question.title}
-                    <div class="right">
+                    <div class="star">
                         <#if user??>
-                           <#if user.questions?? && user.questions?seq_contains(question.Id)>
-                                    <img  src="/static/images/site/dislike-star.png" width="35"
+                           <#if  userFavorite>
+                                    <img src="/static/images/site/dislike-star.png" width="35"
                                      height="35" onclick="
-                                    $.post('/questions/${question.id}/dislike');
-                                     window.location.reload(true);"></img>
+                                    $.post('/questions/${question.id}/dislike').done(function(x) {
+                                    document.location.reload(true);});"></img>
                            <#else>
-                                    <img class="star" src="/static/images/site/like-star.png"
+                                    <img  src="/static/images/site/like-star.png"
                                      width="35" height="35"  onclick="
-                                    $.post('/questions/${question.id}/like');
-                                    window.location.reload(true);"></img>
+                                    $.post('/questions/${question.id}/like').done(function(x) {
+                                    document.location.reload(true);});"></img>
                            </#if>
                         <#else>
-                            <img class="star" src="/static/images/site/like-star.png"
-                             width="35" height="35"  onclick="window.location.reload(true);"></img>
+                            <img  src="/static/images/site/like-star.png"
+                             width="35" height="35"  onclick="document.location.href = '/login.do';"></img>
                         </#if>
                         <span>${question.stars}</span>
                     </div>
