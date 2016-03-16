@@ -38,6 +38,10 @@ public class Question {
 
     private String authorName;
 
+    private int stars;
+
+    private boolean favorite = false;
+
     private Date lastModify;
 
     public Date getLastModify() {
@@ -168,6 +172,22 @@ public class Question {
         this.authorName = authorName;
     }
 
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
+    }
+
+    public boolean getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -185,6 +205,10 @@ public class Question {
                 .append("deleted", deleted)
                 .append("authorId", authorId)
                 .append("authorName", authorName)
+                .append("stars", stars)
+                .append("favorite", favorite)
+                .append("lastModify", lastModify)
                 .toString();
     }
 }
+

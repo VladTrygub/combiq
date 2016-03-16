@@ -42,6 +42,9 @@ public class QuestionEntity {
 
     private boolean deleted;
 
+
+    private int stars;
+
     private Date lastModify;
 
     public Date getLastModify() {
@@ -186,5 +189,13 @@ public class QuestionEntity {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
     }
 }

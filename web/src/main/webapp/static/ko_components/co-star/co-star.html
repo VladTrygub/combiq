@@ -1,0 +1,6 @@
+<div class="star">
+    <img src="/static/images/site/like-star.png" data-bind="visible:!favorite() && isUser, click: like"/>
+    <img src="/static/images/site/dislike-star.png" data-bind="visible:favorite() && isUser, click: dislike"/>
+    <img src="/static/images/site/like-star.png" data-bind="visible: !isUser(), click: login"/>
+    <span data-bind="text: stars"></span>
+</div>

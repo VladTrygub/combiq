@@ -70,6 +70,11 @@ public class FacetBuilder {
         // Фасет по удаленным вопросам.
         facets.add(new DeletedFacet(dslQuery != null && dslQuery.getDeleted() != null && dslQuery.getDeleted()));
 
+        // Фасет по фаворитным вопорсам.
+        if (dslQuery != null && dslQuery.getFavorite() != null) {
+            facets.add(new FavoriteFacet(dslQuery.getFavorite()));
+        }
+
         return facets;
     }
 }

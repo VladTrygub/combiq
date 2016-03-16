@@ -128,7 +128,10 @@
                     <div class="co-question-title">
                     ${question.title}
                     </div>
-
+                    <co-star params="stars: ${question.stars},
+                                             favorite: ${question.favorite?string("true", "false")},
+                                              isUser: ${isUser?string("true", "false")},
+                                               id: '${question.id}' "></co-star>
                     <div class="co-question-body">
                         <@parts.contentEditor content=question.body url='/questions/${question.id}/content' />
                     </div>
@@ -196,6 +199,7 @@
         </li>
 
     </ul>
+
     <#if functions.hasRoleSaOrContenter()>
         <a  href="#" onclick="ko.openDialog('co-questionposter',{id: '${question.id?js_string}'}); return false;">
             Изменить вопрос

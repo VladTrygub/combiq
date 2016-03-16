@@ -20,6 +20,16 @@ public class QuestionViewBuilder {
     private List<Question> anotherQuestions;
     private List<LatestComment> questionsWithLatestComments;
 
+    private boolean user;
+
+    public boolean isUser() {
+        return user;
+    }
+
+    public void setUser(boolean user) {
+        this.user = user;
+    }
+
     public String getDsl() {
         return dsl;
     }
@@ -95,6 +105,7 @@ public class QuestionViewBuilder {
         mav.addObject("canonicalUrl", canonicalUrl);
         mav.addObject("anotherQuestions", anotherQuestions);
         mav.addObject("questionsWithLatestComments", questionsWithLatestComments);
+        mav.addObject("isUser", user);
         return mav;
     }
 }

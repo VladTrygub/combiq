@@ -23,6 +23,7 @@ public class UserEntity {
     private String avatarUrl;
     private List<String> roles;
     private Date registerDate;
+    private List<String> favoriteQuestions;
 
     public String getLogin() {
         return login;
@@ -110,5 +111,13 @@ public class UserEntity {
 
     public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
+    }
+
+    public List<String> getFavoriteQuestions() {
+        return favoriteQuestions;
+    }
+
+    public void setFavoriteQuestions(List<String> favoriteQuestions) {
+        this.favoriteQuestions = favoriteQuestions;
     }
 }
