@@ -1,0 +1,25 @@
+.co-userpage {
+    margin-top: 40px;
+    min-height: 600px;
+}
+
+.co-userpage-tabs {
+
+}
+
+.co-userpage-content {
+    margin-top: 40px;
+}
+
+.co-userphoto {
+    background: linear-gradient(to bottom, #F6F6F6 1%, #F6F6F6 45%, #ffffff 45%, #ffffff 100%);
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    text-align: center;
+    padding: 17px;
+    display: inline-block;
+}
+
+.co-userpage h1 {
+    margin: 0;
+}

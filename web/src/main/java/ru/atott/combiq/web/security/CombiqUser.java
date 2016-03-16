@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import ru.atott.combiq.service.bean.UserType;
+import ru.atott.combiq.web.utils.ViewUtils;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -60,22 +61,7 @@ public class CombiqUser extends User {
     }
 
     public String getHeadAvatarUrl() {
-        if (avatarUrl == null) {
-            return "/static/images/icons/user-48.png";
-        }
-
-        switch (type) {
-            case github:
-                return avatarUrl.contains("?") ? avatarUrl + "&s=46" : avatarUrl + "?s=46";
-            case vk:
-                return avatarUrl;
-            case stackexchange:
-                return avatarUrl;
-            case facebook:
-                return avatarUrl;
-        }
-
-        return null;
+        return ViewUtils.getHeadAvatarUrl(type, avatarUrl);
     }
 
     public void setAvatarUrl(String avatarUrl) {

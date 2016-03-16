@@ -16,7 +16,7 @@ import ru.atott.combiq.web.controller.question.QuestionNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
-public class ErrorHandlingController {
+public class ErrorHandlingController extends BaseController {
 
     private static Logger logger = LoggerFactory.getLogger(ErrorHandlingController.class);
 
@@ -31,10 +31,7 @@ public class ErrorHandlingController {
     public ModelAndView handle404(HttpServletRequest httpRequest, Exception exception) {
         logger.warn("Request {} raised 404", httpRequest.getRequestURL());
 
-        ModelAndView modelAndView = new ModelAndView("error/404");
-        modelAndView.addObject("requestUrl", httpRequest.getRequestURL());
-        commonViewAttributesInjector.inject(httpRequest, modelAndView);
-        return modelAndView;
+        return notFound();
     }
 
     @ExceptionHandler(Throwable.class)
