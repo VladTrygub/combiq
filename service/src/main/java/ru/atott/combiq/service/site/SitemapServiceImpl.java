@@ -23,6 +23,8 @@ import ru.atott.combiq.service.mapper.QuestionnaireHeadMapper;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -113,6 +115,7 @@ public class SitemapServiceImpl implements SitemapService {
             writeTextElement(writer, "loc", urlResolver.externalize(urlResolver.getQuestionnaireUrl(questionnaireHead)));
             writeTextElement(writer, "priority", priority);
 
+
             writer.writeEndElement();
         } catch (Exception e) {
             throw new ServiceException(e.getMessage(), e);
@@ -136,6 +139,9 @@ public class SitemapServiceImpl implements SitemapService {
 
             writeTextElement(writer, "loc", urlResolver.externalize(urlResolver.getQuestionUrl(question)));
             writeTextElement(writer, "priority", priority);
+            Date lastModify = question.getLastModify();
+            if(lastModify!=null)
+                writeTextElement(writer, "lastmod", new SimpleDateFormat("yyyy-MM-dd").format(lastModify));
 
             writer.writeEndElement();
         } catch (Exception e) {

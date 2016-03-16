@@ -6,6 +6,16 @@ public class SitemapEntry {
 
     private String priority;
 
+    private String lastModify;
+
+    public String getLastModify() {
+        return lastModify;
+    }
+
+    public void setLastModify(String lastModify) {
+        this.lastModify = lastModify;
+    }
+
     public String getUrl() {
         return url;
     }
