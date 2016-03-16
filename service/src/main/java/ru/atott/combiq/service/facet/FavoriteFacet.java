@@ -12,6 +12,7 @@ import ru.atott.combiq.service.util.ApplicationContextHolder;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class FavoriteFacet implements Facet {
 
@@ -30,7 +31,7 @@ public class FavoriteFacet implements Facet {
             ApplicationContext applicationContext = ApplicationContextHolder.getApplicationContext();
             UserRepository userRepository = applicationContext.getBean(UserRepository.class);
             UserEntity userEntity = userRepository.findOne(context.getUserContext().getUserId());
-            List<String> favoriteQuestionIds = userEntity.getFavoriteQuestions();
+            Set<String> favoriteQuestionIds = userEntity.getFavoriteQuestions();
 
             if (CollectionUtils.isEmpty(favoriteQuestionIds)) {
                 return Optional.of(FacetUtils.getNothingToFindFilter());

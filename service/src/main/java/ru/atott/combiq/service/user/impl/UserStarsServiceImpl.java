@@ -1,17 +1,19 @@
 package ru.atott.combiq.service.user.impl;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.entity.UserEntity;
 import ru.atott.combiq.dao.repository.QuestionRepository;
 import ru.atott.combiq.dao.repository.UserRepository;
-import ru.atott.combiq.service.mapper.QuestionMapper;
+import ru.atott.combiq.service.site.UserContext;
 import ru.atott.combiq.service.user.UserStarsService;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserStarsServiceImpl implements UserStarsService {
@@ -22,19 +24,19 @@ public class UserStarsServiceImpl implements UserStarsService {
     @Autowired
     private UserRepository userRepository;
 
-
-    private QuestionMapper maper = new QuestionMapper();
-
     @Override
-    public void like(String userId, String questionId) {
-        UserEntity user=userRepository.findOne(userId);
-        List<String> questionslist = user.getFavoriteQuestions();
-        if(questionslist == null){
-            questionslist = new ArrayList<String>();
+    public void like(UserContext uc, String questionId) {
+        Validate.isTrue(!uc.isAnonimous());
+
+        UserEntity user = userRepository.findOne(uc.getUserId());
+        Set<String> questionsSet = user.getFavoriteQuestions();
+        if (questionsSet == null) {
+            questionsSet = new HashSet<>();
         }
-        if (!questionslist.contains(questionId)){
-            questionslist.add(questionId);
-            user.setFavoriteQuestions(questionslist);
+        questionsSet = new HashSet<>(questionsSet);
+        if (!questionsSet.contains(questionId)) {
+            questionsSet.add(questionId);
+            user.setFavoriteQuestions(questionsSet);
             userRepository.save(user);
             QuestionEntity questionEntity = questionRepository.findOne(questionId);
             questionEntity.setStars(questionEntity.getStars() + 1);
@@ -43,25 +45,49 @@ public class UserStarsServiceImpl implements UserStarsService {
     }
 
     @Override
-    public void dislike(String userId, String questionId) {
-        UserEntity user=userRepository.findOne(userId);
-        List<String> questionslist = user.getFavoriteQuestions();
-        if(questionslist == null){
-            questionslist = new ArrayList<String>();
+    public void dislike(UserContext uc, String questionId) {
+        Validate.isTrue(!uc.isAnonimous());
+
+        UserEntity user = userRepository.findOne(uc.getUserId());
+        Set<String> questionsSet = user.getFavoriteQuestions();
+        if (questionsSet == null) {
+            questionsSet = new HashSet<>();
         }
-        if (questionslist.contains(questionId)){
-            questionslist.remove(questionId);
+        questionsSet = new HashSet<>(questionsSet);
+        if (questionsSet.contains(questionId)) {
+            questionsSet.remove(questionId);
+            user.setFavoriteQuestions(questionsSet);
             userRepository.save(user);
             QuestionEntity questionEntity = questionRepository.findOne(questionId);
-            questionEntity.setStars(questionEntity.getStars() - 1);
+            questionEntity.setStars(Math.max(0, questionEntity.getStars() - 1));
             questionRepository.save(questionEntity);
         }
     }
 
     @Override
-    public List<String> starsQuestions(String userId) {
-        List<String> starsQuestion = userRepository.findOne(userId).getFavoriteQuestions();
-        starsQuestion = starsQuestion == null ? new LinkedList<>() : starsQuestion;
+    public Set<String> getFavoriteQuestions(UserContext uc) {
+        if (uc.isAnonimous()) {
+            return Collections.emptySet();
+        }
+
+        Set<String> starsQuestion = userRepository.findOne(uc.getUserId()).getFavoriteQuestions();
+        starsQuestion = starsQuestion == null ? new HashSet<>() : starsQuestion;
         return starsQuestion;
+    }
+
+    @Override
+    public boolean isFavoriteQuestion(UserContext uc, String questionId) {
+        if (uc.isAnonimous()) {
+            return false;
+        }
+
+        UserEntity user = userRepository.findOne(uc.getUserId());
+        Set<String> questionsSet = user.getFavoriteQuestions();
+
+        if (CollectionUtils.isEmpty(questionsSet)) {
+            return false;
+        }
+
+        return questionsSet.contains(questionId);
     }
 }

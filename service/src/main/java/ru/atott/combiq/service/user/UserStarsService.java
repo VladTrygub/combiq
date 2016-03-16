@@ -1,16 +1,17 @@
 package ru.atott.combiq.service.user;
 
-import ru.atott.combiq.service.bean.Question;
+import ru.atott.combiq.service.site.UserContext;
 
-import java.util.List;
-import java.util.stream.Stream;
+import java.util.Set;
 
 
 public interface UserStarsService {
 
-    public void like(String userId, String questionId);
+    void like(UserContext uc, String questionId);
 
-    public void dislike(String userId, String questionId);
+    void dislike(UserContext uc, String questionId);
 
-    public List<String> starsQuestions(String userId);
+    Set<String> getFavoriteQuestions(UserContext uc);
+
+    boolean isFavoriteQuestion(UserContext uc, String userId);
 }

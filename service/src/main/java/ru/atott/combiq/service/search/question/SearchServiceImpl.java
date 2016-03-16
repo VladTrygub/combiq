@@ -80,10 +80,6 @@ public class SearchServiceImpl implements SearchService {
         QuestionMapper questionMapper = new QuestionMapper();
         SearchResponse response = new SearchResponse();
         response.setQuestions(page.map(questionMapper::map));
-        if(context.getUserId() != null) {
-            List<String> favoriteQuestion = userStarsService.starsQuestions(context.getUserId());
-            response.getQuestions().forEach((x -> x.setFavorite(favoriteQuestion.contains(x.getId()))));
-        }
         response.setPopularTags(getPopularTags(searchResponse));
         return response;
     }

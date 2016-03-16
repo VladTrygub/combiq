@@ -57,7 +57,7 @@ public class QuestionController extends BaseController {
     private MarkdownService markdownService;
 
     @Autowired
-    private UserStarsService userStars;
+    private UserStarsService userStarsService;
 
     @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
@@ -128,7 +128,7 @@ public class QuestionController extends BaseController {
         viewBuilder.setCanonicalUrl(urlResolver.externalize(urlResolver.getQuestionUrl(question)));
         viewBuilder.setAnotherQuestions(anotherQuestions);
         viewBuilder.setQuestionsWithLatestComments(questionsWithLatestComments);
-        viewBuilder.setUser(getUc().getUserId() != null);
+        viewBuilder.setFavorite(userStarsService.isFavoriteQuestion(getUc(), questionId));
         return viewBuilder.build();
     }
 

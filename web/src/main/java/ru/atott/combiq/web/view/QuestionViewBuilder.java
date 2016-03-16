@@ -19,16 +19,7 @@ public class QuestionViewBuilder {
     private String canonicalUrl;
     private List<Question> anotherQuestions;
     private List<LatestComment> questionsWithLatestComments;
-
-    private boolean user;
-
-    public boolean isUser() {
-        return user;
-    }
-
-    public void setUser(boolean user) {
-        this.user = user;
-    }
+    private boolean favorite;
 
     public String getDsl() {
         return dsl;
@@ -86,6 +77,14 @@ public class QuestionViewBuilder {
         this.questionsWithLatestComments = questionsWithLatestComments;
     }
 
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
     public ModelAndView build() {
         List<QuestionComment> comments = question.getComments();
         if (comments == null) {
@@ -105,7 +104,7 @@ public class QuestionViewBuilder {
         mav.addObject("canonicalUrl", canonicalUrl);
         mav.addObject("anotherQuestions", anotherQuestions);
         mav.addObject("questionsWithLatestComments", questionsWithLatestComments);
-        mav.addObject("isUser", user);
+        mav.addObject("favorite", favorite);
         return mav;
     }
 }

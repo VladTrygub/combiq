@@ -302,9 +302,15 @@ ul.co-popularTags > li {
     margin-bottom: 10px;
 }
 
-.co-question,
-.co-my-question-comment {
+.co-question {
     margin: 70px 140px;
+    position: relative;
+}
+
+.co-question > co-star {
+    position: absolute;
+    top: 4px;
+    left: -50px;
 }
 
 .co-question-title {
@@ -317,22 +323,6 @@ ul.co-popularTags > li {
 .co-question-body {
     font-size: 14px;
     line-height: 16px;
-}
-
-.co-my-question-comment-label {
-    width: 40%;
-    font-size: 0.75em;
-}
-
-.co-my-question-comment-box {
-    width: 80%;
-    border-left: solid 1px #d2d2d2;
-    background-color: #f5f5f5;
-}
-
-.co-my-question-comment-box textarea {
-    background-color: transparent;
-    border: none;
 }
 
 .co-question-content {
