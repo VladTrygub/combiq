@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.dao.entity.QuestionComment;
 
+import java.util.Date;
 import java.util.List;
 
 public class Question {
@@ -40,6 +41,16 @@ public class Question {
     private int stars;
 
     private boolean favorite = false;
+
+    private Date lastModify;
+
+    public Date getLastModify() {
+        return lastModify;
+    }
+
+    public void setLastModify(Date lastModify) {
+        this.lastModify = lastModify;
+    }
 
     public List<String> getTags() {
         return tags;
@@ -196,6 +207,7 @@ public class Question {
                 .append("authorName", authorName)
                 .append("stars", stars)
                 .append("favorite", favorite)
+                .append("lastModify", lastModify)
                 .toString();
     }
 }

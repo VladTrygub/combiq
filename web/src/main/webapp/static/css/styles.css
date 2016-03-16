@@ -733,6 +733,10 @@ button:hover, .btn:hover {
 .co-questionsFeeds-question-title {
     line-height: 16px;
 }
+.co-questions-meta {
+    font-size: 11px;
+    color: #696969;
+}
 
 .co-comments {
     list-style: none;

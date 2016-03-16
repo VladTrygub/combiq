@@ -155,7 +155,7 @@ public class QuestionServiceImpl implements QuestionService {
             questionEntity.setTitle(question.getTitle());
             eventService.editQuestion(uc, questionEntity);
         }
-
+        questionEntity.setLastModify(question.getLastModify());
         questionEntity.setHumanUrlTitle(transletirateService.lowercaseAndTransletirate(question.getTitle(), 80));
         questionEntity.setTags(question.getTags());
         questionEntity.setLevel(Integer.parseInt(question.getLevel().substring(1)));

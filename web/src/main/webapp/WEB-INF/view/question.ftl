@@ -204,7 +204,11 @@
         <a  href="#" onclick="ko.openDialog('co-questionposter',{id: '${question.id?js_string}'}); return false;">
             Изменить вопрос
         </a>
-
+        <#if question.lastModify??>
+            <span class="co-questions-meta">
+                последнее изменение: ${question.lastModify?string('dd MMMM yyyy, hh:mm')}
+            </span>
+        </#if>
         <#if question.deleted>
             <a class="pull-right" href="#"
                     onclick="$.post('/questions/${question.id}/restore');
