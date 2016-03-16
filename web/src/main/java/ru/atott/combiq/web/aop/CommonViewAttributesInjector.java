@@ -23,6 +23,8 @@ import java.util.Set;
 @Component
 public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
 
+    private static final String INJECTED = "ru.atott.combiq.web.aop.CommonViewAttributesInjector.injected";
+
     private String resourceVersion = String.valueOf(System.currentTimeMillis());
 
     @Autowired
@@ -59,7 +61,8 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
 
     public void inject(HttpServletRequest request, ModelAndView modelAndView) {
         if (modelAndView != null
-                && !(modelAndView.getView() instanceof RedirectView)) {
+                && !(modelAndView.getView() instanceof RedirectView)
+                && !modelAndView.getModel().containsKey(INJECTED)) {
 
             CombiqUser user = authService.getUser();
             UrlResolver urlResolver = new RequestUrlResolver(request);
@@ -95,6 +98,8 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
             modelAndView.addObject("instantMessage", instantMessageHolder.get());
             modelAndView.addObject("toolboxVisible", toolboxVisible);
             modelAndView.addObject("latestCommentFeed", latestCommentSearchService.get5LatestComments());
+
+            modelAndView.addObject(INJECTED, true);
         }
     }
 }

@@ -86,4 +86,9 @@ public class HostPortUrlResolver implements UrlResolver {
             return "/questionnaire/" + questionnaire.getId() + "?" + queryString;
         }
     }
+
+    @Override
+    public String getUserUrl(String userId) {
+        return "/users/" + userId;
+    }
 }

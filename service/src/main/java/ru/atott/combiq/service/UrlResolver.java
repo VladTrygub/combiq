@@ -22,6 +22,8 @@ public interface UrlResolver {
 
     String getQuestionnaireUrl(QuestionnaireHead questionnaire, String queryString);
 
+    String getUserUrl(String userId);
+
     static String encodeUrlComponent(String urlComponent) {
         try {
             if (StringUtils.isEmpty(urlComponent)) {

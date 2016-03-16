@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.stereotype.Component;
+import ru.atott.combiq.service.bean.UserType;
 
 @Component
 public class ViewUtils {
@@ -30,5 +31,24 @@ public class ViewUtils {
         else if(lastDigit>1&&lastDigit<5)answer=" вопроса";
         else answer=" вопросов";
         return count+answer;
+    }
+
+    public static String getHeadAvatarUrl(UserType userType, String userAvatarUrl) {
+        if (userAvatarUrl == null) {
+            return "/static/images/icons/user-48.png";
+        }
+
+        switch (userType) {
+            case github:
+                return userAvatarUrl.contains("?") ? userAvatarUrl + "&s=46" : userAvatarUrl + "?s=46";
+            case vk:
+                return userAvatarUrl;
+            case stackexchange:
+                return userAvatarUrl;
+            case facebook:
+                return userAvatarUrl;
+            default:
+                return userAvatarUrl;
+        }
     }
 }
