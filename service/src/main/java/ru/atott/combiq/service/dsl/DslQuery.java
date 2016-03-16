@@ -19,6 +19,8 @@ public class DslQuery {
 
     private Boolean deleted;
 
+    private Boolean favorite;
+
     public List<DslTag> getTags() {
         return tags;
     }
@@ -72,6 +74,14 @@ public class DslQuery {
         this.deleted = deleted;
     }
 
+    public Boolean getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -81,6 +91,7 @@ public class DslQuery {
                 .append("minCommentQuantity", minCommentQuantity)
                 .append("user", user)
                 .append("deleted", deleted)
+                .append("favorite", favorite)
                 .toString();
     }
 }

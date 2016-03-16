@@ -1,0 +1,10 @@
+.star {
+    display: inline-block;
+}
+
+.star img {
+    height: 30px;
+    width: 30px;
+    margin-bottom: 4px;
+    cursor: pointer;
+}

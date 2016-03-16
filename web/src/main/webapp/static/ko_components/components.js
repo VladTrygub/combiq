@@ -35,6 +35,7 @@
     define('co-contenteditor', 'ko_components/co-contenteditor', 'co-contenteditor', {layoutSeparated: true, styles: 'css'});
     define('co-posteditor', 'ko_components/co-posteditor', 'co-posteditor', {layoutSeparated: true, styles: 'css'});
     define('co-onlywithcomments', 'ko_components/co-onlywithcomments', 'co-onlywithcomments', {layoutSeparated: true});
+    define('co-star', 'ko_components/co-star', 'co-star', {layoutSeparated: true, styles: 'css'});
 
     ko.createComponent = function(componentName, params, tag) {
         var html;

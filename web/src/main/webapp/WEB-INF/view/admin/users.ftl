@@ -18,6 +18,7 @@
                 <th>Логин</th>
                 <th>Имя</th>
                 <th>Дата регистрации</th>
+                <th>Роли</th>
             </tr>
         </thead>
         <tbody>
@@ -41,6 +42,16 @@
                     <td>
                         <#if user.registerDate??>
                             ${user.registerDate?string["dd.MM.yyyy"]}
+                        </#if>
+                    </td>
+                    <td>
+                        <#if user.roles??>
+                            <#list user.roles as role>
+                            ${role}
+                                <#if role_has_next>
+                                    ,
+                                </#if>
+                            </#list>
                         </#if>
                     </td>
                 </tr>

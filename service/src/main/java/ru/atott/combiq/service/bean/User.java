@@ -2,6 +2,7 @@ package ru.atott.combiq.service.bean;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class User {
     private String id;
@@ -15,6 +16,7 @@ public class User {
     private String avatarUrl;
     private List<String> roles;
     private Date registerDate;
+    private Set<String> favoriteQuestions;
 
     public String getId() {
         return id;
@@ -106,5 +108,13 @@ public class User {
 
     public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
+    }
+
+    public Set<String> getFavoriteQuestions() {
+        return favoriteQuestions;
+    }
+
+    public void setFavoriteQuestions(Set<String> favoriteQuestions) {
+        this.favoriteQuestions = favoriteQuestions;
     }
 }

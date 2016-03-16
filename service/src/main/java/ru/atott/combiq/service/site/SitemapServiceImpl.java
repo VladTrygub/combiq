@@ -1,7 +1,6 @@
 package ru.atott.combiq.service.site;
 
 import org.apache.commons.lang3.StringUtils;
-import org.elasticsearch.index.query.FilterBuilders;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +22,7 @@ import ru.atott.combiq.service.mapper.QuestionnaireHeadMapper;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -113,6 +113,7 @@ public class SitemapServiceImpl implements SitemapService {
             writeTextElement(writer, "loc", urlResolver.externalize(urlResolver.getQuestionnaireUrl(questionnaireHead)));
             writeTextElement(writer, "priority", priority);
 
+
             writer.writeEndElement();
         } catch (Exception e) {
             throw new ServiceException(e.getMessage(), e);
@@ -136,6 +137,9 @@ public class SitemapServiceImpl implements SitemapService {
 
             writeTextElement(writer, "loc", urlResolver.externalize(urlResolver.getQuestionUrl(question)));
             writeTextElement(writer, "priority", priority);
+            if(question.getLastModify() != null) {
+                writeTextElement(writer, "lastmod", new SimpleDateFormat("yyyy-MM-dd").format(question.getLastModify()));
+            }
 
             writer.writeEndElement();
         } catch (Exception e) {

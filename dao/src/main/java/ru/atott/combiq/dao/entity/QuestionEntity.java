@@ -7,6 +7,7 @@ import org.springframework.data.elasticsearch.annotations.FieldIndex;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import ru.atott.combiq.dao.Types;
 
+import java.util.Date;
 import java.util.List;
 
 @Document(indexName = "#{domainResolver.resolveQuestionIndex()}", type = Types.question)
@@ -40,6 +41,19 @@ public class QuestionEntity {
     private String legacyId;
 
     private boolean deleted;
+
+
+    private int stars;
+
+    private Date lastModify;
+
+    public Date getLastModify() {
+        return lastModify;
+    }
+
+    public void setLastModify(Date lastModify) {
+        this.lastModify = lastModify;
+    }
 
     @Field(index = FieldIndex.not_analyzed, type = FieldType.String)
     private String authorId;
@@ -175,5 +189,13 @@ public class QuestionEntity {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
     }
 }

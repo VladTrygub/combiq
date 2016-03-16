@@ -8,12 +8,37 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.user.UserService;
 import ru.atott.combiq.web.utils.ViewUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import ru.atott.combiq.service.user.UserStarsService;
+import ru.atott.combiq.web.bean.SuccessBean;
+
 
 @Controller
 public class UserController extends BaseController {
 
     @Autowired
+    private UserStarsService userStarsService;
+
+    @Autowired
     private UserService userService;
+
+    @RequestMapping(value = "/questions/{questionId}/like", method = RequestMethod.POST)
+    @ResponseBody
+    @PreAuthorize("hasAnyRole('user')")
+    public Object like(@PathVariable("questionId") String questionId) {
+        userStarsService.like(getUc(), questionId);
+        return new SuccessBean();
+    }
+
+    @RequestMapping(value = "/questions/{questionId}/dislike", method = RequestMethod.POST)
+    @ResponseBody
+    @PreAuthorize("hasAnyRole('user')")
+    public Object dislike(@PathVariable("questionId") String questionId) {
+        userStarsService.dislike(getUc(), questionId);
+        return new SuccessBean();
+    }
 
     @RequestMapping(value = "/users/{userId}")
     public ModelAndView profile(@PathVariable("userId") String userId) {

@@ -5,6 +5,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Document(indexName = "#{domainResolver.resolvePersonalIndex()}", type = "user")
 public class UserEntity {
@@ -23,6 +24,7 @@ public class UserEntity {
     private String avatarUrl;
     private List<String> roles;
     private Date registerDate;
+    private Set<String> favoriteQuestions;
 
     public String getLogin() {
         return login;
@@ -110,5 +112,13 @@ public class UserEntity {
 
     public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
+    }
+
+    public Set<String> getFavoriteQuestions() {
+        return favoriteQuestions;
+    }
+
+    public void setFavoriteQuestions(Set<String> favoriteQuestions) {
+        this.favoriteQuestions = favoriteQuestions;
     }
 }

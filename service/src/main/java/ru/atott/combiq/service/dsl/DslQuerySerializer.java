@@ -37,6 +37,11 @@ public class DslQuerySerializer {
             builder.append("user:").append(query.getUser());
         }
 
+        if (query.getFavorite() != null) {
+            builder.append(" ");
+            builder.append("favorite:").append(query.getFavorite().booleanValue());
+        }
+
         return builder.toString().trim();
     }
 }

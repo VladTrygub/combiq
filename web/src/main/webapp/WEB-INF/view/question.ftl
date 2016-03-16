@@ -123,19 +123,19 @@
         ogDescription=question.title>
 
         <div class="co-question">
-            <div>
-                <div>
-                    <div class="co-question-title">
-                    ${question.title}
-                    </div>
-
-                    <div class="co-question-body">
-                        <@parts.contentEditor content=question.body url='/questions/${question.id}/content' />
-                    </div>
-
-                    <@questionStaff />
-                </div>
+            <div class="co-question-title">
+            ${question.title}
             </div>
+            <co-star params="
+                stars: ${question.stars?c},
+                favorite: ${favorite?c},
+                questionId: '${question.id?js_string}'">
+            </co-star>
+            <div class="co-question-body">
+                <@parts.contentEditor content=question.body url='/questions/${question.id}/content' />
+            </div>
+
+            <@questionStaff />
         </div>
 
         <@questionPosition />
@@ -196,11 +196,16 @@
         </li>
 
     </ul>
+
     <#if functions.hasRoleSaOrContenter()>
         <a  href="#" onclick="ko.openDialog('co-questionposter',{id: '${question.id?js_string}'}); return false;">
             Изменить вопрос
         </a>
-
+        <#if question.lastModify??>
+            <span class="co-questions-meta">
+                последнее изменение: ${question.lastModify?string('dd MMMM yyyy, hh:mm')}
+            </span>
+        </#if>
         <#if question.deleted>
             <a class="pull-right" href="#"
                     onclick="$.post('/questions/${question.id}/restore');

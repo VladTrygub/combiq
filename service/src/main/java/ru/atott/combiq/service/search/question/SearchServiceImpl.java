@@ -22,6 +22,7 @@ import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.mapper.QuestionMapper;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.site.UserContext;
+import ru.atott.combiq.service.user.UserStarsService;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +44,9 @@ public class SearchServiceImpl implements SearchService {
 
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private UserStarsService userStarsService;
 
     public SearchServiceImpl() {
         SimpleElasticsearchMappingContext mappingContext = new SimpleElasticsearchMappingContext();

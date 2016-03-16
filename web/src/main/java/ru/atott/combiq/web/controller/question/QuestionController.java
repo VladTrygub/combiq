@@ -20,6 +20,7 @@ import ru.atott.combiq.service.search.question.GetQuestionContext;
 import ru.atott.combiq.service.search.question.GetQuestionResponse;
 import ru.atott.combiq.service.search.question.SearchService;
 import ru.atott.combiq.service.markdown.MarkdownService;
+import ru.atott.combiq.service.user.UserStarsService;
 import ru.atott.combiq.web.bean.QuestionBean;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.controller.BaseController;
@@ -32,10 +33,7 @@ import ru.atott.combiq.web.view.QuestionViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class QuestionController extends BaseController {
@@ -57,6 +55,9 @@ public class QuestionController extends BaseController {
 
     @Autowired
     private MarkdownService markdownService;
+
+    @Autowired
+    private UserStarsService userStarsService;
 
     @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
@@ -127,6 +128,7 @@ public class QuestionController extends BaseController {
         viewBuilder.setCanonicalUrl(urlResolver.externalize(urlResolver.getQuestionUrl(question)));
         viewBuilder.setAnotherQuestions(anotherQuestions);
         viewBuilder.setQuestionsWithLatestComments(questionsWithLatestComments);
+        viewBuilder.setFavorite(userStarsService.isFavoriteQuestion(getUc(), questionId));
         return viewBuilder.build();
     }
 
@@ -200,6 +202,7 @@ public class QuestionController extends BaseController {
         question.setBody(markdownService.toMarkdownContent(getUc(), questionRequest.getBody()));
         question.setLevel(questionRequest.getLevel());
         question.setTags(questionRequest.getTags() != null ? questionRequest.getTags() : Collections.emptyList());
+        question.setLastModify(new Date());
 
         questionService.saveQuestion(getUc(), question);
 

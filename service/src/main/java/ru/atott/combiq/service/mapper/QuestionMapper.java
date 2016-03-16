@@ -45,6 +45,8 @@ public class QuestionMapper implements Mapper<QuestionEntity, Question> {
         question.setLanding(source.isLanding());
         question.setClassNames(source.getClassNames());
         question.setHumanUrlTitle(source.getHumanUrlTitle());
+        question.setStars(source.getStars());
+        question.setLastModify(source.getLastModify());
         return question;
     }
 }
