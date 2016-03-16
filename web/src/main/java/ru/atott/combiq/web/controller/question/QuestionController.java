@@ -32,10 +32,7 @@ import ru.atott.combiq.web.view.QuestionViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class QuestionController extends BaseController {
@@ -200,6 +197,7 @@ public class QuestionController extends BaseController {
         question.setBody(markdownService.toMarkdownContent(getUc(), questionRequest.getBody()));
         question.setLevel(questionRequest.getLevel());
         question.setTags(questionRequest.getTags() != null ? questionRequest.getTags() : Collections.emptyList());
+        question.setLastModify(new Date());
 
         questionService.saveQuestion(getUc(), question);
 

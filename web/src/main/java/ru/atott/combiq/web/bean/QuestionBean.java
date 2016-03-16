@@ -4,6 +4,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.service.bean.Question;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class QuestionBean {
@@ -17,6 +19,16 @@ public class QuestionBean {
     private MarkdownContent body;
 
     private List<String> tags;
+
+    private Date lastModify;
+
+    public Date getLastModify() {
+        return lastModify;
+    }
+
+    public void setLastModify(Date lastModify) {
+        this.lastModify = lastModify;
+    }
 
     public String getId() {
         return id;
@@ -65,6 +77,7 @@ public class QuestionBean {
         bean.setLevel(question.getLevel());
         bean.setTags(question.getTags());
         bean.setTitle(question.getTitle());
+        bean.setLastModify(question.getLastModify());
         return bean;
     }
 
@@ -76,6 +89,7 @@ public class QuestionBean {
                 .append("title", title)
                 .append("body", body)
                 .append("tags", tags)
+                .append("lastModify", new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z").format(lastModify))
                 .toString();
     }
 }

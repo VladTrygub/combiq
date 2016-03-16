@@ -126,6 +126,15 @@
                                         </a>
                                     </li>
                                 </#if>
+                                <#if functions.hasRole('sa') || functions.hasRole('contenter')>
+                                    <#if question.lastModify??>
+                                        <li>
+                                            <span class="co-questions-meta">
+                                               последнее изменение: ${question.lastModify?string('dd MMMM yyyy, hh:mm')}
+                                            </span>
+                                        </li>
+                                    </#if>
+                                </#if>
                             </ul>
                         </div>
                     </div>
