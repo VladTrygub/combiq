@@ -15,7 +15,7 @@ public class User {
     private String avatarUrl;
     private List<String> roles;
     private Date registerDate;
-    private List<String> questions;
+    private List<String> favoriteQuestions;
 
     public String getId() {
         return id;
@@ -109,11 +109,11 @@ public class User {
         this.registerDate = registerDate;
     }
 
-    public List<String> getQuestions() {
-        return questions;
+    public List<String> getFavoriteQuestions() {
+        return favoriteQuestions;
     }
 
-    public void setQuestions(List<String> questions) {
-        this.questions = questions;
+    public void setFavoriteQuestions(List<String> favoriteQuestions) {
+        this.favoriteQuestions = favoriteQuestions;
     }
 }

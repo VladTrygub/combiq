@@ -22,6 +22,7 @@ import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.mapper.QuestionMapper;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.site.UserContext;
+import ru.atott.combiq.service.user.UserStarsService;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +44,9 @@ public class SearchServiceImpl implements SearchService {
 
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private UserStarsService userStarsService;
 
     public SearchServiceImpl() {
         SimpleElasticsearchMappingContext mappingContext = new SimpleElasticsearchMappingContext();
@@ -76,6 +80,10 @@ public class SearchServiceImpl implements SearchService {
         QuestionMapper questionMapper = new QuestionMapper();
         SearchResponse response = new SearchResponse();
         response.setQuestions(page.map(questionMapper::map));
+        if(context.getUserId() != null) {
+            List<String> favoriteQuestion = userStarsService.starsQuestions(context.getUserId());
+            response.getQuestions().forEach((x -> x.setFavorite(favoriteQuestion.contains(x.getId()))));
+        }
         response.setPopularTags(getPopularTags(searchResponse));
         return response;
     }

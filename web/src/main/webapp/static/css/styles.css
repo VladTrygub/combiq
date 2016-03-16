@@ -1082,10 +1082,3 @@ ul.co-component-question-tags > li {
     padding: 20px;
     transition: background-color 300ms linear;
 }
-.star{
-    height:10px,
-    width:10px,
-    position: relative;
-    top: 5px;
-    right: 5px
-}

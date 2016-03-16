@@ -30,7 +30,7 @@ public class FavoriteFacet implements Facet {
             ApplicationContext applicationContext = ApplicationContextHolder.getApplicationContext();
             UserRepository userRepository = applicationContext.getBean(UserRepository.class);
             UserEntity userEntity = userRepository.findOne(context.getUserContext().getUserId());
-            List<String> favoriteQuestionIds = userEntity.getQuestions();
+            List<String> favoriteQuestionIds = userEntity.getFavoriteQuestions();
 
             if (CollectionUtils.isEmpty(favoriteQuestionIds)) {
                 return Optional.of(FacetUtils.getNothingToFindFilter());

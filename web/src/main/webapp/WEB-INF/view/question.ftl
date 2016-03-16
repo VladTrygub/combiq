@@ -127,26 +127,11 @@
                 <div>
                     <div class="co-question-title">
                     ${question.title}
-                    <div class="star">
-                        <#if user??>
-                           <#if  userFavorite>
-                                    <img src="/static/images/site/dislike-star.png" width="35"
-                                     height="35" onclick="
-                                    $.post('/questions/${question.id}/dislike').done(function(x) {
-                                    document.location.reload(true);});"></img>
-                           <#else>
-                                    <img  src="/static/images/site/like-star.png"
-                                     width="35" height="35"  onclick="
-                                    $.post('/questions/${question.id}/like').done(function(x) {
-                                    document.location.reload(true);});"></img>
-                           </#if>
-                        <#else>
-                            <img  src="/static/images/site/like-star.png"
-                             width="35" height="35"  onclick="document.location.href = '/login.do';"></img>
-                        </#if>
-                        <span>${question.stars}</span>
                     </div>
-                    </div>
+                    <co-star params="stars: ${question.stars},
+                                             favorite: ${question.favorite?string("true", "false")},
+                                              isUser: ${isUser?string("true", "false")},
+                                               id: '${question.id}' "></co-star>
                     <div class="co-question-body">
                         <@parts.contentEditor content=question.body url='/questions/${question.id}/content' />
                     </div>

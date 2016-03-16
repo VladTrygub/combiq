@@ -39,6 +39,8 @@ public class Question {
 
     private int stars;
 
+    private boolean favorite = false;
+
     public List<String> getTags() {
         return tags;
     }
@@ -167,25 +169,34 @@ public class Question {
         this.stars = stars;
     }
 
+    public boolean getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
     @Override
     public String toString() {
-        return "Question{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", tags=" + tags +
-                ", level='" + level + '\'' +
-                ", reputation=" + reputation +
-                ", tip='" + tip + '\'' +
-                ", body=" + body +
-                ", comments=" + comments +
-                ", landing=" + landing +
-                ", classNames=" + classNames +
-                ", humanUrlTitle='" + humanUrlTitle + '\'' +
-                ", deleted=" + deleted +
-                ", authorId='" + authorId + '\'' +
-                ", authorName='" + authorName + '\'' +
-                ", stars=" + stars +
-                '}';
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("title", title)
+                .append("tags", tags)
+                .append("level", level)
+                .append("reputation", reputation)
+                .append("tip", tip)
+                .append("body", body)
+                .append("comments", comments)
+                .append("landing", landing)
+                .append("classNames", classNames)
+                .append("humanUrlTitle", humanUrlTitle)
+                .append("deleted", deleted)
+                .append("authorId", authorId)
+                .append("authorName", authorName)
+                .append("stars", stars)
+                .append("favorite", favorite)
+                .toString();
     }
 }
 

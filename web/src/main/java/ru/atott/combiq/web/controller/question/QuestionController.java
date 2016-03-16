@@ -20,7 +20,7 @@ import ru.atott.combiq.service.search.question.GetQuestionContext;
 import ru.atott.combiq.service.search.question.GetQuestionResponse;
 import ru.atott.combiq.service.search.question.SearchService;
 import ru.atott.combiq.service.markdown.MarkdownService;
-import ru.atott.combiq.service.user.UserStars;
+import ru.atott.combiq.service.user.UserStarsService;
 import ru.atott.combiq.web.bean.QuestionBean;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.controller.BaseController;
@@ -60,7 +60,7 @@ public class QuestionController extends BaseController {
     private MarkdownService markdownService;
 
     @Autowired
-    private UserStars userStars;
+    private UserStarsService userStars;
 
     @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
@@ -131,9 +131,7 @@ public class QuestionController extends BaseController {
         viewBuilder.setCanonicalUrl(urlResolver.externalize(urlResolver.getQuestionUrl(question)));
         viewBuilder.setAnotherQuestions(anotherQuestions);
         viewBuilder.setQuestionsWithLatestComments(questionsWithLatestComments);
-        if(getUc().getUserId()!=null){
-            viewBuilder.setUserFavorite(userStars.starsQuestions(getUc().getUserId()).contains(question.getId()));
-        } else { viewBuilder.setUserFavorite(false);}
+        viewBuilder.setUser(getUc().getUserId() != null);
         return viewBuilder.build();
     }
 

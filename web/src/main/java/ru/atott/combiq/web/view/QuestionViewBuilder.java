@@ -20,14 +20,14 @@ public class QuestionViewBuilder {
     private List<Question> anotherQuestions;
     private List<LatestComment> questionsWithLatestComments;
 
-    private boolean userFavorite;
+    private boolean user;
 
-    public boolean isUserFavorite() {
-        return userFavorite;
+    public boolean isUser() {
+        return user;
     }
 
-    public void setUserFavorite(boolean userFavorite) {
-        this.userFavorite = userFavorite;
+    public void setUser(boolean user) {
+        this.user = user;
     }
 
     public String getDsl() {
@@ -105,7 +105,7 @@ public class QuestionViewBuilder {
         mav.addObject("canonicalUrl", canonicalUrl);
         mav.addObject("anotherQuestions", anotherQuestions);
         mav.addObject("questionsWithLatestComments", questionsWithLatestComments);
-        mav.addObject("userFavorite", userFavorite);
+        mav.addObject("isUser", user);
         return mav;
     }
 }

@@ -6,19 +6,15 @@ import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.entity.UserEntity;
 import ru.atott.combiq.dao.repository.QuestionRepository;
 import ru.atott.combiq.dao.repository.UserRepository;
-import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.mapper.QuestionMapper;
-import ru.atott.combiq.service.user.UserStars;
+import ru.atott.combiq.service.user.UserStarsService;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by Леонид on 11.03.2016.
- */
 @Service
-public class UserStarsImp implements UserStars {
+public class UserStarsServiceImpl implements UserStarsService {
 
     @Autowired
     private QuestionRepository questionRepository;
@@ -32,14 +28,16 @@ public class UserStarsImp implements UserStars {
     @Override
     public void like(String userId, String questionId) {
         UserEntity user=userRepository.findOne(userId);
-        List<String> questionslist=user.getQuestions();
-        if(questionslist==null){questionslist=new ArrayList<String>();}
+        List<String> questionslist = user.getFavoriteQuestions();
+        if(questionslist == null){
+            questionslist = new ArrayList<String>();
+        }
         if (!questionslist.contains(questionId)){
             questionslist.add(questionId);
-            user.setQuestions(questionslist);
+            user.setFavoriteQuestions(questionslist);
             userRepository.save(user);
-            QuestionEntity questionEntity=questionRepository.findOne(questionId);
-            questionEntity.setStars(questionEntity.getStars()+1);
+            QuestionEntity questionEntity = questionRepository.findOne(questionId);
+            questionEntity.setStars(questionEntity.getStars() + 1);
             questionRepository.save(questionEntity);
         }
     }
@@ -47,29 +45,23 @@ public class UserStarsImp implements UserStars {
     @Override
     public void dislike(String userId, String questionId) {
         UserEntity user=userRepository.findOne(userId);
-        List<String> questionslist=user.getQuestions();
-        if(questionslist==null){questionslist=new ArrayList<String>();}
+        List<String> questionslist = user.getFavoriteQuestions();
+        if(questionslist == null){
+            questionslist = new ArrayList<String>();
+        }
         if (questionslist.contains(questionId)){
             questionslist.remove(questionId);
             userRepository.save(user);
-            QuestionEntity questionEntity=questionRepository.findOne(questionId);
-            questionEntity.setStars(questionEntity.getStars()-1);
+            QuestionEntity questionEntity = questionRepository.findOne(questionId);
+            questionEntity.setStars(questionEntity.getStars() - 1);
             questionRepository.save(questionEntity);
         }
     }
 
     @Override
-    public List<Question> getAll(String userId) {
-        List<Question> questionslist=new LinkedList<Question>();
-        UserEntity user=userRepository.findOne(userId);
-        if(user!=null && user.getQuestions()!=null){
-            questionRepository.findAll(user.getQuestions()).forEach(x->questionslist.add(maper.map(x)));
-        }
-        return questionslist;
-    }
-
-    @Override
     public List<String> starsQuestions(String userId) {
-        return userRepository.findOne(userId).getQuestions();
+        List<String> starsQuestion = userRepository.findOne(userId).getFavoriteQuestions();
+        starsQuestion = starsQuestion == null ? new LinkedList<>() : starsQuestion;
+        return starsQuestion;
     }
 }
