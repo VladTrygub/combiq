@@ -48,12 +48,10 @@
     ko.components.defaultLoader.originalLoadComponent = ko.components.defaultLoader.loadComponent;
     ko.components.defaultLoader.loadComponent = function(componentName, config, callback) {
         if (config && config.styles) {
-            require([config.styles.engine], function() {
-                require(['requirejs.' + config.styles.engine + '!' + config.styles.path], function() {
-                    // Nothing to do.
-                });
-                ko.components.defaultLoader.originalLoadComponent(componentName, config, callback);
+            require(['requirejs.' + config.styles.engine + '!' + config.styles.path], function() {
+                // Nothing to do.
             });
+            ko.components.defaultLoader.originalLoadComponent(componentName, config, callback);
         } else {
             ko.components.defaultLoader.originalLoadComponent(componentName, config, callback);
         }

@@ -80,6 +80,7 @@
                 stackexchangeCallbackUrl: '${stackexchangeCallbackUrl?js_string}'
             };
         </script>
+        <script src="/static/js/lib/css.js"></script>
         <script src="/static/ko_components/components.js?v=${resourceVersion}"></script>
         ${head}
     </head>
