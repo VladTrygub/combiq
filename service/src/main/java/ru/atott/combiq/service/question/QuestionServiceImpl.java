@@ -1,6 +1,7 @@
 package ru.atott.combiq.service.question;
 
 import com.google.common.collect.Sets;
+import org.apache.commons.digester.annotations.rules.AttributeCallParam;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -216,5 +217,24 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionEntity questionEntity = questionRepository.findOne(id);
         QuestionMapper questionMapper = new QuestionMapper();
         return questionMapper.safeMap(questionEntity);
+    }
+
+    @Override
+    public void deleteComment(String questionId, String commentId, UserContext user) {
+        QuestionEntity questionEntity = questionRepository.findOne(questionId);
+        List<QuestionComment> comments = questionEntity.getComments();
+        QuestionComment comment;
+        if (comments != null) {
+           for(int i = 0; i < comments.size(); i++){
+                comment =comments.get(i);
+                if(comment.getId().equals(commentId) &&
+                        (user.getUserId().equals(comment.getUserId()) ||
+                                user.hasAnyRole(new String[]{"sa", "contenter"}))){
+                    questionEntity.setComments(comments.stream()
+                    .filter(x -> !x.getId().equals(commentId)).collect(Collectors.toList()));
+                    questionRepository.save(questionEntity);
+                }
+          }
+        }
     }
 }

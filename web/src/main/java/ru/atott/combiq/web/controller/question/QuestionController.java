@@ -225,4 +225,11 @@ public class QuestionController extends BaseController {
         return new SuccessBean(true);
     }
 
+    @RequestMapping(value = "/questions/{questionId}/comment/{commentId}/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public SuccessBean deleteComment(@PathVariable("questionId") String questionId,
+                                @PathVariable("commentId") String commentId) {
+        questionService.deleteComment(questionId, commentId, getUc());
+        return new SuccessBean(true);
+    }
 }

@@ -307,7 +307,8 @@
 </#macro>
 
 <#macro outComment comment>
-    <span class="co-comments-meta" id="comment-${comment.id!}">
+    <div id="comment-${comment.id!}">
+    <span class="co-comments-meta" >
         ${comment.userName}, ${comment.postDate?string('dd MMMM yyyy, hh:mm')}
         <#if comment.editDate??>
             <span class="co-comments-meta-edited" title="${comment.editUserName!comment.userName}, ${comment.editDate?string('dd MMMM yyyy, hh:mm')}">изменён</span>
@@ -315,7 +316,8 @@
         <#if (user.id)! == comment.userId
                 || functions.hasRole('sa')
                 || functions.hasRole('contenter') >
-            <a class="pull-right" href="#"
+            <div class="pull-right">
+            <a  href="#"
                 onclick="ko.openDialog('co-editcomment', {
                     questionId: '${question.id?js_string}',
                     commentId: '${comment.id?js_string}',
@@ -323,9 +325,16 @@
                 }); return false;">
                 Изменить
             </a>
+            <a  href="#"
+                onclick="$.post('/questions/${question.id}/comment/${comment.id}/delete');
+                    $('#comment-${comment.id!}').remove();">
+                Удалить
+            </a>
+            </div>
         </#if>
     </span>
-    <div class="co-comments-body">
+    <div class="co-comments-body" >
     ${comment.content.html}
+    </div>
     </div>
 </#macro>
