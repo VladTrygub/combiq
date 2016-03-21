@@ -839,11 +839,11 @@ ul.co-component-question-tags > li {
 }
 
 .co-component-question-level-bound {
-      width: 10%;
+    width: 60px;
 }
 
 .co-component-question-content {
-      width: 90%;
+    width: 90%;
 }
 
 .co-level {

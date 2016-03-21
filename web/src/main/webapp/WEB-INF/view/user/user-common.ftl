@@ -7,8 +7,10 @@
     <#assign head>
         <link rel="stylesheet" href="/static/css/user.css?v=${resourceVersion}">
     </#assign>
-
-    <@templates.layoutWithoutSidebar head=head>
+    <#assign sidebar>
+        <co-questionssearch params="title: 'Добавленные в избранное', dsl: 'favorite:true'"></co-questionssearch>
+    </#assign>
+    <@templates.layoutWithSidebar head=head sidebar=sidebar>
 
         <div class="co-userpage">
 
@@ -22,5 +24,6 @@
                 <#nested />
             </div>
         </div>
-    </@templates.layoutWithoutSidebar>
+    </@templates.layoutWithSidebar>
+
 </#macro>

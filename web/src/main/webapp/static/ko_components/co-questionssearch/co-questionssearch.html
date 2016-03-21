@@ -1,0 +1,44 @@
+<div data-bind = "init: init">
+    <h4 data-bind="text: title"></h4>
+    <div   class="co-questionsearch-content">
+        <div  class = "co-questionsearch-preloader" data-bind="element: preloader" >
+            <img src="/static/images/site/preloader.gif"/>
+        </div>
+        <span data-bind="html: sizeDescr"/>
+        <ul data-bind="template: { name: 'co-question-template', foreach: questions }" class="co-questions"/>
+        <div class="co-questionsearch-all" data-bind="html: findAll"/>
+    </div>
+</div>
+
+<script type="text/html" id="co-question-template">
+    <li>
+        <div class="co-component-question">
+            <div class="co-component-question-level-bound">
+                <div class="co-component-question-level">
+                    <div data-bind="css: 'co-level-'+level.toLowerCase()" class="co-level">
+                        <span data-bind="text: level"></span>
+                    </div>
+                    <div class="co-component-question-level-desc">уровень</div>
+                </div>
+            </div>
+            <div class="co-component-question-content">
+                <div class="co-component-question-text">
+                    <span data-bind="text: title"></span>
+                </div>
+                <div>
+                    <ul class="co-component-question-tags" data-bind="foreach: { data: tags, as: 'tag' }">
+                        <li>
+                            <div class="co-tag">
+                                <span data-bind="text: tag"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div data-bind="if: comments.length > 0" class="co-questionsearch-comment">
+                <span class="glyphicon glyphicon-comment"/>
+                <span class="co-questionsearch-comment-count" data-bind="text: comments.length"/>
+            </div>
+        </div>
+    </li>
+</script>
