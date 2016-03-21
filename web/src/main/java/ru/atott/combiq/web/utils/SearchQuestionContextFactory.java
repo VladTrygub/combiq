@@ -65,6 +65,17 @@ public class SearchQuestionContextFactory {
         context.setUserId(authService.getUserId());
         return context;
     }
+    public SearchContext listBySizeAndDsl(int page, int size, String dsl) {
+        DslQuery dslQuery = DslParser.parse(dsl);
+
+        SearchContext context = new SearchContext();
+        context.setUserContext(authService.getUserContext());
+        context.setFrom(page * size);
+        context.setSize(size);
+        context.setDslQuery(dslQuery);
+        context.setUserId(authService.getUserId());
+        return context;
+    }
 
     public SearchContext listByDeleted(int page, boolean deleted) {
         DslQuery query = new DslQuery();

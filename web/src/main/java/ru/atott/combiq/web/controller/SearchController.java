@@ -40,7 +40,17 @@ public class SearchController extends BaseController {
         SearchContext context = searchQuestionContextFactory.listByDsl(page, dsl);
         return getView(request, context, dsl);
     }
-
+    @ResponseBody
+    @RequestMapping(value = "/questions/search/json", method = RequestMethod.GET)
+    public Object searchTop10(HttpServletRequest request,
+                               @RequestParam(defaultValue = "1") int page,
+                               @RequestParam(defaultValue = "10") int size,
+                               @RequestParam(value = "q", defaultValue = "") String dsl) {
+        page = getZeroBasedPage(page);
+        SearchContext context = searchQuestionContextFactory.listBySizeAndDsl(page, size, dsl);
+        SearchResponse questionsResponse = searchService.searchQuestions(context);
+        return questionsResponse.getQuestions();
+    }
     @ResponseBody
     @RequestMapping(value = "/questions/search/count", method = RequestMethod.GET)
     public Object countSearch(HttpServletRequest request,
