@@ -326,8 +326,10 @@
                 Изменить
             </a>
             <a  href="#"
-                onclick="$.post('/questions/${question.id}/comment/${comment.id}/delete');
-                    $('#comment-${comment.id!}').remove();">
+                onclick="
+                        $.post('/questions/${question.id}/comment/${comment.id}/delete');
+                        $('#comment-${comment.id!}').remove();
+                        return false;">
                 Удалить
             </a>
             </div>

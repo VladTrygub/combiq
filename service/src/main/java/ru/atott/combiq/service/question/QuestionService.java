@@ -11,7 +11,7 @@ public interface QuestionService {
 
     void updateComment(UserContext uc, String questionId, String commentId, String comment);
 
-    void deleteComment(String questionId, String commentId, UserContext user);
+    void deleteComment(UserContext uc, String questionId, String commentId);
 
     void saveQuestionBody(UserContext uc, String questionId, String body);
 

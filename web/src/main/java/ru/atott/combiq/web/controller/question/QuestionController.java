@@ -227,9 +227,10 @@ public class QuestionController extends BaseController {
 
     @RequestMapping(value = "/questions/{questionId}/comment/{commentId}/delete", method = RequestMethod.POST)
     @ResponseBody
+    @PreAuthorize("hasAnyRole('user')")
     public SuccessBean deleteComment(@PathVariable("questionId") String questionId,
-                                @PathVariable("commentId") String commentId) {
-        questionService.deleteComment(questionId, commentId, getUc());
+                                     @PathVariable("commentId") String commentId) {
+        questionService.deleteComment(getUc(), questionId, commentId);
         return new SuccessBean(true);
     }
 }
