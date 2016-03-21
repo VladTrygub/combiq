@@ -18,6 +18,8 @@
                     Зарегистрировался ${userRegisterDate?string["dd MMM yyyy г."]}
                 </div>
             </#if>
+
+            <co-questionssearch params="title: 'Добавленные в избранное', dsl: 'favorite:true'"></co-questionssearch>
         </div>
     </div>
 

@@ -55,18 +55,12 @@ public class SearchQuestionContextFactory {
     }
 
     public SearchContext listByDsl(int page, String dsl) {
-        DslQuery dslQuery = DslParser.parse(dsl);
-
-        SearchContext context = new SearchContext();
-        context.setUserContext(authService.getUserContext());
-        context.setFrom(page * size);
-        context.setSize(size);
-        context.setDslQuery(dslQuery);
-        context.setUserId(authService.getUserId());
-        return context;
+        return listByDsl(page, size, dsl);
     }
-    public SearchContext listBySizeAndDsl(int page, int size, String dsl) {
+
+    public SearchContext listByDsl(int page, int size, String dsl) {
         DslQuery dslQuery = DslParser.parse(dsl);
+        size = Math.min(size, 50);
 
         SearchContext context = new SearchContext();
         context.setUserContext(authService.getUserContext());
