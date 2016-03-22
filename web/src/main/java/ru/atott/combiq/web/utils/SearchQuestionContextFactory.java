@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 @Component
 public class SearchQuestionContextFactory {
 
-    private static int size = 20;
+    private static final int DEFAULT_SIZE = 20;
+    private static final int MAX_SIZE = 20;
 
     @Autowired
     private AuthService authService;
@@ -22,8 +23,8 @@ public class SearchQuestionContextFactory {
     public SearchContext list(int page) {
         SearchContext context = new SearchContext();
         context.setUserContext(authService.getUserContext());
-        context.setFrom(page * size);
-        context.setSize(size);
+        context.setFrom(page * DEFAULT_SIZE);
+        context.setSize(DEFAULT_SIZE);
         context.setDslQuery(new DslQuery());
         context.setUserId(authService.getUserId());
         return context;
@@ -34,8 +35,8 @@ public class SearchQuestionContextFactory {
         query.setTags(tags.stream().map(DslTag::new).collect(Collectors.toList()));
         SearchContext context = new SearchContext();
         context.setUserContext(authService.getUserContext());
-        context.setFrom(page * size);
-        context.setSize(size);
+        context.setFrom(page * DEFAULT_SIZE);
+        context.setSize(DEFAULT_SIZE);
         context.setDslQuery(query);
         context.setUserId(authService.getUserId());
         return context;
@@ -47,20 +48,20 @@ public class SearchQuestionContextFactory {
 
         SearchContext context = new SearchContext();
         context.setUserContext(authService.getUserContext());
-        context.setFrom(page * size);
-        context.setSize(size);
+        context.setFrom(page * DEFAULT_SIZE);
+        context.setSize(DEFAULT_SIZE);
         context.setDslQuery(query);
         context.setUserId(authService.getUserId());
         return context;
     }
 
     public SearchContext listByDsl(int page, String dsl) {
-        return listByDsl(page, size, dsl);
+        return listByDsl(page, DEFAULT_SIZE, dsl);
     }
 
     public SearchContext listByDsl(int page, int size, String dsl) {
         DslQuery dslQuery = DslParser.parse(dsl);
-        size = Math.min(size, 50);
+        size = Math.min(size, MAX_SIZE);
 
         SearchContext context = new SearchContext();
         context.setUserContext(authService.getUserContext());
@@ -77,8 +78,8 @@ public class SearchQuestionContextFactory {
 
         SearchContext context = new SearchContext();
         context.setUserContext(authService.getUserContext());
-        context.setFrom(page * size);
-        context.setSize(size);
+        context.setFrom(page * DEFAULT_SIZE);
+        context.setSize(DEFAULT_SIZE);
         context.setDslQuery(query);
         context.setUserId(authService.getUserId());
         return context;
@@ -90,8 +91,8 @@ public class SearchQuestionContextFactory {
 
         SearchContext context = new SearchContext();
         context.setUserContext(authService.getUserContext());
-        context.setFrom(page * size);
-        context.setSize(size);
+        context.setFrom(page * DEFAULT_SIZE);
+        context.setSize(DEFAULT_SIZE);
         context.setDslQuery(query);
         context.setUserId(authService.getUserId());
         return context;

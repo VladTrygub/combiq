@@ -14,6 +14,7 @@ import ru.atott.combiq.service.search.question.SearchService;
 import ru.atott.combiq.web.bean.CountQuestionSearchBean;
 import ru.atott.combiq.web.bean.PagingBean;
 import ru.atott.combiq.web.bean.PagingBeanBuilder;
+import ru.atott.combiq.web.bean.QuestionsSearchBean;
 import ru.atott.combiq.web.utils.SearchQuestionContextFactory;
 import ru.atott.combiq.web.view.SearchViewBuilder;
 
@@ -43,13 +44,13 @@ public class SearchController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/questions/search", method = RequestMethod.GET, produces = "application/json")
-    public Object searchTop10(@RequestParam(defaultValue = "1") int page,
+    public Object search(@RequestParam(defaultValue = "1") int page,
                               @RequestParam(defaultValue = "10") int size,
                               @RequestParam(value = "q", defaultValue = "") String dsl) {
         page = getZeroBasedPage(page);
         SearchContext context = searchQuestionContextFactory.listByDsl(page, size, dsl);
         SearchResponse questionsResponse = searchService.searchQuestions(context);
-        return questionsResponse.getQuestions();
+        return QuestionsSearchBean.of(questionsResponse.getQuestions());
     }
 
     @ResponseBody

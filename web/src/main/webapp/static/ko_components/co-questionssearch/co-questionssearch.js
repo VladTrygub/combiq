@@ -2,12 +2,16 @@ define(['knockout', 'ajax'], function(ko, ajax) {
 
     function ViewModel(params) {
         this.title = ko.wrap(params.title);
+        this.pageSize = params.size || 10;
+        this.dsl = params.dsl || '';
+
         this.preloader = ko.wrap();
         this.sizeDescr = ko.wrap();
+        this.searchAll = ko.wrap();
+
         this.questions = ko.wrap();
-        this.findAll = ko.wrap();
-        this.size = params.size || 10;
-        this.dsl = params.dsl || '';
+        this.size = ko.wrap();
+        this.totalSize = ko.wrap();
 
         this.search();
     }
@@ -17,7 +21,7 @@ define(['knockout', 'ajax'], function(ko, ajax) {
 
         var params = {
             q: this.dsl,
-            size: this.size
+            size: this.pageSize
         };
 
         ajax
@@ -26,15 +30,11 @@ define(['knockout', 'ajax'], function(ko, ajax) {
                 var totalSize = data.totalElements;
                 var size = self.size.length > 0 ? self.size : 10;
                 size = size < totalSize ? size : totalSize;
-                self.sizeDescr('Первые ' + size + ' из ' +
-                    '<a title="Искать все вопросы" href="/questions/search'+
-                    (self.dsl.length > 0 ? '?q='+self.dsl : '') +
-                    '">'+ totalSize +'</a>' +
-                    ' вопросов');
-                self.findAll("<a href = '/questions/search"+
-                    (self.dsl.length > 0 ? "?q="+self.dsl : "")
-                    +"'>Искать все вопросы</a>");
-                self.questions(data.content);
+                self.size(size);
+                self.totalSize(totalSize);
+                self.sizeDescr().show();
+                self.questions(data.questions);
+                self.searchAll().show();
             })
             .always(function() {
                 self.preloader().hide();
