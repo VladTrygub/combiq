@@ -6,9 +6,6 @@ import ru.atott.combiq.service.bean.Question;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by Буянкин on 22.03.2016.
- */
 public class QuestionsSearchBean {
 
     private int page;
