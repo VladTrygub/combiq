@@ -15,6 +15,7 @@ public class UserEntity {
     @Id
     private String id;
     private String name;
+    private String nickName="my nick";
     private String email;
     private String password;
     private String login;
@@ -25,6 +26,14 @@ public class UserEntity {
     private List<String> roles;
     private Date registerDate;
     private Set<String> favoriteQuestions;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public String getLogin() {
         return login;

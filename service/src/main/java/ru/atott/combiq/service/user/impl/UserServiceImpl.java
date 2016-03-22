@@ -284,4 +284,10 @@ public class UserServiceImpl implements UserService {
     private UserEntity findEntityByQualifier(UserQualifier userQualifier) {
         return findEntityByLoginAndType(userQualifier.getLogin(), userQualifier.getType());
     }
+
+    public void updateNickName(String id, String nickName){
+        UserEntity userEntity=userRepository.findOne(id);
+        userEntity.setNickName(nickName);
+        userRepository.save(userEntity);
+    }
 }

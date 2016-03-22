@@ -18,7 +18,11 @@
                     Зарегистрировался ${userRegisterDate?string["dd MMM yyyy г."]}
                 </div>
             </#if>
+            <div>
+                 Nick ${nickName}  <a onclick="ko.openDialog('co-nickEdit'); return false;">Изменить</a>
+            </div>
         </div>
     </div>
+
 
 </@common.userLayout>
