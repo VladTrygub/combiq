@@ -16,6 +16,8 @@ public class QuestionBean {
 
     private String title;
 
+    private int commentsCount;
+
     private MarkdownContent body;
 
     private List<String> tags;
@@ -70,6 +72,14 @@ public class QuestionBean {
         this.tags = tags;
     }
 
+    public int getCommentsCount() {
+        return commentsCount;
+    }
+
+    public void setCommentsCount(int commentsCount) {
+        this.commentsCount = commentsCount;
+    }
+
     public static QuestionBean of(Question question) {
         QuestionBean bean = new QuestionBean();
         bean.setBody(question.getBody());
@@ -78,6 +88,7 @@ public class QuestionBean {
         bean.setTags(question.getTags());
         bean.setTitle(question.getTitle());
         bean.setLastModify(question.getLastModify());
+        bean.setCommentsCount(question.getComments().size());
         return bean;
     }
 

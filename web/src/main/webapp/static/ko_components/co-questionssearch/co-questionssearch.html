@@ -4,9 +4,18 @@
         <div  class = "co-questionsearch-preloader" data-bind="element: preloader" >
             <img src="/static/images/site/preloader.gif"/>
         </div>
-        <span data-bind="html: sizeDescr"/>
+        <span data-bind="element: sizeDescr" style="display: none">
+            Первые <span data-bind="text: size"/>
+            из
+            <a data-bind="attr: { href: '/questions/search?q='+dsl}">
+                <span data-bind="text: totalSize"/>
+            </a>
+            вопросов
+        </span>
         <ul data-bind="template: { name: 'co-question-template', foreach: questions }" class="co-questions"/>
-        <div class="co-questionsearch-all" data-bind="html: findAll"/>
+        <div class="co-questionsearch-all" data-bind="element: searchAll">
+            <a data-bind="attr: { href: '/questions/search?q='+dsl}">Искать все вопросы</a>
+        </div>
     </div>
 </div>
 
@@ -35,9 +44,9 @@
                     </ul>
                 </div>
             </div>
-            <div data-bind="if: comments.length > 0" class="co-questionsearch-comment">
+            <div data-bind="if: commentsCount > 0" class="co-questionsearch-comment">
                 <span class="glyphicon glyphicon-comment"/>
-                <span class="co-questionsearch-comment-count" data-bind="text: comments.length"/>
+                <span class="co-questionsearch-comment-count" data-bind="text: commentsCount"/>
             </div>
         </div>
     </li>
