@@ -20,12 +20,12 @@ define(['knockout', 'ajax'], function(ko, ajax) {
         var self = this;
 
         var params = {
-            q: this.dsl,
-            size: this.pageSize
+            dsl: this.dsl,
+            pageSize: this.pageSize
         };
 
         ajax
-            .rest('GET', '/questions/search', params)
+            .rest('GET', '/rest/v1/question', params)
             .done(function(data) {
                 var totalSize = data.totalElements;
                 var size = self.size.length > 0 ? self.size : 10;

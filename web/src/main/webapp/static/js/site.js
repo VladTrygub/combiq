@@ -23,3 +23,18 @@ var coMarkdown = {
         });
     }
 };
+
+var coUtils = {
+
+    getRestUrl: function(template, params) {
+        if (!params) {
+            return template;
+        }
+
+        for (var key in params) {
+            template = template.replace('{' + key + '}', encodeURIComponent(params[key]));
+        }
+
+        return template;
+    }
+};

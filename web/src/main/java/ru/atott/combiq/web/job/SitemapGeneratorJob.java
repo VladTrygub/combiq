@@ -8,13 +8,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import ru.atott.combiq.service.site.SitemapEntry;
 import ru.atott.combiq.service.site.SitemapService;
-import ru.atott.combiq.web.utils.HostPortUrlResolver;
+import ru.atott.combiq.service.site.HostPortUrlResolver;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class SitemapGeneratorJob {

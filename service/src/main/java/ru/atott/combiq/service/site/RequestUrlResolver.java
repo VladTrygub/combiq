@@ -1,8 +1,4 @@
-package ru.atott.combiq.web.utils;
-
-import org.apache.commons.lang3.StringUtils;
-import ru.atott.combiq.service.UrlResolver;
-import ru.atott.combiq.service.bean.Question;
+package ru.atott.combiq.service.site;
 
 import javax.servlet.http.HttpServletRequest;
 

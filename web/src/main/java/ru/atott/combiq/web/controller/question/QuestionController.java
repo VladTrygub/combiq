@@ -3,13 +3,11 @@ package ru.atott.combiq.web.controller.question;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.atott.combiq.service.UrlResolver;
+import ru.atott.combiq.service.site.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.question.QuestionService;
@@ -21,14 +19,13 @@ import ru.atott.combiq.service.search.question.GetQuestionResponse;
 import ru.atott.combiq.service.search.question.SearchService;
 import ru.atott.combiq.service.markdown.MarkdownService;
 import ru.atott.combiq.service.user.UserStarsService;
-import ru.atott.combiq.web.bean.QuestionBean;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.controller.BaseController;
 import ru.atott.combiq.web.request.ContentRequest;
 import ru.atott.combiq.web.request.EditCommentRequest;
-import ru.atott.combiq.web.request.QuestionRequest;
+import ru.atott.combiq.rest.request.QuestionRequest;
 import ru.atott.combiq.web.security.AuthService;
-import ru.atott.combiq.web.utils.RequestUrlResolver;
+import ru.atott.combiq.service.site.RequestUrlResolver;
 import ru.atott.combiq.web.view.QuestionViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,18 +55,6 @@ public class QuestionController extends BaseController {
 
     @Autowired
     private UserStarsService userStarsService;
-
-    @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    public Object view(@PathVariable("questionId") String questionId) {
-        Question question = questionService.getQuestion(questionId);
-
-        if (question == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        return QuestionBean.of(question);
-    }
 
     @RequestMapping(value = {
             "/questions/{questionId}",
@@ -180,33 +165,6 @@ public class QuestionController extends BaseController {
         }
 
         return null;
-    }
-
-    @RequestMapping(value = "/questions",method = RequestMethod.POST)
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('sa','contenter')")
-    public Object saveQuestion(@Valid @RequestBody QuestionRequest questionRequest) {
-        Question question;
-
-        if (questionRequest.getId() != null) {
-            question = questionService.getQuestion(questionRequest.getId());
-        } else {
-            question = new Question();
-        }
-
-        if (question == null) {
-            return new SuccessBean(false, "Question " + questionRequest.getId() + " is not found.");
-        }
-
-        question.setTitle(questionRequest.getTitle());
-        question.setBody(markdownService.toMarkdownContent(getUc(), questionRequest.getBody()));
-        question.setLevel(questionRequest.getLevel());
-        question.setTags(questionRequest.getTags() != null ? questionRequest.getTags() : Collections.emptyList());
-        question.setLastModify(new Date());
-
-        questionService.saveQuestion(getUc(), question);
-
-        return QuestionBean.of(question);
     }
 
     @RequestMapping(value = "/questions/{questionId}/delete", method = RequestMethod.POST)

@@ -22,7 +22,6 @@ import ru.atott.combiq.dao.Types;
 import ru.atott.combiq.dao.entity.QuestionComment;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
-import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.mapper.QuestionMapper;
 import ru.atott.combiq.service.markdown.MarkdownService;
 

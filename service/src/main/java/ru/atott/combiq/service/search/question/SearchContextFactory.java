@@ -1,32 +1,31 @@
-package ru.atott.combiq.web.utils;
+package ru.atott.combiq.service.search.question;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.service.dsl.DslTag;
-import ru.atott.combiq.service.search.question.SearchContext;
-import ru.atott.combiq.web.security.AuthService;
+import ru.atott.combiq.service.site.UserContextProvider;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class SearchQuestionContextFactory {
+public class SearchContextFactory {
 
     private static final int DEFAULT_SIZE = 20;
-    private static final int MAX_SIZE = 20;
+    private static final int MAX_SIZE = 50;
 
     @Autowired
-    private AuthService authService;
+    private UserContextProvider userContextProvider;
 
     public SearchContext list(int page) {
         SearchContext context = new SearchContext();
-        context.setUserContext(authService.getUserContext());
+        context.setUserContext(userContextProvider.getUserContext());
         context.setFrom(page * DEFAULT_SIZE);
         context.setSize(DEFAULT_SIZE);
         context.setDslQuery(new DslQuery());
-        context.setUserId(authService.getUserId());
+        context.setUserId(context.getUserContext().getUserId());
         return context;
     }
 
@@ -34,11 +33,11 @@ public class SearchQuestionContextFactory {
         DslQuery query = new DslQuery();
         query.setTags(tags.stream().map(DslTag::new).collect(Collectors.toList()));
         SearchContext context = new SearchContext();
-        context.setUserContext(authService.getUserContext());
+        context.setUserContext(userContextProvider.getUserContext());
         context.setFrom(page * DEFAULT_SIZE);
         context.setSize(DEFAULT_SIZE);
         context.setDslQuery(query);
-        context.setUserId(authService.getUserId());
+        context.setUserId(context.getUserContext().getUserId());
         return context;
     }
 
@@ -47,11 +46,11 @@ public class SearchQuestionContextFactory {
         query.setLevel(level);
 
         SearchContext context = new SearchContext();
-        context.setUserContext(authService.getUserContext());
+        context.setUserContext(userContextProvider.getUserContext());
         context.setFrom(page * DEFAULT_SIZE);
         context.setSize(DEFAULT_SIZE);
         context.setDslQuery(query);
-        context.setUserId(authService.getUserId());
+        context.setUserId(context.getUserContext().getUserId());
         return context;
     }
 
@@ -64,11 +63,11 @@ public class SearchQuestionContextFactory {
         size = Math.min(size, MAX_SIZE);
 
         SearchContext context = new SearchContext();
-        context.setUserContext(authService.getUserContext());
+        context.setUserContext(userContextProvider.getUserContext());
         context.setFrom(page * size);
         context.setSize(size);
         context.setDslQuery(dslQuery);
-        context.setUserId(authService.getUserId());
+        context.setUserId(context.getUserContext().getUserId());
         return context;
     }
 
@@ -77,11 +76,11 @@ public class SearchQuestionContextFactory {
         query.setDeleted(deleted);
 
         SearchContext context = new SearchContext();
-        context.setUserContext(authService.getUserContext());
+        context.setUserContext(userContextProvider.getUserContext());
         context.setFrom(page * DEFAULT_SIZE);
         context.setSize(DEFAULT_SIZE);
         context.setDslQuery(query);
-        context.setUserId(authService.getUserId());
+        context.setUserId(context.getUserContext().getUserId());
         return context;
     }
 
@@ -90,11 +89,11 @@ public class SearchQuestionContextFactory {
         query.setUser(userId);
 
         SearchContext context = new SearchContext();
-        context.setUserContext(authService.getUserContext());
+        context.setUserContext(userContextProvider.getUserContext());
         context.setFrom(page * DEFAULT_SIZE);
         context.setSize(DEFAULT_SIZE);
         context.setDslQuery(query);
-        context.setUserId(authService.getUserId());
+        context.setUserId(context.getUserContext().getUserId());
         return context;
     }
 }

@@ -81,6 +81,7 @@ public class SearchServiceImpl implements SearchService {
         SearchResponse response = new SearchResponse();
         response.setQuestions(page.map(questionMapper::map));
         response.setPopularTags(getPopularTags(searchResponse));
+        response.setDslQuery(context.getDslQuery());
         return response;
     }
 

@@ -1,12 +1,10 @@
-package ru.atott.combiq.web.request;
+package ru.atott.combiq.rest.request;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.List;
 
 public class QuestionRequest {
-
-    private String id;
 
     @NotEmpty
     private String title;
@@ -17,14 +15,6 @@ public class QuestionRequest {
     private String level;
 
     private String body;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

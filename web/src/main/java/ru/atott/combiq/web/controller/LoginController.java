@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponentsBuilder;
-import ru.atott.combiq.service.UrlResolver;
+import ru.atott.combiq.service.site.UrlResolver;
 import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.bean.UserType;
 import ru.atott.combiq.service.user.*;
 import ru.atott.combiq.web.security.AuthService;
-import ru.atott.combiq.web.utils.RequestUrlResolver;
+import ru.atott.combiq.service.site.RequestUrlResolver;
 import ru.atott.combiq.web.utils.ViewUtils;
 import ru.atott.combiq.web.view.InstantMessageHolder;
 

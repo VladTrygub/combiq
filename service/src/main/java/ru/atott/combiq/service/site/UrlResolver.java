@@ -1,4 +1,4 @@
-package ru.atott.combiq.service;
+package ru.atott.combiq.service.site;
 
 import org.apache.commons.lang3.StringUtils;
 import ru.atott.combiq.service.bean.Question;

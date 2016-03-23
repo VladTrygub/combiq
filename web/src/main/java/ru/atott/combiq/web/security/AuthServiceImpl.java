@@ -5,12 +5,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.service.bean.UserQualifier;
 import ru.atott.combiq.service.site.UserContext;
+import ru.atott.combiq.service.site.UserContextProvider;
 import ru.atott.combiq.web.filter.RequestHolderFilter;
 
 import java.util.HashSet;
 
 @Service
-public class AuthServiceImpl implements AuthService {
+public class AuthServiceImpl implements AuthService, UserContextProvider {
 
     private static String launchDependentSalt = String.valueOf(System.currentTimeMillis());
 

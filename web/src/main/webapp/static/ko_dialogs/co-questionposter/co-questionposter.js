@@ -23,7 +23,12 @@ define([
         this.availableTags = ko.wrap([]);
 
         if (this.id()) {
-            ajax.rest('GET', '/questions/' + encodeURIComponent(this.id()))
+            var url = coUtils.getRestUrl('/rest/v1/question/{questionId}', {
+                questionId: this.id()
+            });
+
+            ajax
+                .rest('GET', url)
                 .done(function(question) {
                     self.level(question.level);
                     self.title(question.title);
@@ -63,18 +68,24 @@ define([
     ViewModel.prototype.save = function() {
         var self = this;
 
+        self.saving(true);
+        self.saved(false);
+
+        var method = this.id() ? 'PUT' : 'POST';
+
+        var url = this.id()
+            ? coUtils.getRestUrl('/rest/v1/question/{questionId}', {questionId: this.id()})
+            : '/rest/v1/question';
+
         var json = {
-            id: this.id() || null,
             title: this.title(),
             body: this.body(),
             level: this.level(),
             tags: this.selectedTags()
         };
 
-        self.saving(true);
-        self.saved(false);
-
-        ajax.rest('POST', '/questions', json)
+        ajax
+            .rest(method, url, json)
             .done(function(question) {
                 self.id(question.id);
                 self.saved(true);

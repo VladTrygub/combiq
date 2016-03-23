@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.atott.combiq.service.UrlResolver;
+import ru.atott.combiq.service.site.UrlResolver;
 import ru.atott.combiq.service.search.comment.LatestCommentSearchService;
 import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.security.CombiqUser;
-import ru.atott.combiq.web.utils.RequestUrlResolver;
+import ru.atott.combiq.service.site.RequestUrlResolver;
 import ru.atott.combiq.web.utils.ViewUtils;
 import ru.atott.combiq.web.view.InstantMessageHolder;
 

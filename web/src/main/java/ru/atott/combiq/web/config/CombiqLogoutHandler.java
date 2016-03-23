@@ -2,10 +2,9 @@ package ru.atott.combiq.web.config;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import ru.atott.combiq.service.UrlResolver;
-import ru.atott.combiq.web.utils.RequestUrlResolver;
+import ru.atott.combiq.service.site.UrlResolver;
+import ru.atott.combiq.service.site.RequestUrlResolver;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

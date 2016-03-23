@@ -1,7 +1,6 @@
-package ru.atott.combiq.web.utils;
+package ru.atott.combiq.service.site;
 
 import org.apache.commons.lang3.StringUtils;
-import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
 
