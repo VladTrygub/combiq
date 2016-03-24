@@ -47,6 +47,7 @@ public class QuestionMapper implements Mapper<QuestionEntity, Question> {
         question.setHumanUrlTitle(source.getHumanUrlTitle());
         question.setStars(source.getStars());
         question.setLastModify(source.getLastModify());
+        question.setLikeCount(source.getLikeCount()+source.getLikeCountToday());
         return question;
     }
 }

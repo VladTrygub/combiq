@@ -131,6 +131,11 @@
                 favorite: ${favorite?c},
                 questionId: '${question.id?js_string}'">
             </co-star>
+            <co-like params="
+                likeCount: ${question.likeCount?c},
+                like: ${asked?c},
+                questionId: '${question.id?js_string}'">
+            </co-like>
             <div class="co-question-body">
                 <@parts.contentEditor content=question.body url='/questions/${question.id}/content' />
             </div>

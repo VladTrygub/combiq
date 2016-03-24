@@ -47,6 +47,10 @@ public class QuestionEntity {
 
     private Date lastModify;
 
+    private int likeCount;
+
+    private int likeCountToday;
+
     public Date getLastModify() {
         return lastModify;
     }
@@ -197,5 +201,21 @@ public class QuestionEntity {
 
     public void setStars(int stars) {
         this.stars = stars;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public int getLikeCountToday() {
+        return likeCountToday;
+    }
+
+    public void setLikeCountToday(int likeCountToday) {
+        this.likeCountToday = likeCountToday;
     }
 }

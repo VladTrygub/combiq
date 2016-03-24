@@ -13,5 +13,10 @@ public interface UserStarsService {
 
     Set<String> getFavoriteQuestions(UserContext uc);
 
-    boolean isFavoriteQuestion(UserContext uc, String userId);
+    boolean isFavoriteQuestion(UserContext uc, String questionId);
+
+    void addAskedCount(UserContext uc, String questionId);
+
+    boolean isAsked(UserContext uc, String questionId);
 }
+

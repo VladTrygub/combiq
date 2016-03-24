@@ -54,4 +54,9 @@ public class UserController extends BaseController {
         modelAndView.addObject("userRegisterDate", user.getRegisterDate());
         return modelAndView;
     }
+
+    @RequestMapping(value = "/questions/{questionId}/addcount", method = RequestMethod.POST)
+    public void addCount(@PathVariable("questionId") String questionId){
+        userStarsService.addAskedCount(getUc(), questionId);
+    }
 }

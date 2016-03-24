@@ -2,10 +2,12 @@ package ru.atott.combiq.service.facet;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.elasticsearch.index.query.FilterBuilder;
 import ru.atott.combiq.service.dsl.DslQuery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class FacetBuilder {
 
