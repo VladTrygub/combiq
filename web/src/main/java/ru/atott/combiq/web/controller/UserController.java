@@ -55,7 +55,7 @@ public class UserController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/questions/{questionId}/addcount", method = RequestMethod.POST)
+    @RequestMapping(value = "/questions/{questionId}/asked", method = RequestMethod.POST)
     public void addCount(@PathVariable("questionId") String questionId){
         userStarsService.addAskedCount(getUc(), questionId);
     }

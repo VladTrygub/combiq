@@ -42,7 +42,7 @@ public class Question {
 
     private Date lastModify;
 
-    private int likeCount;
+    private int askedCount;
 
     public Date getLastModify() {
         return lastModify;
@@ -180,12 +180,12 @@ public class Question {
         this.stars = stars;
     }
 
-    public int getLikeCount() {
-        return likeCount;
+    public int getAskedCount() {
+        return askedCount;
     }
 
-    public void setLikeCount(int likeCount) {
-        this.likeCount = likeCount;
+    public void setAskedCount(int askedCount) {
+        this.askedCount = askedCount;
     }
 
     @Override
@@ -207,7 +207,7 @@ public class Question {
                 .append("authorName", authorName)
                 .append("stars", stars)
                 .append("lastModify", lastModify)
-                .append("likeCount", likeCount)
+                .append("askedCount", askedCount)
                 .toString();
     }
 }

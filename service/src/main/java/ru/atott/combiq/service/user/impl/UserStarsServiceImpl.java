@@ -105,13 +105,13 @@ public class UserStarsServiceImpl implements UserStarsService {
             user.setAskedQuestions(questionsAskedSet);
             userRepository.save(user);
             QuestionEntity questionEntity = questionRepository.findOne(questionId);
-            questionEntity.setLikeCountToday(questionEntity.getLikeCountToday() + 1);
+            questionEntity.setAskedToday(questionEntity.getAskedToday() + 1);
             questionRepository.save(questionEntity);
         }
     }
 
     @Override
-    public boolean isAsked(UserContext uc, String questionId) {
+    public boolean isAskedQuestion(UserContext uc, String questionId) {
         if (uc.isAnonimous()) {
             return false;
         }
@@ -126,7 +126,7 @@ public class UserStarsServiceImpl implements UserStarsService {
         return questionsAskedSet.contains(questionId);
     }
 
-    @Scheduled(cron="0 5 * * * * ")
+    @Override
     public void recount(){
         HashMap<String, Integer> likeCounter = new HashMap<>();
         questionRepository.findAll().forEach(x->likeCounter.put(x.getId(), 0));
@@ -139,11 +139,12 @@ public class UserStarsServiceImpl implements UserStarsService {
         });
         likeCounter.keySet().forEach(x-> {
             QuestionEntity question = questionRepository.findOne(x);
-            question.setLikeCount(likeCounter.get(x));
+            question.setAskedCount(likeCounter.get(x));
             question.setStars(starCounter.get(x));
-            question.setLikeCountToday(0);
+            question.setAskedToday(0);
             questionRepository.save(question);
         });
+
 
     }
 }

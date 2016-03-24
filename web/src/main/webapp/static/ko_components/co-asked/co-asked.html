@@ -1,0 +1,8 @@
+<div>
+<button class="btn btn-primary" data-bind="click: ask, visible: !asked()">
+    Меня это спрашивали
+</button>
+<div data-bind="visible: askedCount" class="text-center" title="Количество пользователей, которым задавали этот вопрос">
+    <span class="co-small" data-bind="text: askedCount"></span>
+</div>
+</div>

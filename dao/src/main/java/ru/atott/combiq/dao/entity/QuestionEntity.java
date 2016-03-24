@@ -47,9 +47,9 @@ public class QuestionEntity {
 
     private Date lastModify;
 
-    private int likeCount;
+    private int askedCount;
 
-    private int likeCountToday;
+    private int askedToday;
 
     public Date getLastModify() {
         return lastModify;
@@ -203,19 +203,19 @@ public class QuestionEntity {
         this.stars = stars;
     }
 
-    public int getLikeCount() {
-        return likeCount;
+    public int getAskedCount() {
+        return askedCount;
     }
 
-    public void setLikeCount(int likeCount) {
-        this.likeCount = likeCount;
+    public void setAskedCount(int askedCount) {
+        this.askedCount = askedCount;
     }
 
-    public int getLikeCountToday() {
-        return likeCountToday;
+    public int getAskedToday() {
+        return askedToday;
     }
 
-    public void setLikeCountToday(int likeCountToday) {
-        this.likeCountToday = likeCountToday;
+    public void setAskedToday(int askedToday) {
+        this.askedToday = askedToday;
     }
 }

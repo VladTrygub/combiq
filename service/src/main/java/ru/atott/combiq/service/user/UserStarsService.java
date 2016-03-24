@@ -17,6 +17,8 @@ public interface UserStarsService {
 
     void addAskedCount(UserContext uc, String questionId);
 
-    boolean isAsked(UserContext uc, String questionId);
+    boolean isAskedQuestion(UserContext uc, String questionId);
+
+    public void recount();
 }
 

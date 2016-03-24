@@ -15,6 +15,12 @@
         "reputation": {
           "type": "long"
         },
+        "askedCount": {
+          "type": "int"
+        },
+        "stars": {
+          "type": "int"
+        },
         "comments": {
           "properties": {
             "userId": {

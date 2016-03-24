@@ -129,7 +129,7 @@ public class QuestionController extends BaseController {
         viewBuilder.setAnotherQuestions(anotherQuestions);
         viewBuilder.setQuestionsWithLatestComments(questionsWithLatestComments);
         viewBuilder.setFavorite(userStarsService.isFavoriteQuestion(getUc(), questionId));
-        viewBuilder.setAsked(userStarsService.isAsked(getUc(), questionId));
+        viewBuilder.setAsked(userStarsService.isAskedQuestion(getUc(), questionId));
         return viewBuilder.build();
     }
 
