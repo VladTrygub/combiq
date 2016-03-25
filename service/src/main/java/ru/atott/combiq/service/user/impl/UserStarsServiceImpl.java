@@ -128,18 +128,18 @@ public class UserStarsServiceImpl implements UserStarsService {
 
     @Override
     public void recount(){
-        HashMap<String, Integer> likeCounter = new HashMap<>();
-        questionRepository.findAll().forEach(x->likeCounter.put(x.getId(), 0));
-        HashMap<String, Integer> starCounter = (HashMap<String, Integer>) likeCounter.clone();
+        HashMap<String, Integer> AskedCounter = new HashMap<>();
+        questionRepository.findAll().forEach(x->AskedCounter.put(x.getId(), 0));
+        HashMap<String, Integer> starCounter = (HashMap<String, Integer>) AskedCounter.clone();
         userRepository.findAll().iterator().forEachRemaining(x-> {
             x.getAskedQuestions().iterator()
-                    .forEachRemaining(y-> likeCounter.put(y, likeCounter.get(y) + 1));
+                    .forEachRemaining(y-> AskedCounter.put(y, AskedCounter.get(y) + 1));
             x.getFavoriteQuestions().iterator()
-                    .forEachRemaining(y-> starCounter.put(y, likeCounter.get(y) + 1));
+                    .forEachRemaining(y-> starCounter.put(y, AskedCounter.get(y) + 1));
         });
-        likeCounter.keySet().forEach(x-> {
+        AskedCounter.keySet().forEach(x-> {
             QuestionEntity question = questionRepository.findOne(x);
-            question.setAskedCount(likeCounter.get(x));
+            question.setAskedCount(AskedCounter.get(x));
             question.setStars(starCounter.get(x));
             question.setAskedToday(0);
             questionRepository.save(question);

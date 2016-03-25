@@ -16,10 +16,13 @@
           "type": "long"
         },
         "askedCount": {
-          "type": "int"
+          "type": "long"
         },
         "stars": {
-          "type": "int"
+          "type": "long"
+        },
+        "askedToday": {
+          "type": "long"
         },
         "comments": {
           "properties": {

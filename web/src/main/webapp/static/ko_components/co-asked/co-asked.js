@@ -13,8 +13,8 @@ define(['knockout'], function(ko) {
              return;
          }
          $.post('/questions/' + encodeURIComponent(this.questionId()) + '/asked');
-         this.like(true);
-         this.likeCount(this.likeCount() + 1);
+         this.asked(true);
+         this.askedCount(this.askedCount() + 1);
      };
 
      return ViewModel;
