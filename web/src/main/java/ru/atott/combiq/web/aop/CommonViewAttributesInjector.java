@@ -48,6 +48,24 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
     @Value("${web.toolbox.visible}")
     private boolean toolboxVisible;
 
+    @Value("${web.toolbox.color}")
+    private String toolboxColor;
+
+    @Value("${web.toolbox.text}")
+    private String toolboxText;
+
+    @Value("${web.auth.github.enable}")
+    private boolean githubEnable;
+
+    @Value("${web.auth.vk.enable}")
+    private boolean vkEnable;
+
+    @Value("${web.auth.stackexchange.enable}")
+    private boolean stackexchangeEnable;
+
+    @Value("${web.auth.facebook.enable}")
+    private boolean facebookEnable;
+
     @Autowired
     private InstantMessageHolder instantMessageHolder;
 
@@ -97,6 +115,12 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
             modelAndView.addObject("facebookCallbackUrl", urlResolver.externalize("/login/callback/facebook.do"));
             modelAndView.addObject("instantMessage", instantMessageHolder.get());
             modelAndView.addObject("toolboxVisible", toolboxVisible);
+            modelAndView.addObject("toolboxColor", toolboxColor);
+            modelAndView.addObject("toolboxText", toolboxText);
+            modelAndView.addObject("githubEnable", githubEnable);
+            modelAndView.addObject("vkEnable", vkEnable);
+            modelAndView.addObject("stackexchangeEnable", stackexchangeEnable);
+            modelAndView.addObject("facebookEnable", facebookEnable);
             modelAndView.addObject("latestCommentFeed", latestCommentSearchService.get5LatestComments());
 
             modelAndView.addObject(INJECTED, true);

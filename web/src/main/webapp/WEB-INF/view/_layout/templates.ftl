@@ -77,7 +77,11 @@
                 facebookCallbackUrl: '${facebookCallbackUrl?js_string}',
                 stackexchangeClientId: '${stackexchangeClientId?js_string}',
                 stackexchangeClientState: '${stackexchangeClientState?js_string}',
-                stackexchangeCallbackUrl: '${stackexchangeCallbackUrl?js_string}'
+                stackexchangeCallbackUrl: '${stackexchangeCallbackUrl?js_string}',
+                githubEnable: ${githubEnable?c},
+                vkEnable: ${vkEnable?c},
+                stackexchangeEnable: ${stackexchangeEnable?c},
+                facebookEnable: ${facebookEnable?c}
             };
         </script>
         <script src="/static/js/lib/css.js"></script>
@@ -86,10 +90,11 @@
     </head>
     <body class="${bodyClass}">
         <#if toolboxVisible>
-            <div class="co-toolbox">
+            <div class="co-toolbox" style="background-color: ${toolboxColor!} !important;">
                 <div class="container">
                     Это тестовый стенд проекта <a href="http://combiq.ru/project">combiq.ru</a>,
-                    окружение <strong>${env}</strong>
+                    окружение <strong>${env}</strong>.
+                    ${toolboxText!}
                 </div>
             </div>
         </#if>
