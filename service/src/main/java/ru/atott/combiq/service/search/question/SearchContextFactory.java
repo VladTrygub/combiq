@@ -16,7 +16,7 @@ public class SearchContextFactory {
     private static final int DEFAULT_SIZE = 20;
     private static final int MAX_SIZE = 50;
 
-    @Autowired
+    @Autowired(required = false)
     private UserContextProvider userContextProvider;
 
     public SearchContext list(int page) {
