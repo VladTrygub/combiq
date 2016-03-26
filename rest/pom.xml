@@ -84,6 +84,7 @@
                         <artifactId>xml-doclet</artifactId>
                         <version>1.0.4</version>
                     </docletArtifact>
+                    <encoding>UTF-8</encoding>
                 </configuration>
                 <executions>
                     <execution>
