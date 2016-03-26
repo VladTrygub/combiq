@@ -47,7 +47,7 @@ public class QuestionEntity {
 
     private Date lastModify;
 
-    private int askedCount;
+    private Integer askedCount;
 
     private int askedToday;
 
