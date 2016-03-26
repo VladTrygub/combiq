@@ -14,8 +14,7 @@ import ru.atott.combiq.service.search.question.SearchService;
 import ru.atott.combiq.web.bean.CountQuestionSearchBean;
 import ru.atott.combiq.web.bean.PagingBean;
 import ru.atott.combiq.web.bean.PagingBeanBuilder;
-import ru.atott.combiq.web.bean.QuestionsSearchBean;
-import ru.atott.combiq.web.utils.SearchQuestionContextFactory;
+import ru.atott.combiq.service.search.question.SearchContextFactory;
 import ru.atott.combiq.web.view.SearchViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,33 +30,22 @@ public class SearchController extends BaseController {
     private SearchService searchService;
 
     @Autowired
-    private SearchQuestionContextFactory searchQuestionContextFactory;
+    private SearchContextFactory searchContextFactory;
 
     @RequestMapping(value = "/questions/search", method = RequestMethod.GET)
     public ModelAndView search(HttpServletRequest request,
                                @RequestParam(defaultValue = "1") int page,
                                @RequestParam(value = "q", defaultValue = "") String dsl) {
         page = getZeroBasedPage(page);
-        SearchContext context = searchQuestionContextFactory.listByDsl(page, dsl);
+        SearchContext context = searchContextFactory.listByDsl(page, dsl);
         return getView(request, context, dsl);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/questions/search", method = RequestMethod.GET, produces = "application/json")
-    public Object search(@RequestParam(defaultValue = "1") int page,
-                              @RequestParam(defaultValue = "10") int size,
-                              @RequestParam(value = "q", defaultValue = "") String dsl) {
-        page = getZeroBasedPage(page);
-        SearchContext context = searchQuestionContextFactory.listByDsl(page, size, dsl);
-        SearchResponse questionsResponse = searchService.searchQuestions(context);
-        return QuestionsSearchBean.of(questionsResponse.getQuestions());
     }
 
     @ResponseBody
     @RequestMapping(value = "/questions/search/count", method = RequestMethod.GET)
     public Object countSearch(HttpServletRequest request,
                               @RequestParam(value = "q", defaultValue = "") String dsl) {
-        SearchContext context = searchQuestionContextFactory.listByDsl(0, dsl);
+        SearchContext context = searchContextFactory.listByDsl(0, dsl);
         long countQuestions = searchService.countQuestions(context);
         return new CountQuestionSearchBean(countQuestions);
     }
@@ -66,7 +54,7 @@ public class SearchController extends BaseController {
     public ModelAndView questions(HttpServletRequest request,
                                   @RequestParam(defaultValue = "1") int page) {
         page = getZeroBasedPage(page);
-        SearchContext context = searchQuestionContextFactory.list(page);
+        SearchContext context = searchContextFactory.list(page);
         String subTitle = "Вопросы для подготовки к собеседованию Java";
         return getView(request, context, null, subTitle, true);
     }
@@ -77,7 +65,7 @@ public class SearchController extends BaseController {
                                         @PathVariable("tags") String tags) {
         page = getZeroBasedPage(page);
         ArrayList<String> tagsList = Lists.newArrayList(StringUtils.split(tags, ','));
-        SearchContext context = searchQuestionContextFactory.listByTags(page, tagsList);
+        SearchContext context = searchContextFactory.listByTags(page, tagsList);
         return getView(request, context, null);
     }
 
@@ -86,7 +74,7 @@ public class SearchController extends BaseController {
                               @RequestParam(defaultValue = "1") int page,
                               @PathVariable("level") String level) {
         page = getZeroBasedPage(page);
-        SearchContext context = searchQuestionContextFactory.listByLevel(page, level);
+        SearchContext context = searchContextFactory.listByLevel(page, level);
         return getView(request, context, null);
     }
 
@@ -95,7 +83,7 @@ public class SearchController extends BaseController {
     public ModelAndView deleted(HttpServletRequest request,
                                 @RequestParam(defaultValue = "1") int page) {
         page = getZeroBasedPage(page);
-        SearchContext context = searchQuestionContextFactory.listByDeleted(page, true);
+        SearchContext context = searchContextFactory.listByDeleted(page, true);
         return getView(request, context, null);
     }
 
@@ -104,7 +92,7 @@ public class SearchController extends BaseController {
                                @RequestParam(defaultValue = "1") int page,
                                @PathVariable("userId") String userId) {
         page = getZeroBasedPage(page);
-        SearchContext context = searchQuestionContextFactory.listByUser(page, userId);
+        SearchContext context = searchContextFactory.listByUser(page, userId);
         return getView(request, context, null);
     }
 

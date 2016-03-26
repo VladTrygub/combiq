@@ -16,14 +16,17 @@ import java.util.stream.Collectors;
 
 @Component("domainResolver")
 public class NameVersionDomainResolver {
+
     private String delimiter = "_";
 
     private Map<String, Long> domainVersions;
+
     private List<String> rawIndeces;
 
     @Value("${es.index.prefix}")
     private String prefix;
-    @Autowired(required = false)
+
+    @Autowired
     private Client client;
 
     public String getDelimiter() {

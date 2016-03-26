@@ -21,7 +21,6 @@ public class SearchContext {
 
     private UserContext userContext;
 
-
     public void setQuestionId(String questionId) {
         this.questionIds = Collections.singletonList(questionId);
     }

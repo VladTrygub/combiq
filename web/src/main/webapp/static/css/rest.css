@@ -1,0 +1,107 @@
+.co-rest-index {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.co-rest-index > li {
+    margin-bottom: 15px;
+}
+
+.co-rest-bucket {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.co-rest-bucket > li {
+    margin-left: 45px;
+}
+
+.co-rest-bucket > li:first-child {
+    margin-left: 0;
+}
+
+.co-rest-method-ref {
+    display: inline-block;
+    background-color: #EEEEEE;
+    border-radius: 4px;
+    padding: 0 10px;
+    font-size: 11px;
+    color: #424242;
+    text-decoration: none;
+}
+
+.co-rest-plainlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.co-rest-method {
+    margin-bottom: 25px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 15px;
+    font-size: 12px;
+}
+
+.co-rest-method-head {
+    font-family: monospace;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.co-rest-method-head > strong {
+    display: inline-block;
+    min-width: 50px;
+    font-weight: 700;
+}
+
+.co-rest-method pre {
+    background-color: #F0F0F0;
+}
+
+.co-rest-method em {
+    color: #3291E4;
+}
+
+.co-rest-method h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.co-rest-method h4 {
+    font-size: 11px;
+    margin-bottom: 10px;
+    font-weight: bolder;
+}
+
+.co-rest-code {
+    font-family: monospace;
+}
+
+.co-rest-status {
+    display: inline-block;
+    min-width: 80px;
+}
+
+.co-rest-status-ok {
+    background-color: #14892c;
+    border-color: #14892c;
+    color: #ffffff;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.co-rest-status-error {
+    background-color: #d04437;
+    border-color: #d04437;
+    color: #ffffff;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}

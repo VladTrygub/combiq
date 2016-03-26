@@ -1,7 +1,7 @@
 package ru.atott.combiq.service.search.question;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import ru.atott.combiq.service.UrlResolver;
+import ru.atott.combiq.service.site.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslQuery;
 

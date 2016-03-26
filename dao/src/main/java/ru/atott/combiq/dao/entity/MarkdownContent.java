@@ -1,5 +1,6 @@
 package ru.atott.combiq.dao.entity;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.pegdown.PegDownProcessor;
 
@@ -35,6 +36,10 @@ public class MarkdownContent {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public static boolean isEmpty(MarkdownContent content) {
+        return content == null || StringUtils.isBlank(content.getMarkdown());
     }
 
     @Override

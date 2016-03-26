@@ -5,14 +5,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ru.atott.combiq.service.UrlResolver;
+import ru.atott.combiq.service.site.UrlResolver;
 import ru.atott.combiq.service.bean.Questionnaire;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
 import ru.atott.combiq.service.question.QuestionnaireService;
 import ru.atott.combiq.service.site.UserContext;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.request.ContentRequest;
-import ru.atott.combiq.web.utils.RequestUrlResolver;
+import ru.atott.combiq.service.site.RequestUrlResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
