@@ -21,6 +21,7 @@ import ru.atott.combiq.dao.Domains;
 import ru.atott.combiq.dao.Types;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.entity.QuestionnaireEntity;
+import ru.atott.combiq.dao.es.IndexService;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.dao.repository.QuestionRepository;
 import ru.atott.combiq.dao.repository.QuestionnaireRepository;
@@ -60,6 +61,9 @@ public class QuestionIndexServiceImpl implements QuestionIndexService {
     @Autowired
     private TransletirateService transletirateService;
 
+    @Autowired
+    private IndexService indexService;
+
     @Override
     public String importQuestions(String env) throws IOException, ExecutionException, InterruptedException {
         domainResolver.reset();
@@ -84,6 +88,9 @@ public class QuestionIndexServiceImpl implements QuestionIndexService {
         }
 
         domainResolver.reset();
+
+        indexService.refreshIndexByIndexName(indexName);
+
         return indexName;
     }
 
@@ -124,6 +131,8 @@ public class QuestionIndexServiceImpl implements QuestionIndexService {
             client.update(updateRequest).get();
         }
 
+        indexService.refreshIndexByIndexName(indexName);
+
         return indexName;
     }
 
@@ -138,6 +147,7 @@ public class QuestionIndexServiceImpl implements QuestionIndexService {
                     questionEntity.setHumanUrlTitle(humanUrlTitle);
                     questionRepository.save(questionEntity);
                 });
+        indexService.refreshIndexByDomain(Domains.question);
     }
 
     @Override
@@ -167,6 +177,8 @@ public class QuestionIndexServiceImpl implements QuestionIndexService {
                                     .collect(Collectors.toList()));
                     questionnaireRepository.save(questionnaireEntity);
                 });
+
+        indexService.refreshIndexByDomain(Domains.question);
     }
 
     @Override
@@ -182,5 +194,6 @@ public class QuestionIndexServiceImpl implements QuestionIndexService {
                     questionnaireRepository.save(entity);
                     questionnaireRepository.delete(entity.getLegacyId());
                 });
+        indexService.refreshIndexByDomain(Domains.question);
     }
 }

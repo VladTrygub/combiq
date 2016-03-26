@@ -8,10 +8,14 @@ import java.util.Date;
 
 @Document(indexName = "#{domainResolver.resolveSystemIndex()}", type = Types.rememberMe)
 public class RememberMeEntity {
+
     @Id
     private String series;
+
     private Date lastused;
+
     private String token;
+
     private String username;
 
     public String getSeries() {

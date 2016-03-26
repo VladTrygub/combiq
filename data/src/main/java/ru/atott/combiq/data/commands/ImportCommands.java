@@ -36,7 +36,7 @@ public class ImportCommands implements CommandMarker {
     @CliCommand(value = "import dictionary jdk8classes")
     public String importJdk8ClassesDictionary() throws IOException {
         try {
-            return importService.importJdk8ClassesDictionary();
+            return importService.importJdk8ClassesDictionary() + ". Done.";
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -46,7 +46,7 @@ public class ImportCommands implements CommandMarker {
     @CliCommand(value = "import questions")
     public String importQuestions() throws Exception {
         try {
-            return questionIndexService.importQuestions(CommandsContext.env);
+            return questionIndexService.importQuestions(CommandsContext.env) + ". Done.";
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

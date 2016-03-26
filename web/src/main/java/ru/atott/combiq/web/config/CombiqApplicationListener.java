@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-import ru.atott.combiq.dao.es.index.IndexService;
-import ru.atott.combiq.web.utils.EnvUtils;
+import ru.atott.combiq.dao.es.IndexService;
 
 @Component
 public class CombiqApplicationListener implements ApplicationListener<ContextRefreshedEvent> {
@@ -24,10 +23,10 @@ public class CombiqApplicationListener implements ApplicationListener<ContextRef
 
         if (!initialized) {
             try {
-                indexService.updateQuestionMapping(EnvUtils.getEnv());
-                indexService.updatePersonalMapping(EnvUtils.getEnv());
-                indexService.updateSiteMapping(EnvUtils.getEnv());
-                indexService.updateIndecesMappingByEntities();
+                indexService.updateQuestionMapping();
+                indexService.updatePersonalMapping();
+                indexService.updateSiteMapping();
+                indexService.updateMappingByEntities();
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
             }

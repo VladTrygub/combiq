@@ -17,7 +17,7 @@ public class QuestionIndexCommands implements CommandMarker {
 
     @CliCommand(value = "update question timestamps", help = "Set missing timestamp values for questions.")
     public String updateTimestamps() throws InterruptedException, ExecutionException, IOException {
-        return questionIndexService.updateQuestionTimestamps();
+        return questionIndexService.updateQuestionTimestamps() + ". Done.";
     }
 
     @CliCommand(value = "update question humanUrlTitles", help = "Set missing humanUrlTitle values for questions.")

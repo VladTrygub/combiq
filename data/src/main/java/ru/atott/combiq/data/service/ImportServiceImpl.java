@@ -13,6 +13,7 @@ import org.odftoolkit.simple.table.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.Types;
+import ru.atott.combiq.dao.es.IndexService;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.data.service.ImportService;
 
@@ -32,11 +33,14 @@ import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 @Service
 public class ImportServiceImpl implements ImportService {
 
-    @Autowired(required = false)
+    @Autowired
     private Client client;
 
     @Autowired
     private NameVersionDomainResolver domainResolver;
+
+    @Autowired
+    private IndexService indexService;
 
     @Override
     public String importQuestionnareOds(String filename, String questionnaireName) throws Exception {
@@ -129,6 +133,8 @@ public class ImportServiceImpl implements ImportService {
                 e.printStackTrace();
             }
         });
+
+        indexService.refreshIndexByIndexName(questionIndex);
 
         return questionIndex;
     }

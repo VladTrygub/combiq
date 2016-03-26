@@ -7,7 +7,7 @@ import org.springframework.shell.core.CommandMarker;
 import org.springframework.shell.core.annotation.CliCommand;
 import org.springframework.shell.core.annotation.CliOption;
 import org.springframework.stereotype.Component;
-import ru.atott.combiq.dao.es.index.IndexService;
+import ru.atott.combiq.dao.es.IndexService;
 import ru.atott.combiq.data.service.DeleteIndecesService;
 import ru.atott.combiq.data.service.ListIndecesService;
 
@@ -42,52 +42,54 @@ public class IndecesCommands implements CommandMarker {
     @CliCommand(value = "create indeces")
     public String create() throws InterruptedException, ExecutionException, IOException {
         ArrayList<String> indeces = Lists.newArrayList(
-                indexService.createQuestionIndex(CommandsContext.env),
-                indexService.createPersonalIndex(CommandsContext.env),
-                indexService.createSystemIndex(CommandsContext.env));
-        return StringUtils.join(indeces.toArray(), ",");
+                indexService.createQuestionIndex(),
+                indexService.createPersonalIndex(),
+                indexService.createSystemIndex(),
+                indexService.createSiteIndex());
+        return StringUtils.join(indeces.toArray(), ",") + ". Done.";
     }
 
     @CliCommand(value = "update indeces")
     public String update() throws InterruptedException, ExecutionException, IOException {
         ArrayList<String> indeces = Lists.newArrayList(
-                indexService.updateQuestionMapping(CommandsContext.env),
-                indexService.updatePersonalMapping(CommandsContext.env));
-        return StringUtils.join(indeces.toArray(), ",");
+                indexService.updateQuestionMapping(),
+                indexService.updatePersonalMapping(),
+                indexService.updateSiteMapping());
+        return StringUtils.join(indeces.toArray(), ",") + ". Done.";
     }
 
     @CliCommand(value = "create index system")
     public String createSystemIndex() throws InterruptedException, ExecutionException, IOException {
-        return indexService.createSiteIndex(CommandsContext.env);
+        return indexService.createSiteIndex();
     }
 
     @CliCommand(value = "create index site")
     public String createSiteIndex() throws InterruptedException, ExecutionException, IOException {
-        return indexService.createSiteIndex(CommandsContext.env);
+        return indexService.createSiteIndex();
     }
 
     @CliCommand(value = "update index site")
     public String updateSiteIndex() throws InterruptedException, ExecutionException, IOException {
-        return indexService.updateSiteMapping(CommandsContext.env);
+        return indexService.updateSiteMapping();
     }
 
     @CliCommand(value = "create index personal")
     public String createPersonalIndex() throws InterruptedException, ExecutionException, IOException {
-        return indexService.createPersonalIndex(CommandsContext.env);
+        return indexService.createPersonalIndex();
     }
 
     @CliCommand(value = "update index personal")
     public String updatePersonalIndex() throws InterruptedException, ExecutionException, IOException {
-        return indexService.updatePersonalMapping(CommandsContext.env);
+        return indexService.updatePersonalMapping();
     }
 
     @CliCommand(value = "create index question")
     public String createQuestionIndex() throws InterruptedException, ExecutionException, IOException {
-        return indexService.createQuestionIndex(CommandsContext.env);
+        return indexService.createQuestionIndex();
     }
 
     @CliCommand(value = "update index question")
     public String updateQuestionIndex() throws InterruptedException, ExecutionException, IOException {
-        return indexService.updateQuestionMapping(CommandsContext.env);
+        return indexService.updateQuestionMapping();
     }
 }

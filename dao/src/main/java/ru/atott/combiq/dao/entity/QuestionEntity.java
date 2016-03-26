@@ -42,7 +42,6 @@ public class QuestionEntity {
 
     private boolean deleted;
 
-
     private int stars;
 
     private Date lastModify;
