@@ -203,11 +203,11 @@ public class QuestionEntity {
         this.stars = stars;
     }
 
-    public int getAskedCount() {
+    public Integer getAskedCount() {
         return askedCount;
     }
 
-    public void setAskedCount(int askedCount) {
+    public void setAskedCount(Integer askedCount) {
         this.askedCount = askedCount;
     }
 
