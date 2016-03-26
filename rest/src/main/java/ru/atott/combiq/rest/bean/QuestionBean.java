@@ -1,9 +1,27 @@
 package ru.atott.combiq.rest.bean;
 
+import com.google.common.collect.Lists;
+
 import java.util.Date;
 import java.util.List;
 
 public class QuestionBean {
+
+    public static QuestionBean EXAMPLE;
+
+    public static List<QuestionBean> EXAMPLE_LIST;
+
+    static {
+        EXAMPLE = new QuestionBean();
+        EXAMPLE.setId("577");
+        EXAMPLE.setLevel("D2");
+        EXAMPLE.setCommentsCount(4);
+        EXAMPLE.setChangeDate(new Date());
+        EXAMPLE.setTags(Lists.newArrayList("concurrency"));
+        EXAMPLE.setTitle("Как сделать Safe Publishing используя synchronized?");
+        EXAMPLE.setUri("http://combiq.ru/questions/577/kak-sdelat-safe-publishing-ispolzuya-synchronized");
+        EXAMPLE_LIST = Lists.newArrayList(EXAMPLE);
+    }
 
     private String id;
 

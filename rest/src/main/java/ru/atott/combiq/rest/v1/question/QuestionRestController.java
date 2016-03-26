@@ -3,6 +3,7 @@ package ru.atott.combiq.rest.v1.question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import ru.atott.combiq.rest.bean.QuestionBean;
 import ru.atott.combiq.rest.mapper.QuestionBeanMapper;
 import ru.atott.combiq.rest.mapper.QuestionSearchBeanMapper;
 import ru.atott.combiq.rest.request.QuestionRequest;
@@ -36,6 +37,25 @@ public class QuestionRestController extends BaseRestController {
     @Autowired
     private MarkdownService markdownService;
 
+    /**
+     * Найти вопросы по здаданному dsl. Если dsl не найден, вернуть все вопросы.
+     *
+     * @param dsl
+     *      Поисковый запрос. Синтаксис dsl можно посмотреть
+     *      <a href="https://github.com/combiq/combiq/wiki/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA">здесь</a>.
+     *
+     * @param page
+     *      Номер страницы (zero-based).
+     *
+     * @param pageSize
+     *      Размер возвращаемой страницы.
+     *
+     * @response.200.doc
+     *      Найденные вопросы.
+     *
+     * @response.200.example
+     *      {@link ru.atott.combiq.rest.bean.QuestionSearchBean#EXAMPLE}
+     */
     @RequestMapping(value = "/rest/v1/question", method = RequestMethod.GET)
     @ResponseBody
     public Object search(
@@ -49,6 +69,21 @@ public class QuestionRestController extends BaseRestController {
         return questionSearchBeanMapper.map(getContext(), searchResponse);
     }
 
+    /**
+     * Вернуть вопрос по заданному идентификатору questionId.
+     *
+     * @param questionId
+     *      Идентификатор вопроса.
+     *
+     * @response.200.doc
+     *      Вопрос по заданному идентификатору.
+     *
+     * @response.200.example
+     *      {@link ru.atott.combiq.rest.bean.QuestionBean#EXAMPLE}
+     *
+     * @response.404.doc
+     *      В случае если вопрос не найден.
+     */
     @RequestMapping(value = "/rest/v1/question/{questionId}", method = RequestMethod.GET)
     public Object get(
             @PathVariable("questionId") String questionId) {
@@ -63,6 +98,18 @@ public class QuestionRestController extends BaseRestController {
         return questionMapper.map(getContext(), question);
     }
 
+    /**
+     * Создать вопрос.
+     *
+     * @request.body.example
+     *      {@link QuestionRequest#EXAMPLE}
+     *
+     * @response.200.doc
+     *      В случае успеха, созданный вопрос.
+     *
+     * @response.200.example
+     *      {@link ru.atott.combiq.rest.bean.QuestionBean#EXAMPLE}
+     */
     @RequestMapping(value = "/rest/v1/question", method = RequestMethod.POST)
     @ResponseBody
     @PreAuthorize("hasAnyRole('sa','contenter')")
@@ -80,6 +127,21 @@ public class QuestionRestController extends BaseRestController {
         return questionBeanMapper.map(context, question);
     }
 
+    /**
+     * Обновить вопрос по заданному идентификатору.
+     *
+     * @request.body.example
+     *      {@link QuestionRequest#EXAMPLE}
+     *
+     * @param questionId
+     *      Идентификатор обновляемого вопроса.
+     *
+     * @response.200.doc
+     *      В случае успеха, обновленный вопрос.
+     *
+     * @response.200.example
+     *      {@link ru.atott.combiq.rest.bean.QuestionBean#EXAMPLE}
+     */
     @RequestMapping(value = "/rest/v1/question/{questionId}", method = RequestMethod.PUT)
     @ResponseBody
     @PreAuthorize("hasAnyRole('sa','contenter')")

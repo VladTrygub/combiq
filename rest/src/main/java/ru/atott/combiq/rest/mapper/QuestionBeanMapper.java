@@ -1,6 +1,7 @@
 package ru.atott.combiq.rest.mapper;
 
 import org.apache.commons.collections.CollectionUtils;
+import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.rest.bean.MarkdownContentBean;
 import ru.atott.combiq.rest.bean.QuestionBean;
 import ru.atott.combiq.rest.utils.BeanMapper;
@@ -28,7 +29,7 @@ public class QuestionBeanMapper implements BeanMapper<Question, QuestionBean> {
         bean.setCommentsCount(source.getComments() != null ? source.getComments().size() : 0);
         bean.setLevel(source.getLevel());
 
-        if (source.getBody() != null) {
+        if (!MarkdownContent.isEmpty(source.getBody())) {
             bean.setBody(new MarkdownContentBean(source.getBody()));
         }
 

@@ -1,10 +1,21 @@
 package ru.atott.combiq.rest.request;
 
+import com.google.common.collect.Lists;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.List;
 
 public class QuestionRequest {
+
+    public static QuestionRequest EXAMPLE;
+
+    static {
+        EXAMPLE = new QuestionRequest();
+        EXAMPLE.setTitle("Заголовок вопроса");
+        EXAMPLE.setBody("Markdown разметка содержания/ответа вопроса");
+        EXAMPLE.setLevel("D1");
+        EXAMPLE.setTags(Lists.newArrayList("core", "jms"));
+    }
 
     @NotEmpty
     private String title;

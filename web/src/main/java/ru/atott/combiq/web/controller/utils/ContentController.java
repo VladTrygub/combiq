@@ -1,4 +1,4 @@
-package ru.atott.combiq.web.controller;
+package ru.atott.combiq.web.controller.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.atott.combiq.service.site.ContentService;
 import ru.atott.combiq.web.bean.SuccessBean;
+import ru.atott.combiq.web.controller.BaseController;
 import ru.atott.combiq.web.request.ContentRequest;
 
 @Controller

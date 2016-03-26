@@ -4,6 +4,17 @@ import java.util.List;
 
 public class QuestionSearchBean {
 
+    public static QuestionSearchBean EXAMPLE;
+
+    static {
+        EXAMPLE = new QuestionSearchBean();
+        EXAMPLE.setQuestions(QuestionBean.EXAMPLE_LIST);
+        EXAMPLE.setPageSize(10);
+        EXAMPLE.setPage(0);
+        EXAMPLE.setDsl("favorite:true");
+        EXAMPLE.setTotal(422);
+    }
+
     private String dsl;
 
     private int page;

@@ -1,4 +1,4 @@
-package ru.atott.combiq.web.controller;
+package ru.atott.combiq.web.controller.utils;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import ru.atott.combiq.web.aop.CommonViewAttributesInjector;
+import ru.atott.combiq.web.controller.BaseController;
 import ru.atott.combiq.web.controller.question.QuestionNotFoundException;
 
 import javax.servlet.http.HttpServletRequest;
