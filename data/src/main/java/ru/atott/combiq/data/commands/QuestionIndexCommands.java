@@ -4,32 +4,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.core.CommandMarker;
 import org.springframework.shell.core.annotation.CliCommand;
 import org.springframework.stereotype.Component;
-import ru.atott.combiq.data.service.CreateQuestionIndexService;
+import ru.atott.combiq.data.service.QuestionIndexService;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 @Component
-public class QuestionIndexUtilsCommands implements CommandMarker {
+public class QuestionIndexCommands implements CommandMarker {
 
     @Autowired
-    private CreateQuestionIndexService createQuestionIndexService;
+    private QuestionIndexService questionIndexService;
 
     @CliCommand(value = "update question timestamps", help = "Set missing timestamp values for questions.")
     public String updateTimestamps() throws InterruptedException, ExecutionException, IOException {
-        return createQuestionIndexService.updateQuestionTimestamps();
+        return questionIndexService.updateQuestionTimestamps();
     }
 
     @CliCommand(value = "update question humanUrlTitles", help = "Set missing humanUrlTitle values for questions.")
     public String updateHumanUrlTitles() {
-        createQuestionIndexService.updateHumanUrlTitles();
+        questionIndexService.updateHumanUrlTitles();
         return "Done";
     }
 
     @CliCommand(value = "migrate question stringIdsToNumbers")
     public String migrateIdsToNumbers() {
-        createQuestionIndexService.migrateQuestionIdsToNumbers();
-        createQuestionIndexService.migrateQuestionnaireIdsToNumbers();
+        questionIndexService.migrateQuestionIdsToNumbers();
+        questionIndexService.migrateQuestionnaireIdsToNumbers();
         return "Done";
     }
 }

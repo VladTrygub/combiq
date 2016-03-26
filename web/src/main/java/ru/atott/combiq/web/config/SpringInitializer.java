@@ -35,6 +35,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import ru.atott.combiq.web.aop.CommonViewAttributesInjector;
 import ru.atott.combiq.web.filter.RequestHolderFilter;
+import ru.atott.combiq.web.security.CombiqLogoutHandler;
 import ru.atott.combiq.web.security.CombiqUserDetailsService;
 import ru.atott.combiq.web.security.ElasticSearchTokenRepositoryImpl;
 

@@ -1,4 +1,4 @@
-package ru.atott.combiq.web.config;
+package ru.atott.combiq.web.security;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;

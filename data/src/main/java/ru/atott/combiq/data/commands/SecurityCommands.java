@@ -10,7 +10,7 @@ import ru.atott.combiq.service.bean.UserType;
 import ru.atott.combiq.service.user.UserService;
 
 @Component
-public class GrantRevokeRoleCommands implements CommandMarker {
+public class SecurityCommands implements CommandMarker {
 
     @Autowired
     private UserService userService;

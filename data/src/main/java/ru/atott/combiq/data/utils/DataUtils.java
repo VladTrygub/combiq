@@ -9,7 +9,9 @@ import org.elasticsearch.client.Client;
 import java.io.IOException;
 import java.io.InputStream;
 
+@Deprecated
 public class DataUtils {
+
     public static String getIndexMapping(String indexFile) throws IOException {
         InputStream indexStream = DataUtils.class.getResourceAsStream(indexFile);
         String indexJson = IOUtils.toString(indexStream, "utf-8");

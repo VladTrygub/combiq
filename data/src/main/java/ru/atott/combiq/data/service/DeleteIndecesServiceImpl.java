@@ -1,4 +1,4 @@
-package ru.atott.combiq.data.service.impl;
+package ru.atott.combiq.data.service;
 
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.client.Client;

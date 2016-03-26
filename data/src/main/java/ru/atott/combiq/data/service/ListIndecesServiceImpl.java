@@ -1,4 +1,4 @@
-package ru.atott.combiq.data.service.impl;
+package ru.atott.combiq.data.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

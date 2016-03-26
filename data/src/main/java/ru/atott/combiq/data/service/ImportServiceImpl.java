@@ -1,4 +1,4 @@
-package ru.atott.combiq.data.service.impl;
+package ru.atott.combiq.data.service;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.io.IOUtils;

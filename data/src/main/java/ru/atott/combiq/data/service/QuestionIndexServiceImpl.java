@@ -1,4 +1,4 @@
-package ru.atott.combiq.data.service.impl;
+package ru.atott.combiq.data.service;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -7,7 +7,6 @@ import com.google.gson.JsonParser;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
@@ -15,6 +14,7 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.FilterBuilders;
 import org.elasticsearch.index.query.FilteredQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.Domains;
@@ -24,8 +24,6 @@ import ru.atott.combiq.dao.entity.QuestionnaireEntity;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.dao.repository.QuestionRepository;
 import ru.atott.combiq.dao.repository.QuestionnaireRepository;
-import ru.atott.combiq.data.service.CreateQuestionIndexService;
-import ru.atott.combiq.data.utils.DataUtils;
 import ru.atott.combiq.service.util.NumberService;
 import ru.atott.combiq.service.util.TransletirateService;
 
@@ -42,9 +40,9 @@ import java.util.stream.StreamSupport;
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
 @Service
-public class CreateQuestionIndexServiceImpl implements CreateQuestionIndexService {
+public class QuestionIndexServiceImpl implements QuestionIndexService {
 
-    @Autowired(required = false)
+    @Autowired
     private Client client;
 
     @Autowired
@@ -63,21 +61,11 @@ public class CreateQuestionIndexServiceImpl implements CreateQuestionIndexServic
     private TransletirateService transletirateService;
 
     @Override
-    public String create(String env) throws IOException, ExecutionException, InterruptedException {
+    public String importQuestions(String env) throws IOException, ExecutionException, InterruptedException {
         domainResolver.reset();
 
-        Long version = 1L;
-        if (domainResolver.canBeResolved(Domains.question)) {
-            version = domainResolver.getVersion(Domains.question) + 1;
-        }
-        String indexName = domainResolver.resolveIndexName(Domains.question, version);
-
         // Create index.
-        InputStream indexStream = this.getClass().getResourceAsStream("/index/question.json");
-        String indexJson = IOUtils.toString(indexStream, "utf-8");
-        CreateIndexRequest request = new CreateIndexRequest(indexName);
-        request.source(indexJson);
-        client.admin().indices().create(request).actionGet();
+        String indexName = domainResolver.resolveIndexName(Domains.question);
 
         // Fill data.
         InputStream dataStream = this.getClass().getResourceAsStream("/data/questions-1.json");
@@ -100,14 +88,6 @@ public class CreateQuestionIndexServiceImpl implements CreateQuestionIndexServic
     }
 
     @Override
-    public String update(String env) throws IOException, ExecutionException, InterruptedException {
-        String indexName = domainResolver.resolveQuestionIndex();
-        String json = DataUtils.getIndexMapping("/index/question.json");
-        DataUtils.putMapping(client, indexName, json);
-        return indexName;
-    }
-
-    @Override
     public String updateQuestionTimestamps() throws IOException, ExecutionException, InterruptedException {
         String indexName = domainResolver.resolveQuestionIndex();
         FilteredQueryBuilder query = QueryBuilders
@@ -125,7 +105,7 @@ public class CreateQuestionIndexServiceImpl implements CreateQuestionIndexServic
         SearchResponse searchResponse = searchRequest.execute().get();
 
         List<String> ids = Arrays.asList(searchResponse.getHits().getHits()).stream()
-                .map(hit -> hit.getId())
+                .map(SearchHit::getId)
                 .collect(Collectors.toList());
 
         long timestamp = System.currentTimeMillis();
