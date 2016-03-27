@@ -199,7 +199,7 @@
                 <li class="co-question-staff-share">
                     <div id="vk_like"></div>
                     <script type="text/javascript"><!--
-                        VK.Widgets.Like("vk_like", {type: "button", height: 20, pageUrl: "${canonicalUrl}"});
+                        VK.Widgets.Like("vk_like", {type: "mini", height: 20, pageUrl: "${canonicalUrl}"});
                     --></script>
                 </li>
                 </#if>
