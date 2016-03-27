@@ -1124,6 +1124,7 @@ ul.co-component-question-tags > li {
         padding-left: 38px;
         padding-top: 10px;
         padding-bottom: 10px;
+        display: block;
     }
 
     .co-menu-top-items {
