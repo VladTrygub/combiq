@@ -1104,3 +1104,61 @@ ul.co-component-question-tags > li {
 .co-profile-button .dropdown-menu a {
     padding: 12px 25px;
 }
+
+@media (max-width: 767px) {
+    .co-mainhead {
+        margin-top: 40px;
+    }
+
+    .co-mainer {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .co-menu-top-items > li {
+        display: block;
+    }
+
+    .co-menu-top-items > li > a {
+        padding-left: 38px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .co-menu-top-items {
+        display: block;
+        float: none !important;
+    }
+
+    .co-topmenu-mainer {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .co-menu-top-items > li.co-auth {
+        margin-bottom: 10px;
+    }
+
+    .co-rightbordered {
+        border-right: none;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .co-menu-top-items > li > a {
+        padding: 20px 10px;
+    }
+
+    .co-profile-button button > a {
+        padding: 20px 5px;
+    }
+
+    .co-topmenu-mainer img {
+        margin-bottom: 0 !important;
+    }
+
+    .co-rightbordered {
+        border-right: none;
+    }
+}

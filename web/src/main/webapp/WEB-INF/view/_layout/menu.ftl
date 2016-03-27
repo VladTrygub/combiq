@@ -5,12 +5,12 @@
         <div class="co-menu-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-sm-3">
                         <a class="co-topmenu-mainer" href="/" title="Combiq.ru - Всё, что может потребоваться для подготовки к Java собеседованию" style="line-height: 48px;">
                             <img style="margin-bottom: -8px;" src="/static/images/site/flat-logo-64.png?v=2" />
                         </a>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-7 col-sm-7">
                         <ul class="co-menu-top-items">
                             <li class="${functions.if(chapter == 'questions', 'active')}">
                                 <a href="/questions">Вопросы</a>
@@ -22,9 +22,10 @@
                                 <a href="/job">Работа</a>
                             </li>
                             <li class="${functions.if(chapter == 'about', 'active')}">
-                                <a href="/project" title="О проекте Combiq.ru">
+                                <a class="hidden-xs" href="/project" title="О проекте Combiq.ru">
                                     <img style="margin-top: -24px; margin-bottom: -10px;" src="/static/images/site/OpenSource.png" alt="О проекте Combiq.ru">
                                 </a>
+                                <a class="visible-xs" href="/project">О проекте</a>
                             </li>
                             <#if functions.hasRole("sa") || functions.hasRole("contenter")>
                             <li class="${functions.if(chapter == 'admin', 'active')}">
@@ -33,11 +34,11 @@
                             </#if>
                         </ul>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-2">
                         <ul class="co-menu-top-items pull-right">
                             <#if user??>
                                 <li class="co-auth">
-                                    <div class="btn-group co-profile-button">
+                                    <div class="hidden-xs btn-group co-profile-button">
                                         <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <a class="co-inline" href="${urlResolver.getUserUrl(user.id)}">
                                                 <#if user.headAvatarUrl??>
@@ -56,6 +57,8 @@
                                             </li>
                                         </ul>
                                     </div>
+
+                                    <a class="visible-xs" href="${urlResolver.getUserUrl(user.id)}">Мой профиль</a>
                                 </li>
                             <#else>
                                 <li class="co-auth">
