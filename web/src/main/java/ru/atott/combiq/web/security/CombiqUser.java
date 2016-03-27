@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CombiqUser extends User {
     private UserType type;
@@ -20,6 +19,7 @@ public class CombiqUser extends User {
     private String email;
     private String name;
     private Set<String> roles;
+    private String nickName;
 
     public UserType getType() {
         return type;
@@ -38,6 +38,14 @@ public class CombiqUser extends User {
                 roles.stream()
                         .map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
         this.roles = Sets.newHashSet(roles);
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getLogin() {

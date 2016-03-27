@@ -9,15 +9,11 @@ import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.user.UserService;
 import ru.atott.combiq.service.user.UserStarsService;
 import ru.atott.combiq.web.bean.SuccessBean;
-import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.utils.ViewUtils;
 
 
 @Controller
 public class UserController extends BaseController {
-
-    @Autowired
-    private AuthService authService;
 
     @Autowired
     private UserStarsService userStarsService;
@@ -41,7 +37,7 @@ public class UserController extends BaseController {
         return new SuccessBean();
     }
 
-    @RequestMapping(value = "/users/{userId}")
+    @RequestMapping(value = {"/users/{userId}","/users/{userId}/{nickName}"})
     public ModelAndView profile(@PathVariable("userId") String userId) {
         User user = userService.findById(userId);
 
@@ -52,16 +48,20 @@ public class UserController extends BaseController {
         ModelAndView modelAndView = new ModelAndView("user/profile");
         modelAndView.addObject("headAvatarUrl", ViewUtils.getHeadAvatarUrl(user.getType(), user.getAvatarUrl()));
         modelAndView.addObject("userName", user.getName());
-        if(!user.getNickName().isEmpty()&&!user.getNickName().equals(null)) modelAndView.addObject("nickName",user.getNickName());
+        if(!(user.getNickName()==null)&&!user.getNickName().isEmpty())
+            modelAndView.addObject("nickName",user.getNickName());
+        else
+            modelAndView.addObject ("nickName","Не выбран");
         modelAndView.addObject("userRegisterDate", user.getRegisterDate());
         return modelAndView;
     }
 
     @RequestMapping(value = "/users/setNickName", method = RequestMethod.POST)
-    public ModelAndView setName(@RequestParam("nickName") String nickName) {
-        String userId=authService.getUserId();
+    @ResponseBody
+    public Object setName(@RequestParam("nickName") String nickName) {
+        String userId=super.getUc().getUserId();
         userService.updateNickName(userId, nickName);
-        return profile(userId);
+        return new SuccessBean();
     }
 
 

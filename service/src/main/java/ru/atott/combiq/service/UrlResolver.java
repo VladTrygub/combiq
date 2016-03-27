@@ -22,7 +22,7 @@ public interface UrlResolver {
 
     String getQuestionnaireUrl(QuestionnaireHead questionnaire, String queryString);
 
-    String getUserUrl(String userId);
+    String getUserUrl(String userId, String nickName);
 
     static String encodeUrlComponent(String urlComponent) {
         try {

@@ -39,7 +39,7 @@
                                 <li class="co-auth">
                                     <div class="btn-group co-profile-button">
                                         <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <a class="co-inline" href="${urlResolver.getUserUrl(user.id)}">
+                                            <a class="co-inline" href="${urlResolver.getUserUrl(user.id,user.nickName)}">
                                                 <#if user.headAvatarUrl??>
                                                     <img style="margin-top: -20px; margin-bottom: -15px;" width="46" height="46" src="${user.headAvatarUrl!}">
                                                 </#if>
@@ -48,7 +48,7 @@
                                         </button>
                                         <ul class="dropdown-menu pull-right">
                                             <li>
-                                                <a href="${urlResolver.getUserUrl(user.id)}">Мой профиль</a>
+                                                <a href="${urlResolver.getUserUrl(user.id,user.nickName)}">Мой профиль</a>
                                             </li>
                                             <li role="separator" class="divider"></li>
                                             <li>
