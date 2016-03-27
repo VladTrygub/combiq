@@ -985,27 +985,24 @@ ul.co-component-question-tags > li {
     color: white;
 }
 
-.co-project-resource img {
-    width: 60px;
-    height: 60px;
+.co-project-resources h2 {
+    margin: 0;
+    margin-bottom: 10px;
+    line-height: 70px;
+}
+
+.co-project-resources .row {
+    margin-bottom: 20px;
 }
 
 .co-project-resource {
-    padding: 40px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-bottom: 20px;
-    background-color: #F3F3F3;
-    box-shadow: 1px 1px 6px 1px rgb(230, 230, 230);
-    border: solid 1px #E4E4E4;
+    height: 70px;
+    text-align: right;
 }
 
-.co-project-resource-meta {
-    font-size: 11px;
-    color: gray;
-    line-height: 14px;
-    font-style: italic;
-    display: inline-block;
+.co-project-resource img {
+    max-width: 60px;
+    max-height: 60px;
     vertical-align: middle;
 }
 
