@@ -1168,7 +1168,7 @@ ul.co-question-staff > li.co-question-staff-share {
     padding-left: 10px;
 }
 
-.co-question-staff-share > table {
+.co-question-staff-share > div {
     display: inline-block;
     vertical-align: text-top;
 }
