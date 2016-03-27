@@ -9,11 +9,15 @@ import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.user.UserService;
 import ru.atott.combiq.service.user.UserStarsService;
 import ru.atott.combiq.web.bean.SuccessBean;
+import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.utils.ViewUtils;
 
 
 @Controller
 public class UserController extends BaseController {
+
+    @Autowired
+    private AuthService authService;
 
     @Autowired
     private UserStarsService userStarsService;
@@ -53,9 +57,10 @@ public class UserController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/users/{userId}/setName", method = RequestMethod.POST)
-    public ModelAndView setName(@PathVariable("userId") String userId, @RequestParam("nickName") String nickName) {
-        userService.updateNickName(userId,nickName);
+    @RequestMapping(value = "/users/setNickName", method = RequestMethod.POST)
+    public ModelAndView setName(@RequestParam("nickName") String nickName) {
+        String userId=authService.getUserId();
+        userService.updateNickName(userId, nickName);
         return profile(userId);
     }
 

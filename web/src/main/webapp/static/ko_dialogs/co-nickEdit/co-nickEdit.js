@@ -1,7 +1,7 @@
-define(['knockout', 'ajax'], function(ko, ajax) {
+define([], function() {
 
     function ViewModel(params) {
-        this.width = 360;
+        this.width = 460;
         this.align = 'top';
         this.buttons = [];
     }

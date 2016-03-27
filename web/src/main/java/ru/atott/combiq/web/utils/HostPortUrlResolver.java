@@ -89,6 +89,9 @@ public class HostPortUrlResolver implements UrlResolver {
 
     @Override
     public String getUserUrl(String userId) {
-        return "/users/" + userId;
+        String nickName="";
+        /*if(userId!=null) nickName=userService.findById(userId).getNickName();*/
+        if(!nickName.equals("")) return "/users/" + userId + "/"+nickName;
+        else return "/users/" + userId;
     }
 }
