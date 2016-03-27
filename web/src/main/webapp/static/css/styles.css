@@ -305,6 +305,7 @@ ul.co-popularTags > li {
 .co-question {
     margin: 70px 140px;
     position: relative;
+    min-height: 200px;
 }
 
 .co-question > co-star {
@@ -357,7 +358,6 @@ ul.co-question-staff {
     list-style: none;
     margin: 0;
     padding: 0;
-    margin-top: 30px;
 }
 
 ul.co-question-staff > li {
@@ -639,12 +639,15 @@ button:hover, .btn:hover {
 }
 
 .co-tag {
+    padding: 1px 6px;
+    line-height: 18px;
+    border-radius: 2px;
     text-decoration: none;
     background-color: #cad6df;
     display: inline-block;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 12px;
-    padding: 2px 10px;
+    vertical-align: text-top;
     color: #777;
 }
 
@@ -807,10 +810,6 @@ button:hover, .btn:hover {
     font-size: 16px;
 }
 
-.co-component-question {
-    display: flex;
-}
-
 ul.co-component-question-tags {
     list-style: none;
     margin: 0;
@@ -839,11 +838,12 @@ ul.co-component-question-tags > li {
 }
 
 .co-component-question-level-bound {
+    float: left;
     width: 60px;
 }
 
 .co-component-question-content {
-    width: 90%;
+    margin-left: 80px;
 }
 
 .co-level {
@@ -1162,4 +1162,13 @@ ul.co-component-question-tags > li {
     .co-rightbordered {
         border-right: none;
     }
+}
+
+ul.co-question-staff > li.co-question-staff-share {
+    padding-left: 10px;
+}
+
+.co-question-staff-share > table {
+    display: inline-block;
+    vertical-align: text-top;
 }

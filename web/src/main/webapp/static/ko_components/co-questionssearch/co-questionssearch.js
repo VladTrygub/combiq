@@ -4,12 +4,8 @@ define(['knockout', 'ajax'], function(ko, ajax) {
         this.title = ko.wrap(params.title);
         this.pageSize = params.size || 10;
         this.dsl = params.dsl || '';
-
-        this.preloader = ko.wrap();
-        this.sizeDescr = ko.wrap();
-        this.searchAll = ko.wrap();
-
-        this.questions = ko.wrap();
+        this.loading = ko.wrap(true);
+        this.questions = ko.wrap([]);
         this.size = ko.wrap();
         this.totalSize = ko.wrap();
 
@@ -19,6 +15,8 @@ define(['knockout', 'ajax'], function(ko, ajax) {
     ViewModel.prototype.search = function() {
         var self = this;
 
+        this.loading(true);
+
         var params = {
             dsl: this.dsl,
             pageSize: this.pageSize
@@ -27,17 +25,13 @@ define(['knockout', 'ajax'], function(ko, ajax) {
         ajax
             .rest('GET', '/rest/v1/question', params)
             .done(function(data) {
-                var totalSize = data.totalElements;
-                var size = self.size.length > 0 ? self.size : 10;
-                size = size < totalSize ? size : totalSize;
-                self.size(size);
+                var totalSize = data.total;
+                self.size((data.questions && data.questions.length) || 0);
                 self.totalSize(totalSize);
-                self.sizeDescr().show();
                 self.questions(data.questions);
-                self.searchAll().show();
             })
             .always(function() {
-                self.preloader().hide();
+                self.loading(false);
             });
     };
     return ViewModel;

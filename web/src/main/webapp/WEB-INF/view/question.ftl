@@ -7,7 +7,11 @@
 <#import "_layout/functions.ftl" as functions />
 
 <#assign head>
-    <script type="text/javascript" src="http://vk.com/js/api/share.js?93" charset="windows-1251"></script>
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>
+
+    <script type="text/javascript">
+        VK.init({apiId: 5065282, onlyWidgets: true});
+    </script>
 
     <#if position??>
     <script>
@@ -135,10 +139,9 @@
                 <@parts.contentEditor content=question.body url='/questions/${question.id}/content' />
             </div>
 
-            <@questionStaff />
         </div>
 
-        <@questionPosition />
+        <@questionStaff />
 
         <#if landing>
             <@landingBlock />
@@ -175,47 +178,61 @@
 </#macro>
 
 <#macro questionStaff>
-    <ul class="co-question-staff">
-        <#list question.tags as tag>
-            <li>
-                <a class="co-tag" href="/questions/tagged/${tag}">${tag}</a>
-            </li>
-        </#list>
-        <#if question.level??>
-            <li style="margin-left: 15px;" class="co-small">
-                <@parts.questionLevel level=question.level class='co-small' />
-                <span class="inline" style="margin-left: 4px;">
-                    ${parts.explainLevel(question.level)} уровень
-                </span>
-            </li>
-        </#if>
-        <li class="pull-right" style="padding-top: 2px;">
-            <script type="text/javascript"><!--
-            document.write(VK.Share.button({url: "${canonicalUrl}"},{type: "round", text: "Поделиться", eng: 1}));
-            --></script>
-        </li>
+    <div class="row">
 
-    </ul>
+        <div class="col-md-6">
+            <ul class="co-question-staff">
+                <#list question.tags as tag>
+                    <li>
+                        <a class="co-tag" href="/questions/tagged/${tag}">${tag}</a>
+                    </li>
+                </#list>
+                <#if question.level??>
+                    <li style="margin-left: 15px;" class="co-small">
+                        <@parts.questionLevel level=question.level class='co-small' />
+                        <span class="inline" style="margin-left: 4px;">
+                            ${parts.explainLevel(question.level)} уровень
+                        </span>
+                    </li>
+                </#if>
+                <#if env == 'prod'>
+                <li class="co-question-staff-share">
+                    <div id="vk_like"></div>
+                    <script type="text/javascript"><!--
+                        VK.Widgets.Like("vk_like", {type: "button", height: 20, pageUrl: "${canonicalUrl}"});
+                    --></script>
+                </li>
+                </#if>
+            </ul>
+        </div>
 
-    <#if functions.hasRoleSaOrContenter()>
-        <a  href="#" onclick="ko.openDialog('co-questionposter',{id: '${question.id?js_string}'}); return false;">
-            Изменить вопрос
-        </a>
-        <#if question.lastModify??>
-            <span class="co-questions-meta">
+
+        <div class="col-md-6">
+            <@questionPosition />
+        </div>
+    </div>
+
+    <div>
+        <#if functions.hasRoleSaOrContenter()>
+            <a  href="#" onclick="ko.openDialog('co-questionposter',{id: '${question.id?js_string}'}); return false;">
+                Изменить вопрос
+            </a>
+            <#if question.lastModify??>
+                <span class="co-questions-meta">
                 последнее изменение: ${question.lastModify?string('dd MMMM yyyy, hh:mm')}
             </span>
+            </#if>
+            <#if question.deleted>
+                <a class="pull-right" href="#"
+                   onclick="$.post('/questions/${question.id}/restore');
+                           window.location.replace('/questions/search');">Востановить Вопрос</a>
+            <#else>
+                <a class="pull-right" href="#"
+                   onclick="$.post('/questions/${question.id}/delete');
+                           window.location.replace('/questions/search');">Удалить Вопрос</a>
+            </#if>
         </#if>
-        <#if question.deleted>
-            <a class="pull-right" href="#"
-                    onclick="$.post('/questions/${question.id}/restore');
-                    window.location.replace('/questions/search');">Востановить Вопрос</a>
-        <#else>
-            <a class="pull-right" href="#"
-                onclick="$.post('/questions/${question.id}/delete');
-                window.location.replace('/questions/search');">Удалить Вопрос</a>
-        </#if>
-    </#if>
+    </div>
 </#macro>
 
 <#macro questionPosition>

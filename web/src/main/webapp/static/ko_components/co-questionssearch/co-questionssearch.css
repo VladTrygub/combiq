@@ -5,7 +5,8 @@
     height: 100%;
     min-height: 100px;
 }
-.co-questionsearch-preloader{
+
+.co-questionsearch-preloader {
     margin:auto;
     position: absolute;
     left:50%;
@@ -13,16 +14,22 @@
     top: 50%;
     margin-top: -32px;
 }
-.co-questionsearch-all{
-    margin-top: -20px;
-    display: none;
-}
-.co-questionsearch-comment{
+
+.co-questionsearch-comment {
     margin-left: 10px;
     font-size: 13px;
     display: table;
     color: #007fb6
 }
-.co-questionsearch-comment-count{
+
+.co-questionsearch-comment-count {
     margin-left: 3px
+}
+
+.co-questionssearch .co-questions {
+    margin-bottom: 10px;
+}
+
+.co-questionssearch h4 {
+    margin-bottom: 10px;
 }

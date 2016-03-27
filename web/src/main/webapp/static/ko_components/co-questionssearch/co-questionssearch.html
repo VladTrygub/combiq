@@ -1,20 +1,40 @@
-<div>
+<div class="co-questionssearch">
+
     <h4 data-bind="text: title"></h4>
-    <div   class="co-questionsearch-content">
-        <div  class = "co-questionsearch-preloader" data-bind="element: preloader" >
+
+    <div class="co-questionsearch-content">
+
+        <!-- Прелоадер -->
+        <div data-bind="visible: loading" class="co-questionsearch-preloader" >
             <img src="/static/images/site/preloader.gif"/>
         </div>
-        <span data-bind="element: sizeDescr" style="display: none">
-            Первые <span data-bind="text: size"/>
-            из
-            <a data-bind="attr: { href: '/questions/search?q='+dsl}">
-                <span data-bind="text: totalSize"/>
-            </a>
-            вопросов
-        </span>
-        <ul data-bind="template: { name: 'co-question-template', foreach: questions }" class="co-questions"/>
-        <div class="co-questionsearch-all" data-bind="element: searchAll">
-            <a data-bind="attr: { href: '/questions/search?q='+dsl}">Искать все вопросы</a>
+
+        <!-- Результат поиска -->
+        <div data-bind="visible: !loading()">
+
+            <!-- Если вопросы нашлись -->
+            <div data-bind="visible: totalSize">
+                <div class="co-small" style="margin-bottom: 15px;">
+                    Первые <span data-bind="text: size"></span> из
+                    <a data-bind="attr: { href: '/questions/search?q=' + encodeURIComponent(dsl) }, text: totalSize"></a>
+                    вопросов
+                </div>
+
+                <ul data-bind="template: { name: 'co-question-template', foreach: questions }"
+                    class="co-questions">
+                </ul>
+
+                <div>
+                    <a data-bind="attr: { href: '/questions/search?q=' + encodeURIComponent(dsl) }">
+                       Показать все вопросы →
+                    </a>
+                </div>
+            </div>
+
+            <!-- Если вопросы не нашлись -->
+            <div data-bind="visible: !totalSize()">
+                <span class="co-small">Ничего не нашлось :(</span>
+            </div>
         </div>
     </div>
 </div>
@@ -25,21 +45,23 @@
             <div class="co-component-question-level-bound">
                 <div class="co-component-question-level">
                     <div data-bind="css: 'co-level-'+level.toLowerCase()" class="co-level">
-                        <span data-bind="text: level"></span>
+                        <a data-bind="text: level, attr: {href: '/questions/level/' + level}"></a>
                     </div>
                     <div class="co-component-question-level-desc">уровень</div>
                 </div>
             </div>
             <div class="co-component-question-content">
                 <div class="co-component-question-text">
-                    <span data-bind="text: title"></span>
+                    <a data-bind="text: title, attr: {href: uri}"></a>
                 </div>
                 <div>
                     <ul class="co-component-question-tags" data-bind="foreach: { data: tags, as: 'tag' }">
                         <li>
-                            <div class="co-tag">
-                                <span data-bind="text: tag"></span>
-                            </div>
+                            <a class="co-tag"
+                               data-bind="
+                                    text: tag,
+                                    attr: {href: '/questions/tagged/' + tag}">
+                            </a>
                         </li>
                     </ul>
                 </div>

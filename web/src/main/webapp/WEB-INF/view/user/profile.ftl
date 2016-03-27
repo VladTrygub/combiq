@@ -19,7 +19,11 @@
                 </div>
             </#if>
 
-            <co-questionssearch params="title: 'Добавленные в избранное', dsl: 'favorite:true'"></co-questionssearch>
+            <co-questionssearch params="
+                title: 'Избранные вопросы',
+                dsl: 'favorite:true',
+                size: 5">
+            </co-questionssearch>
         </div>
     </div>
 
