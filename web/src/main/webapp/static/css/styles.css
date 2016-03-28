@@ -658,12 +658,22 @@ button:hover, .btn:hover {
     background-color: rgb(200, 230, 255);
 }
 
-.co-search-comment {
+.co-search-asked {
+    color: #E91E63;
+    cursor: default;
+}
+
+.co-search-asked > span {
+    margin-right: -2px;
+}
+
+.co-search-comment, .co-search-asked {
     margin-left: 10px;
     font-size: 13px;
 }
 
-.co-search-comment > span {
+.co-search-comment > span,
+.co-search-asked > span {
     display: inline-block;
     top: 2px !important;
 }

@@ -36,7 +36,7 @@
     define('co-posteditor', 'ko_components/co-posteditor', 'co-posteditor', {layoutSeparated: true, styles: 'css'});
     define('co-onlywithcomments', 'ko_components/co-onlywithcomments', 'co-onlywithcomments', {layoutSeparated: true});
     define('co-star', 'ko_components/co-star', 'co-star', {layoutSeparated: true, styles: 'css'});
-    define('co-asked', 'ko_components/co-asked', 'co-asked', {layoutSeparated: true});
+    define('co-asked', 'ko_components/co-asked', 'co-asked', {layoutSeparated: true, styles: 'css'});
     define('co-questionssearch', 'ko_components/co-questionssearch', 'co-questionssearch', {layoutSeparated: true, styles: 'css'});
 
     ko.createComponent = function(componentName, params, tag) {

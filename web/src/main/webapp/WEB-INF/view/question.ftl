@@ -135,11 +135,6 @@
                 favorite: ${favorite?c},
                 questionId: '${question.id?js_string}'">
             </co-star>
-            <co-asked params="
-                askedCount: ${question.askedCount?c},
-                asked: ${asked?c},
-                questionId: '${question.id?js_string}'">
-            </co-asked>
             <div class="co-question-body">
                 <@parts.contentEditor content=question.body url='/questions/${question.id}/content' />
             </div>
@@ -184,7 +179,7 @@
 
 <#macro questionStaff>
     <div class="row co-question-staff-container">
-        <div class="col-md-7">
+        <div class="col-md-8">
             <ul class="co-question-staff">
                 <#list question.tags as tag>
                     <li>
@@ -194,11 +189,15 @@
                 <#if question.level??>
                     <li style="margin-left: 15px;" class="co-small">
                         <@parts.questionLevel level=question.level class='co-small' />
-                        <span class="inline" style="margin-left: 4px;">
-                            ${parts.explainLevel(question.level)} уровень
-                        </span>
                     </li>
                 </#if>
+                <li>
+                    <co-asked params="
+                        askedCount: ${question.askedCount?c},
+                        asked: ${asked?c},
+                        questionId: '${question.id?js_string}'">
+                    </co-asked>
+                </li>
                 <#if env == 'prod'>
                 <li class="co-question-staff-share">
                     <div id="vk_like"></div>
@@ -211,7 +210,7 @@
         </div>
 
 
-        <div class="col-md-5">
+        <div class="col-md-4">
             <@questionPosition />
         </div>
     </div>
@@ -247,7 +246,7 @@
                     <li>
                         <div>
                             <a href="${position.resolvePreviouesQuestionUrl(urlResolver)}">
-                                <span class="co-arrow">←</span> предыдущий
+                                <span class="co-arrow">←</span> назад
                             </a>
                         </div>
                         <div class="co-small pull-right co-question-position-keyboardtip">
@@ -262,7 +261,7 @@
                     <li>
                         <div>
                             <a href="${position.resolveNextQuestionUrl(urlResolver)}">
-                                следующий <span class="co-arrow">→</span>
+                                вперед <span class="co-arrow">→</span>
                             </a>
                         </div>
                         <div class="co-small co-question-position-keyboardtip">

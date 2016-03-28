@@ -53,6 +53,10 @@
                                             </li>
                                             <li role="separator" class="divider"></li>
                                             <li>
+                                                <a href="/questions/search?q=favorite%3Atrue">Избранные вопросы</a>
+                                            </li>
+                                            <li role="separator" class="divider"></li>
+                                            <li>
                                                 <a href="/logout.do">Выйти</a>
                                             </li>
                                         </ul>

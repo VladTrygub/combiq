@@ -126,6 +126,14 @@
                                         </a>
                                     </li>
                                 </#if>
+                                <#if question.askedCount != 0>
+                                    <li title="Количество пользователей, которых спрашивали этот вопрос на собеседованиях">
+                                        <span class="co-search-asked">
+                                            <span class="glyphicon glyphicon-chevron-up"></span>
+                                            ${question.askedCount!0}
+                                        </span>
+                                    </li>
+                                </#if>
                                 <#if functions.hasRole('sa') || functions.hasRole('contenter')>
                                     <#if question.lastModify??>
                                         <li>
