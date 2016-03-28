@@ -9,7 +9,7 @@ import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.user.UserService;
 import ru.atott.combiq.service.user.UserStarsService;
 import ru.atott.combiq.web.bean.SuccessBean;
-import ru.atott.combiq.web.request.NickNameEditRequest;
+import ru.atott.combiq.web.request.NickEditRequest;
 import ru.atott.combiq.web.utils.ViewUtils;
 
 import java.util.Optional;
@@ -70,7 +70,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/users/setNickName", method = RequestMethod.POST)
     @ResponseBody
-    public Object setName(@RequestBody NickNameEditRequest nickNameEditRequest) {
+    public Object setName(@RequestBody NickEditRequest nickNameEditRequest) {
         String nickName=nickNameEditRequest.getNickName();
         if(userService.isNickNameUniq(nickName)){
             userService.updateNickName(super.getUc().getUserId(), nickName);
