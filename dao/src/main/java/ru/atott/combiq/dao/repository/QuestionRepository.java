@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 
 import java.util.Collection;
+import java.util.List;
 
 @Component
 public interface QuestionRepository extends PagingAndSortingRepository<QuestionEntity, String> {
@@ -14,4 +15,6 @@ public interface QuestionRepository extends PagingAndSortingRepository<QuestionE
     Page<QuestionEntity> findByTagsIn(Collection<String> tags, Pageable pageable);
 
     QuestionEntity findOneByLegacyId(String legacyId);
+
+    List<QuestionEntity> findByAskedTodayGreaterThan(long from);
 }

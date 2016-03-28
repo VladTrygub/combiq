@@ -55,7 +55,7 @@ public class SearchQueryBuilder {
                 .prepareSearch(domainResolver.resolveQuestionIndex())
                 .setTypes(Types.question)
                 .setQuery(createQuery(searchContext))
-                .addSort("askedCount", SortOrder.DESC)
+                .addSort(QuestionEntity.ASKEDCOUNT_FIELD, SortOrder.DESC)
                 .addSort(QuestionEntity.TIMESTAMP_FIELD, SortOrder.DESC)
                 .setFrom(searchContext.getFrom())
                 .setSize(searchContext.getSize());

@@ -16,7 +16,7 @@
           "type": "long"
         },
         "askedCount": {
-          "type": "Integer"
+          "type": "integer"
         },
         "stars": {
           "type": "long"

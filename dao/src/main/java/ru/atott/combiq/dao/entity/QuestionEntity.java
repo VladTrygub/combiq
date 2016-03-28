@@ -14,6 +14,7 @@ import java.util.List;
 public class QuestionEntity {
 
     public static final String TIMESTAMP_FIELD = "timestamp";
+    public static final String ASKEDCOUNT_FIELD = "askedCount";
 
     @Id
     private String id;

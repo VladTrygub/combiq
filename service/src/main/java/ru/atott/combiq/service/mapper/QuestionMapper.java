@@ -47,7 +47,11 @@ public class QuestionMapper implements Mapper<QuestionEntity, Question> {
         question.setHumanUrlTitle(source.getHumanUrlTitle());
         question.setStars(source.getStars());
         question.setLastModify(source.getLastModify());
-        question.setAskedCount(source.getAskedCount() + source.getAskedToday());
+        if (source.getAskedCount() == null) {
+            question.setAskedCount(source.getAskedToday());
+        } else {
+            question.setAskedCount(source.getAskedCount() + source.getAskedToday());
+        }
         return question;
     }
 }

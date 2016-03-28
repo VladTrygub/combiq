@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+import ru.atott.combiq.service.question.AskedQuestionService;
 import ru.atott.combiq.service.site.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
@@ -18,18 +19,16 @@ import ru.atott.combiq.service.search.question.GetQuestionContext;
 import ru.atott.combiq.service.search.question.GetQuestionResponse;
 import ru.atott.combiq.service.search.question.SearchService;
 import ru.atott.combiq.service.markdown.MarkdownService;
-import ru.atott.combiq.service.user.UserStarsService;
+import ru.atott.combiq.service.question.FavoriteQuestionService;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.controller.BaseController;
 import ru.atott.combiq.web.request.ContentRequest;
 import ru.atott.combiq.web.request.EditCommentRequest;
-import ru.atott.combiq.rest.request.QuestionRequest;
 import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.service.site.RequestUrlResolver;
 import ru.atott.combiq.web.view.QuestionViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -51,10 +50,10 @@ public class QuestionController extends BaseController {
     private TagService tagService;
 
     @Autowired
-    private MarkdownService markdownService;
+    private FavoriteQuestionService favoriteQuestionService;
 
     @Autowired
-    private UserStarsService userStarsService;
+    private AskedQuestionService askedQuestionService;
 
     @RequestMapping(value = {
             "/questions/{questionId}",
@@ -113,8 +112,8 @@ public class QuestionController extends BaseController {
         viewBuilder.setCanonicalUrl(urlResolver.externalize(urlResolver.getQuestionUrl(question)));
         viewBuilder.setAnotherQuestions(anotherQuestions);
         viewBuilder.setQuestionsWithLatestComments(questionsWithLatestComments);
-        viewBuilder.setFavorite(userStarsService.isFavoriteQuestion(getUc(), questionId));
-        viewBuilder.setAsked(userStarsService.isAskedQuestion(getUc(), questionId));
+        viewBuilder.setFavorite(favoriteQuestionService.isFavoriteQuestion(getUc(), questionId));
+        viewBuilder.setAsked(askedQuestionService.isAskedQuestion(getUc(), questionId));
         return viewBuilder.build();
     }
 

@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.user.impl;
+package ru.atott.combiq.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
