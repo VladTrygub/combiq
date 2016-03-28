@@ -73,7 +73,7 @@ public class IndexServiceImpl implements IndexService, ApplicationContextAware {
 
     @Override
     public String updateMappingByDomain(String domain) throws IOException {
-        String indexName = domainResolver.resolveSiteIndex();
+        String indexName = domainResolver.resolveIndexName(domain);
         String json = getIndexMapping("/ru/atott/combiq/dao/es/index/" + domain + ".json");
         putMapping(client, indexName, json);
         return indexName;

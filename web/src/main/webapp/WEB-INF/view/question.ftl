@@ -135,6 +135,11 @@
                 favorite: ${favorite?c},
                 questionId: '${question.id?js_string}'">
             </co-star>
+            <co-asked params="
+                askedCount: ${question.askedCount?c},
+                asked: ${asked?c},
+                questionId: '${question.id?js_string}'">
+            </co-asked>
             <div class="co-question-body">
                 <@parts.contentEditor content=question.body url='/questions/${question.id}/content' />
             </div>

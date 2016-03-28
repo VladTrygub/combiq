@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.User;
+import ru.atott.combiq.service.question.AskedQuestionService;
 import ru.atott.combiq.service.user.UserService;
-import ru.atott.combiq.service.user.UserStarsService;
+import ru.atott.combiq.service.question.FavoriteQuestionService;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.utils.ViewUtils;
 
@@ -19,7 +20,10 @@ import ru.atott.combiq.web.utils.ViewUtils;
 public class UserController extends BaseController {
 
     @Autowired
-    private UserStarsService userStarsService;
+    private FavoriteQuestionService favoriteQuestionService;
+
+    @Autowired
+    private AskedQuestionService askedQuestionService;
 
     @Autowired
     private UserService userService;
@@ -28,7 +32,7 @@ public class UserController extends BaseController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('user')")
     public Object like(@PathVariable("questionId") String questionId) {
-        userStarsService.like(getUc(), questionId);
+        favoriteQuestionService.like(getUc(), questionId);
         return new SuccessBean();
     }
 
@@ -36,7 +40,7 @@ public class UserController extends BaseController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('user')")
     public Object dislike(@PathVariable("questionId") String questionId) {
-        userStarsService.dislike(getUc(), questionId);
+        favoriteQuestionService.dislike(getUc(), questionId);
         return new SuccessBean();
     }
 
@@ -53,5 +57,10 @@ public class UserController extends BaseController {
         modelAndView.addObject("userName", user.getName());
         modelAndView.addObject("userRegisterDate", user.getRegisterDate());
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/questions/{questionId}/asked", method = RequestMethod.POST)
+    public void addCount(@PathVariable("questionId") String questionId){
+        askedQuestionService.addAskedCount(getUc(), questionId);
     }
 }

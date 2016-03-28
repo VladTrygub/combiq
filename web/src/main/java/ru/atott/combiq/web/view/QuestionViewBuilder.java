@@ -20,6 +20,7 @@ public class QuestionViewBuilder {
     private List<Question> anotherQuestions;
     private List<LatestComment> questionsWithLatestComments;
     private boolean favorite;
+    private boolean asked;
 
     public String getDsl() {
         return dsl;
@@ -77,6 +78,14 @@ public class QuestionViewBuilder {
         this.questionsWithLatestComments = questionsWithLatestComments;
     }
 
+    public boolean isAsked() {
+        return asked;
+    }
+
+    public void setAsked(boolean asked) {
+        this.asked = asked;
+    }
+
     public boolean isFavorite() {
         return favorite;
     }
@@ -105,6 +114,7 @@ public class QuestionViewBuilder {
         mav.addObject("anotherQuestions", anotherQuestions);
         mav.addObject("questionsWithLatestComments", questionsWithLatestComments);
         mav.addObject("favorite", favorite);
+        mav.addObject("asked", asked);
         return mav;
     }
 }

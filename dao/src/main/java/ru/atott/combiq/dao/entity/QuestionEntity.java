@@ -14,6 +14,7 @@ import java.util.List;
 public class QuestionEntity {
 
     public static final String TIMESTAMP_FIELD = "timestamp";
+    public static final String ASKEDCOUNT_FIELD = "askedCount";
 
     @Id
     private String id;
@@ -45,6 +46,10 @@ public class QuestionEntity {
     private int stars;
 
     private Date lastModify;
+
+    private Integer askedCount;
+
+    private int askedToday;
 
     public Date getLastModify() {
         return lastModify;
@@ -196,5 +201,21 @@ public class QuestionEntity {
 
     public void setStars(int stars) {
         this.stars = stars;
+    }
+
+    public Integer getAskedCount() {
+        return askedCount;
+    }
+
+    public void setAskedCount(Integer askedCount) {
+        this.askedCount = askedCount;
+    }
+
+    public int getAskedToday() {
+        return askedToday;
+    }
+
+    public void setAskedToday(int askedToday) {
+        this.askedToday = askedToday;
     }
 }

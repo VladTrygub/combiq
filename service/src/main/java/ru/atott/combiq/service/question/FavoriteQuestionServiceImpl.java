@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.user.impl;
+package ru.atott.combiq.service.question;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.Validate;
@@ -9,14 +9,11 @@ import ru.atott.combiq.dao.entity.UserEntity;
 import ru.atott.combiq.dao.repository.QuestionRepository;
 import ru.atott.combiq.dao.repository.UserRepository;
 import ru.atott.combiq.service.site.UserContext;
-import ru.atott.combiq.service.user.UserStarsService;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
-public class UserStarsServiceImpl implements UserStarsService {
+public class FavoriteQuestionServiceImpl implements FavoriteQuestionService {
 
     @Autowired
     private QuestionRepository questionRepository;
