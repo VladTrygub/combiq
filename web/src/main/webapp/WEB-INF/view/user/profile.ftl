@@ -19,7 +19,7 @@
                 </div>
             </#if>
             <div>
-                 Nick ${nickName}  <a onclick="ko.openDialog('co-nickEdit'); return false;">Изменить</a>
+                 Nick name: ${nickName}  <a href="" onclick="ko.openDialog('co-nickEdit'); return false;">Изменить</a>
             </div>
         </div>
     </div>

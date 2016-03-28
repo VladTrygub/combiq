@@ -9,7 +9,10 @@ import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.user.UserService;
 import ru.atott.combiq.service.user.UserStarsService;
 import ru.atott.combiq.web.bean.SuccessBean;
+import ru.atott.combiq.web.request.NickNameEditRequest;
 import ru.atott.combiq.web.utils.ViewUtils;
+
+import java.util.Optional;
 
 
 @Controller
@@ -38,12 +41,21 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = {"/users/{userId}","/users/{userId}/{nickName}"})
-    public ModelAndView profile(@PathVariable("userId") String userId) {
+    public ModelAndView profile(@PathVariable("userId") String userId,
+                                @PathVariable Optional<String> nickName) {
         User user = userService.findById(userId);
 
         if (user == null) {
             return notFound();
         }
+        if(!nickName.isPresent()&&user.getNickName()!=null){
+            return notFound();
+        }
+        if(nickName.isPresent()&&(user.getNickName()==null||!user.getNickName().equals(nickName.get()))){
+            return notFound();
+        }
+
+
 
         ModelAndView modelAndView = new ModelAndView("user/profile");
         modelAndView.addObject("headAvatarUrl", ViewUtils.getHeadAvatarUrl(user.getType(), user.getAvatarUrl()));
@@ -58,10 +70,16 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/users/setNickName", method = RequestMethod.POST)
     @ResponseBody
-    public Object setName(@RequestParam("nickName") String nickName) {
-        String userId=super.getUc().getUserId();
-        userService.updateNickName(userId, nickName);
-        return new SuccessBean();
+    public Object setName(@RequestBody NickNameEditRequest nickNameEditRequest) {
+        String nickName=nickNameEditRequest.getNickName();
+        if(userService.isNickNameUniq(nickName)){
+            userService.updateNickName(super.getUc().getUserId(), nickName);
+            super.getCombiqUser().setNickName(nickName);
+            return new SuccessBean();
+        } else if(super.getCombiqUser().getNickName().equals(nickName))
+            return new SuccessBean(false, "Это ваш текущий Ник name, вы можете выбрать другой");
+
+        return new SuccessBean(false,"Этот Ник занят, выберите пожалуйста другой");
     }
 
 

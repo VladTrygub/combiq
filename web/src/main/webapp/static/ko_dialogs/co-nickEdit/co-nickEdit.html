@@ -1,12 +1,12 @@
 <div>
-    <form action="/users/setNickName" method="post" id="nickNameEdit">
+    <form id="nickNameEdit">
         <div class="co-search">
             <div class="row">
                 <div class="col-md-10">
-                    <input id="nickEditBox" autofocus autocomplete="off" type="text" name="nickName"/>
+                    <input id="nickEditBox" autofocus type="text" required maxlength="40" pattern="[a-zA-Z0-9]+" data-bind="value: nickName"/>
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" class="pull-right">Edit</button>
+                    <button type="submit" class="pull-right" data-bind="click: editButtonClick, disable: posting">Edit</button>
                 </div>
             </div>
         </div>

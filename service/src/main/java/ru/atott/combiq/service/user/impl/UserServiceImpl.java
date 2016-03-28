@@ -290,4 +290,8 @@ public class UserServiceImpl implements UserService {
         userEntity.setNickName(nickName);
         userRepository.save(userEntity);
     }
+
+    public boolean isNickNameUniq(String nickName){
+        return userRepository.findByNickName(nickName).isEmpty();
+    }
 }
