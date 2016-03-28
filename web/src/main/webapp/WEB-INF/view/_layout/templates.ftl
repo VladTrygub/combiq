@@ -77,7 +77,11 @@
                 facebookCallbackUrl: '${facebookCallbackUrl?js_string}',
                 stackexchangeClientId: '${stackexchangeClientId?js_string}',
                 stackexchangeClientState: '${stackexchangeClientState?js_string}',
-                stackexchangeCallbackUrl: '${stackexchangeCallbackUrl?js_string}'
+                stackexchangeCallbackUrl: '${stackexchangeCallbackUrl?js_string}',
+                githubEnable: ${githubEnable?c},
+                vkEnable: ${vkEnable?c},
+                stackexchangeEnable: ${stackexchangeEnable?c},
+                facebookEnable: ${facebookEnable?c}
             };
         </script>
         <script src="/static/js/lib/css.js"></script>
@@ -86,10 +90,11 @@
     </head>
     <body class="${bodyClass}">
         <#if toolboxVisible>
-            <div class="co-toolbox">
+            <div class="co-toolbox" style="background-color: ${toolboxColor!} !important;">
                 <div class="container">
                     Это тестовый стенд проекта <a href="http://combiq.ru/project">combiq.ru</a>,
-                    окружение <strong>${env}</strong>
+                    окружение <strong>${env}</strong>.
+                    ${toolboxText!}
                 </div>
             </div>
         </#if>
@@ -109,12 +114,12 @@
                 <div class="container">
                     <div class="co-inline">
                         <div>
-                            <strong>Combiq.ru, 2014-2016</strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+                            <strong>Combiq.ru, 2014-2016</strong><span class="hidden-xs hidden-sm">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                             <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                             <a href="/donate">Поддержать проект</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                             <a href="http://jira.combiq.ru/">
                                 <img style="margin-top: -12px;" src="/static/images/social/jirasoftware_rgb_white_atlassian.png" alt="JIRA">
-                            </a>
+                            </a></span>
                         </div>
                     </div>
                     <span class="co-informer">

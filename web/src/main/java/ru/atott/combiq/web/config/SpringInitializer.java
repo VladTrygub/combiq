@@ -1,5 +1,8 @@
 package ru.atott.combiq.web.config;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,7 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
@@ -17,7 +21,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
@@ -32,12 +35,15 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import ru.atott.combiq.web.aop.CommonViewAttributesInjector;
 import ru.atott.combiq.web.filter.RequestHolderFilter;
+import ru.atott.combiq.web.security.CombiqLogoutHandler;
 import ru.atott.combiq.web.security.CombiqUserDetailsService;
 import ru.atott.combiq.web.security.ElasticSearchTokenRepositoryImpl;
 
 import javax.servlet.Filter;
 import javax.servlet.ServletRegistration;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.List;
 import java.util.Properties;
 
 @SuppressWarnings("ALL")
@@ -85,6 +91,7 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
     @ImportResource({
             "classpath:ru/atott/combiq/dao/dao-context.xml",
             "classpath:ru/atott/combiq/service/service-context.xml",
+            "classpath:ru/atott/combiq/rest/rest-context.xml",
             "classpath:conf-context.xml"
     })
     @EnableScheduling
@@ -141,6 +148,20 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
         public void addResourceHandlers(ResourceHandlerRegistry registry) {
             registry.addResourceHandler("/static/**").addResourceLocations("/static/");
             registry.addResourceHandler("/b74b66d51df1.html").addResourceLocations("/b74b66d51df1.html");
+        }
+
+        @Override
+        public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+            objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ"));
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+            MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+            converter.setObjectMapper(objectMapper);
+            converters.add(converter);
+
+            super.configureMessageConverters(converters);
         }
     }
 

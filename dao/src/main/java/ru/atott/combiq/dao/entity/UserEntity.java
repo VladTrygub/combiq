@@ -26,6 +26,7 @@ public class UserEntity {
     private List<String> roles;
     private Date registerDate;
     private Set<String> favoriteQuestions;
+    private Set<String> askedQuestions;
 
     public String getNickName() {
         return nickName;
@@ -125,6 +126,14 @@ public class UserEntity {
 
     public Set<String> getFavoriteQuestions() {
         return favoriteQuestions;
+    }
+
+    public Set<String> getAskedQuestions() {
+        return askedQuestions;
+    }
+
+    public void setAskedQuestions(Set<String> askedQuestions) {
+        this.askedQuestions = askedQuestions;
     }
 
     public void setFavoriteQuestions(Set<String> favoriteQuestions) {

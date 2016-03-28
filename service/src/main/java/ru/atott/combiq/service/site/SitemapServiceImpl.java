@@ -13,7 +13,6 @@ import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.dao.repository.QuestionnaireRepository;
 import ru.atott.combiq.service.ServiceException;
-import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
 import ru.atott.combiq.service.mapper.QuestionMapper;

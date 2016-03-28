@@ -1,6 +1,7 @@
 package ru.atott.combiq.service.question;
 
 import com.google.common.collect.Sets;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.mapper.QuestionMapper;
 import ru.atott.combiq.service.markdown.MarkdownService;
-import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.site.EventService;
 import ru.atott.combiq.service.site.UserContext;
 import ru.atott.combiq.service.util.NumberService;
@@ -216,5 +216,28 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionEntity questionEntity = questionRepository.findOne(id);
         QuestionMapper questionMapper = new QuestionMapper();
         return questionMapper.safeMap(questionEntity);
+    }
+
+    @Override
+    public void deleteComment(UserContext uc, String questionId, String commentId) {
+        Validate.isTrue(!uc.isAnonimous());
+
+        QuestionEntity questionEntity = questionRepository.findOne(questionId);
+
+        if (CollectionUtils.isEmpty(questionEntity.getComments())) {
+            return;
+        }
+
+        List<QuestionComment> comments = questionEntity.getComments().stream()
+                .filter(comment -> {
+                    if (!Objects.equals(comment.getId(), commentId)) {
+                        return true;
+                    }
+
+                    return !(Objects.equals(comment.getUserId(), uc.getUserId()) || uc.hasAnyRole(sa, contenter));
+                })
+                .collect(Collectors.toList());
+        questionEntity.setComments(comments);
+        questionRepository.save(questionEntity);
     }
 }

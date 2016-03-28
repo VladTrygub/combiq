@@ -6,20 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.User;
+import ru.atott.combiq.service.question.AskedQuestionService;
 import ru.atott.combiq.service.user.UserService;
-import ru.atott.combiq.service.user.UserStarsService;
+import ru.atott.combiq.service.question.FavoriteQuestionService;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.request.NickEditRequest;
 import ru.atott.combiq.web.utils.ViewUtils;
 
 import java.util.Optional;
 
-
 @Controller
 public class UserController extends BaseController {
 
     @Autowired
-    private UserStarsService userStarsService;
+    private FavoriteQuestionService favoriteQuestionService;
+
+    @Autowired
+    private AskedQuestionService askedQuestionService;
 
     @Autowired
     private UserService userService;
@@ -28,7 +31,7 @@ public class UserController extends BaseController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('user')")
     public Object like(@PathVariable("questionId") String questionId) {
-        userStarsService.like(getUc(), questionId);
+        favoriteQuestionService.like(getUc(), questionId);
         return new SuccessBean();
     }
 
@@ -36,7 +39,7 @@ public class UserController extends BaseController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('user')")
     public Object dislike(@PathVariable("questionId") String questionId) {
-        userStarsService.dislike(getUc(), questionId);
+        favoriteQuestionService.dislike(getUc(), questionId);
         return new SuccessBean();
     }
 
@@ -55,8 +58,6 @@ public class UserController extends BaseController {
             return notFound();
         }
 
-
-
         ModelAndView modelAndView = new ModelAndView("user/profile");
         modelAndView.addObject("headAvatarUrl", ViewUtils.getHeadAvatarUrl(user.getType(), user.getAvatarUrl()));
         modelAndView.addObject("userName", user.getName());
@@ -66,6 +67,11 @@ public class UserController extends BaseController {
             modelAndView.addObject ("nickName","Не выбран");
         modelAndView.addObject("userRegisterDate", user.getRegisterDate());
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/questions/{questionId}/asked", method = RequestMethod.POST)
+    public void addCount(@PathVariable("questionId") String questionId){
+        askedQuestionService.addAskedCount(getUc(), questionId);
     }
 
     @RequestMapping(value = "/users/setNickName", method = RequestMethod.POST)

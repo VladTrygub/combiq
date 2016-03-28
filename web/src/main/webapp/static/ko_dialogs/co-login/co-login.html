@@ -6,26 +6,27 @@
     <h1>Войти на Combiq.ru</h1>
 
     <div class="text-center">
-        <p>
+        <p data-bind="visible: window.co.githubEnable">
             <a data-bind="attr: {href: githubUrl}" class="btn btn-default">
                 через <b>github.com</b>
             </a>
         </p>
-        <p class="co-login-delimiter">
+        <p data-bind="visible: (window.co.vkEnable || window.co.facebookEnable) && window.co.githubEnable"
+           class="co-login-delimiter">
             - или -
         </p>
-        <p>
-            <a data-bind="attr: {href: vkUrl}" class="btn btn-default">
+        <p data-bind="visible: window.co.vkEnable || window.co.facebookEnable">
+            <a data-bind="attr: {href: vkUrl}, visible: window.co.vkEnable" class="btn btn-default">
                 через <b>vk.com</b>
             </a>
-            <a data-bind="attr: {href: fbUrl}" class="btn btn-default">
+            <a data-bind="attr: {href: fbUrl}, visible: window.co.facebookEnable" class="btn btn-default">
                 через <b>fb.com</b>
             </a>
         </p>
-        <p class="co-login-delimiter">
+        <p data-bind="visible: window.co.stackexchangeEnable && (window.co.vkEnable || window.co.facebookEnable || window.co.githubEnable)" class="co-login-delimiter">
             - или -
         </p>
-        <p>
+        <p data-bind="visible: window.co.stackexchangeEnable">
             <a class="btn btn-default" data-bind="attr: {href: stackexchangeUrl}">
                 через <b>stackoverflow.com</b>
             </a>

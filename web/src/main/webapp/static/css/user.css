@@ -23,3 +23,8 @@
 .co-userpage h1 {
     margin: 0;
 }
+
+.co-userpage co-questionssearch {
+    margin-top: 45px;
+    display: block;
+}

@@ -1,5 +1,5 @@
 create indeces
-create index site
+import questions
 import dictionary jdk8classes
 update question timestamps
 migrate question stringIdsToNumbers

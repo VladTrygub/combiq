@@ -22,5 +22,7 @@
                 <#nested />
             </div>
         </div>
+
     </@templates.layoutWithoutSidebar>
+
 </#macro>

@@ -10,10 +10,10 @@
 
     <div class="container">
         <div class="co-titler">
-            <img src="/static/images/background.svg" <#--onerror="this.onerror=null; this.src='image.png'"-->>
+            <img class="hidden-xs hidden-sm" src="/static/images/background.svg">
 
             <div class="co-mainhead text-center">
-                <img src="/static/images/site/titler.png">
+                <img class="hidden-xs" src="/static/images/site/titler.png">
 
                 <h1 class="co-mainhead-content">
                     Всё, что может вам потребоваться
@@ -56,7 +56,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 hidden-xs hidden-sm">
                 <img style="margin-top: -100px;" src="/static/images/site/questions-promo.png">
             </div>
         </div>

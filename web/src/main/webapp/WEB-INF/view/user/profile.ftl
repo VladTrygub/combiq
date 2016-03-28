@@ -21,8 +21,13 @@
             <div>
                  Nick name: ${nickName}  <a href="" onclick="ko.openDialog('co-nickEdit'); return false;">Изменить</a>
             </div>
+
+            <co-questionssearch params="
+                title: 'Избранные вопросы',
+                dsl: 'favorite:true',
+                size: 5">
+            </co-questionssearch>
         </div>
     </div>
-
 
 </@common.userLayout>

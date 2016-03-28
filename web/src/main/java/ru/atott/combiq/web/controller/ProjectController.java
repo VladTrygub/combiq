@@ -9,7 +9,19 @@ public class ProjectController extends BaseController {
 
     @RequestMapping(value = "/project")
     public ModelAndView project() {
-        ModelAndView modelAndView = new ModelAndView("project");
+        ModelAndView modelAndView = new ModelAndView("project/project");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/project/wtf")
+    public ModelAndView wtf() {
+        ModelAndView modelAndView = new ModelAndView("project/wtf");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/project/resources")
+    public ModelAndView resources() {
+        ModelAndView modelAndView = new ModelAndView("project/resources");
         return modelAndView;
     }
 }
