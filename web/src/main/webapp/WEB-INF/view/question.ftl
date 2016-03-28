@@ -183,9 +183,8 @@
 </#macro>
 
 <#macro questionStaff>
-    <div class="row">
-
-        <div class="col-md-6">
+    <div class="row co-question-staff-container">
+        <div class="col-md-7">
             <ul class="co-question-staff">
                 <#list question.tags as tag>
                     <li>
@@ -212,7 +211,7 @@
         </div>
 
 
-        <div class="col-md-6">
+        <div class="col-md-5">
             <@questionPosition />
         </div>
     </div>

@@ -55,7 +55,8 @@
                     <a data-bind="text: title, attr: {href: uri}"></a>
                 </div>
                 <div>
-                    <ul class="co-component-question-tags" data-bind="foreach: { data: tags, as: 'tag' }">
+                    <ul class="co-component-question-tags">
+                        <!-- ko foreach: { data: tags, as: 'tag' } -->
                         <li>
                             <a class="co-tag"
                                data-bind="
@@ -63,13 +64,17 @@
                                     attr: {href: '/questions/tagged/' + tag}">
                             </a>
                         </li>
+                        <!-- /ko -->
+                        <li data-bind="visible: commentsCount">
+                            <a data-bind="attr: {href: uri + '#comments'}" class="co-search-comment" title="Перейти к комментариям вопроса">
+                                <span class="glyphicon glyphicon-comment"></span>
+                                <span data-bind="text: commentsCount"></span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
-            <div data-bind="if: commentsCount > 0" class="co-questionsearch-comment">
-                <span class="glyphicon glyphicon-comment"/>
-                <span class="co-questionsearch-comment-count" data-bind="text: commentsCount"/>
-            </div>
+
         </div>
     </li>
 </script>

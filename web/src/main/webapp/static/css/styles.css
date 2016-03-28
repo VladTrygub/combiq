@@ -354,6 +354,10 @@ ul.co-question-position > li {
     font-family: Tahoma, sans-serif;
 }
 
+.co-question-staff-container {
+    margin-bottom: 40px;
+}
+
 ul.co-question-staff {
     list-style: none;
     margin: 0;
@@ -639,15 +643,13 @@ button:hover, .btn:hover {
 }
 
 .co-tag {
-    padding: 1px 6px;
-    line-height: 18px;
+    padding: 2px 6px;
+    line-height: 16px;
     border-radius: 2px;
     text-decoration: none;
     background-color: #cad6df;
     display: inline-block;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 12px;
-    vertical-align: text-top;
     color: #777;
 }
 
