@@ -78,6 +78,8 @@ public class UserController extends BaseController {
     @ResponseBody
     public Object setName(@RequestBody NickEditRequest nickNameEditRequest) {
         String nickName=nickNameEditRequest.getNickName();
+        if(nickName==null||!nickName.matches("^[a-zA-Z0-9][a-zA-Z0-9 ]{1,40}"))
+            return new SuccessBean(false,"Ник должен состоять из латинских букв, цифр, пробелов и быть не более 40 символов");
         if(userService.isNickNameUniq(nickName)){
             userService.updateNickName(super.getUc().getUserId(), nickName);
             super.getCombiqUser().setNickName(nickName);

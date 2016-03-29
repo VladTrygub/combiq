@@ -58,7 +58,7 @@
                                         </ul>
                                     </div>
 
-                                    <a class="visible-xs" href="${urlResolver.getUserUrl(user.id)}">Мой профиль</a>
+                                    <a class="visible-xs" href="${urlResolver.getUserUrl(user.id,user.nickName)}">Мой профиль</a>
                                 </li>
                             <#else>
                                 <li class="co-auth">
