@@ -86,7 +86,6 @@ public class UserController extends BaseController {
             return new SuccessBean();
         } else if(super.getCombiqUser().getNickName().equals(nickName))
             return new SuccessBean(false, "Это ваш текущий Ник name, вы можете выбрать другой");
-
         return new SuccessBean(false,"Этот Ник занят, выберите пожалуйста другой");
     }
 

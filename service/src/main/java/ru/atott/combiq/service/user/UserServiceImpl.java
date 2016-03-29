@@ -292,6 +292,10 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean isNickNameUniq(String nickName){
-        return userRepository.findByNickName(nickName).isEmpty();
+        List<UserEntity> userEntities=userRepository.findByNickName(nickName);
+        for(UserEntity user:userEntities){
+            if(user.getNickName().equals(nickName)) return false;
+        }
+        return true;
     }
 }

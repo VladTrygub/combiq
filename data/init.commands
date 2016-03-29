@@ -4,4 +4,3 @@ import dictionary jdk8classes
 update question timestamps
 migrate question stringIdsToNumbers
 update question humanUrlTitles
-grant role --userType github --login maks115015 --role sa
