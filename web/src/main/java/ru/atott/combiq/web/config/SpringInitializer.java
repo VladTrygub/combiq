@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -160,6 +162,12 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
             MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
             converter.setObjectMapper(objectMapper);
             converters.add(converter);
+
+            StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+            stringConverter.setWriteAcceptCharset(false);
+            converters.add(stringConverter);
+
+            converters.add(new ByteArrayHttpMessageConverter());
 
             super.configureMessageConverters(converters);
         }
