@@ -39,7 +39,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
         <script src="/static/js/lib/knockout.js"></script>
-        <script src="/static/js/lib/knockout.dialog.js?v=${resourceVersion}"></script>
         <script src="/static/js/lib/knockout.bindings.js?v=${resourceVersion}"></script>
         <script src="/static/js/lib/jquery-resizable.min.js"></script>
         <script src="/static/js/lib/tooltipster/jquery.tooltipster.min.js"></script>
@@ -55,7 +54,6 @@
                 baseUrl: '/static',
                 paths: {
                     text: 'js/lib/text',
-                    css: 'js/lib/css',
                     ajax: 'js/lib/ajax'
                 },
                 urlArgs: '${resourceVersion}'
@@ -85,6 +83,7 @@
             };
         </script>
         <script src="/static/js/lib/css.js"></script>
+        <script src="/static/js/lib/knockout.dialog.js?v=${resourceVersion}"></script>
         <script src="/static/ko_components/components.js?v=${resourceVersion}"></script>
         ${head}
     </head>
