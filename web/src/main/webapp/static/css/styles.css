@@ -1184,3 +1184,7 @@ ul.co-question-staff > li.co-question-staff-share {
     display: inline-block;
     vertical-align: text-top;
 }
+
+.nav-pills > li > a {
+    line-height: 16px;
+}

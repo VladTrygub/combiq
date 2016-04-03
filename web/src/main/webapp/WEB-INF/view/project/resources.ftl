@@ -6,7 +6,7 @@
 
         <#-- Gihub -->
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-1 hidden-sm hidden-xs">
                 <div class="co-project-resource">
                     <img src="/static/images/site/Octocat.png" style="margin-top: 10px;">
                 </div>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-1 hidden-sm hidden-xs">
                 <div class="co-project-resource">
                     <img src="/static/images/site/jira.png">
                 </div>
@@ -45,7 +45,7 @@
 
         <#-- Test resources -->
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-1 hidden-sm hidden-xs">
                 <div class="co-project-resource">
                     <img src="/static/images/image.png">
                 </div>
@@ -67,7 +67,7 @@
 
         <#-- Rest resources -->
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-1 hidden-sm hidden-xs">
                 <div class="co-project-resource">
                     <img src="/static/images/site/teamcity.png">
                 </div>
