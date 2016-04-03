@@ -38,6 +38,9 @@
     <@projectLayout tab='wtf' title=title>
         <div class="container">
             <div class="row">
+                <div class="col-md-9 col-sm-9">
+                    <#nested />
+                </div>
                 <div class="col-md-3 col-sm-3">
                     <ul class="nav nav-pills nav-stacked" style="margin-bottom: 20px;">
                         <li role="presentation" class="${functions.if(wtfTab == 'site', 'active')}">
@@ -47,9 +50,6 @@
                             <a href="/project/wtf/android">Android приложение</a>
                         </li>
                     </ul>
-                </div>
-                <div class="col-md-9 col-sm-9">
-                    <#nested />
                 </div>
             </div>
         </div>
