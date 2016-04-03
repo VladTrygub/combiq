@@ -76,6 +76,10 @@
                 <h2>Другое</h2>
                 <ul>
                     <li>
+                        <a href="http://forum.combiq.ru/">http://forum.combiq.ru/</a> - здесь мы обсуждаем любые
+                        вопросы связанные с проектом Combiq.ru.
+                    </li>
+                    <li>
                         <a href="http://teamcity.combiq.ru/">http://teamcity.combiq.ru/</a> - здесь мы собираем и
                         деплоим наш проект.
                     </li>

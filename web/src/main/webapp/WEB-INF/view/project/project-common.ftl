@@ -6,6 +6,14 @@
         chapter="about"
         subTitle="О проекте combiq.ru">
 
+    <div class="co-toolbox text-center" style="background-color: #BBDEFB">
+        <div class="container">
+            <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+            Мы запустили форум для разработчиков Combiq.ru - <a href="http://forum.combiq.ru">http://forum.combiq.ru</a>, присоединяйтесь!
+        </div>
+    </div>
+
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
