@@ -27,12 +27,11 @@ define(['knockout', 'ajax'], function(ko, ajax) {
         self.posting(true);
 
         var json = {
-            commentId: this.commentId,
             content: this.markdown()
         };
 
         return ajax
-            .rest('POST', '/questions/' + this.questionId + '/comment', json)
+            .rest('PUT', '/rest/v1/question/' + this.questionId + '/comment/' + this.commentId, json)
             .always(function() {
                 self.posting(false);
             });

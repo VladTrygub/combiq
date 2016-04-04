@@ -117,27 +117,6 @@ public class QuestionController extends BaseController {
         return viewBuilder.build();
     }
 
-    @RequestMapping(value = "/questions/{questionId}/content", method = RequestMethod.POST)
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('sa','contenter')")
-    public Object postContent(@PathVariable("questionId") String questionId,
-                              @RequestBody ContentRequest contentRequest) {
-        questionService.saveQuestionBody(getUc(), questionId, contentRequest.getContent());
-        return new SuccessBean();
-    }
-
-    @RequestMapping(value = "/questions/{questionId}/comment", method = RequestMethod.POST)
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('user')")
-    public Object postComment(@PathVariable("questionId") String questionId,
-                              @RequestBody EditCommentRequest request) {
-        if (request.getCommentId() == null) {
-            questionService.saveComment(getUc(), questionId, request.getContent());
-        } else {
-            questionService.updateComment(getUc(), questionId, request.getCommentId(), request.getContent());
-        }
-        return new SuccessBean();
-    }
 
     private RedirectView redirectToCanonicalUrlIfNeed(String questionId,
                                                       String humanUrlTitle,
@@ -165,30 +144,5 @@ public class QuestionController extends BaseController {
         }
 
         return null;
-    }
-
-    @RequestMapping(value = "/questions/{questionId}/delete", method = RequestMethod.POST)
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('sa','contenter')")
-    public SuccessBean deleteQuestion(@PathVariable("questionId") String questionId) {
-        questionService.deleteQuestion(getUc(),questionId);
-        return new SuccessBean(true);
-    }
-
-    @RequestMapping(value = "/questions/{questionId}/restore", method = RequestMethod.POST)
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('sa','contenter')")
-    public SuccessBean restoreQuestion(@PathVariable("questionId") String questionId) {
-        questionService.restoreQuestion(getUc(),questionId);
-        return new SuccessBean(true);
-    }
-
-    @RequestMapping(value = "/questions/{questionId}/comment/{commentId}/delete", method = RequestMethod.POST)
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('user')")
-    public SuccessBean deleteComment(@PathVariable("questionId") String questionId,
-                                     @PathVariable("commentId") String commentId) {
-        questionService.deleteComment(getUc(), questionId, commentId);
-        return new SuccessBean(true);
     }
 }

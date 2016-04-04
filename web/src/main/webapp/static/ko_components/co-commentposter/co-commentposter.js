@@ -20,7 +20,7 @@ define(['ajax'], function(ajax) {
             content: this.comment()
         };
         ajax
-            .rest('POST', '/questions/' + this.questionId + '/comment', json)
+            .rest('POST', '/rest/v1/question/' + this.questionId + '/comment', json)
             .done(function() {
                 new Dialog({
                     content: 'Ваш комментарий успешно размещен на сайте',

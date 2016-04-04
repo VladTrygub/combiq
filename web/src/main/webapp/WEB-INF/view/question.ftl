@@ -347,9 +347,11 @@
             </a>
             <a  href="#"
                 onclick="
-                        $.post('/questions/${question.id}/comment/${comment.id}/delete');
-                        $('#comment-${comment.id!}').remove();
-                        return false;">
+                        $.ajax({ url: '/rest/v1/question/${question.id}/comment/${comment.id}',
+                        type: 'DELETE',
+                        success: function (result) {$('#comment-${comment.id!}').remove();
+                        return false;}
+                        });">
                 Удалить
             </a>
             </div>
