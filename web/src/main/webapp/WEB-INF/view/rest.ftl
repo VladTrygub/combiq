@@ -179,7 +179,7 @@
                 <#if method.acceptableRepresentation??>
                     <h4>Пример тела запроса</h4>
 
-                    <pre><code class="json hljs">${method.acceptableRepresentation}</code></pre>
+                    <pre><code class="json hljs">${method.acceptableRepresentation?html}</code></pre>
                 </#if>
             </div>
         </#if>
@@ -209,7 +209,7 @@
                                     <div>
                                         <h4>Пример ответа</h4>
 
-                                        <pre><code class="json hljs">${example.value}</code></pre>
+                                        <pre><code class="json hljs">${example.value?html}</code></pre>
                                     </div>
                                 </#list>
                             </div>

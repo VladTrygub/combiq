@@ -3,14 +3,15 @@ package ru.atott.combiq.web.controller.question;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.atott.combiq.service.question.AskedQuestionService;
-import ru.atott.combiq.service.site.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
+import ru.atott.combiq.service.question.AskedQuestionService;
+import ru.atott.combiq.service.question.FavoriteQuestionService;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.question.TagService;
 import ru.atott.combiq.service.search.comment.LatestComment;
@@ -18,18 +19,17 @@ import ru.atott.combiq.service.search.comment.LatestCommentSearchService;
 import ru.atott.combiq.service.search.question.GetQuestionContext;
 import ru.atott.combiq.service.search.question.GetQuestionResponse;
 import ru.atott.combiq.service.search.question.SearchService;
-import ru.atott.combiq.service.markdown.MarkdownService;
-import ru.atott.combiq.service.question.FavoriteQuestionService;
-import ru.atott.combiq.web.bean.SuccessBean;
-import ru.atott.combiq.web.controller.BaseController;
-import ru.atott.combiq.web.request.ContentRequest;
-import ru.atott.combiq.web.request.EditCommentRequest;
-import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.service.site.RequestUrlResolver;
+import ru.atott.combiq.service.site.UrlResolver;
+import ru.atott.combiq.web.controller.BaseController;
+import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.view.QuestionViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 public class QuestionController extends BaseController {

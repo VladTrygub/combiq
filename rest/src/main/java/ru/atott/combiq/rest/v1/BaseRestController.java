@@ -31,6 +31,10 @@ public class BaseRestController {
         return response(HttpStatus.NOT_FOUND);
     }
 
+    protected Object responseOk() {
+        return response(HttpStatus.OK);
+    }
+
     protected Object response(HttpStatus httpStatus) {
         return response(new MessageBean(httpStatus.getReasonPhrase()), httpStatus);
     }

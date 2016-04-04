@@ -2,7 +2,6 @@ package ru.atott.combiq.rest.request;
 
 public class CommentRequest {
 
-
     private String content;
 
     public static CommentRequest EXAMPLE;
