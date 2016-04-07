@@ -341,7 +341,7 @@
                 onclick="ko.openDialog('co-editcomment', {
                     questionId: '${question.id?js_string}',
                     commentId: '${comment.id?js_string}',
-                    commentMarkdown: '${comment.content.markdown?js_string}'
+                    commentMarkdown: '${comment.content.markdown!?html?js_string}'
                 }); return false;">
                 Изменить
             </a>
