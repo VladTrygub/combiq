@@ -46,14 +46,14 @@ public class UserController extends BaseController {
         return new SuccessBean();
     }
 
-    @RequestMapping(value = {"/users/{userId}","/users/{userId}/{nick}"})
+    @RequestMapping(value = {"/users/{userId}", "/users/{userId}/{nick}"})
     public ModelAndView profile(@PathVariable("userId") String userId,
                                 @PathVariable Optional<String> nick) {
         User user = userService.findById(userId);
         if (user == null) {
             return notFound();
         }
-        String userNick=UrlResolver.encodeUrlComponent(user.getNick());
+        String userNick = UrlResolver.encodeUrlComponent(user.getNick());
         if(userNick != null && (!nick.isPresent() || !userNick.equals(nick.get()))){
             return new ModelAndView(new RedirectView("/users/" + user.getId() + "/" + userNick));
         }

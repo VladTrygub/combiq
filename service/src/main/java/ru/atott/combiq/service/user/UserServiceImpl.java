@@ -286,7 +286,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public synchronized void updateNick(String id, String nick){
-        if (!StringUtils.isEmpty(nick)&&nick.matches("^[a-zA-Z0-9][a-zA-Z0-9 ]{1,40}")&&isNickUniq(nick)){
+        if (!StringUtils.isEmpty(nick) && nick.matches("^[a-zA-Z0-9][a-zA-Z0-9 ]{1,40}") && isNickUniq(nick)){
             nick = nick.trim();
             UserEntity userEntity = userRepository.findOne(id);
             userEntity.setNick(nick);
