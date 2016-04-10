@@ -25,6 +25,8 @@ public interface UrlResolver {
 
     String getUserUrl(User user);
 
+    String getUserUrl(String userId);
+
     static String encodeUrlComponent(String urlComponent) {
         try {
             if (StringUtils.isEmpty(urlComponent)) {

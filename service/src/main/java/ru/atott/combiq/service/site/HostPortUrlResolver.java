@@ -90,6 +90,13 @@ public class HostPortUrlResolver implements UrlResolver {
     @Override
     public String getUserUrl(User user) {
         String encodedNick = UrlResolver.encodeUrlComponent(user.getNick());
-        return "/users/" + user.getId() + "/" + (StringUtils.isEmpty(encodedNick)?"":encodedNick);
+        return "/users/" + user.getId() + "/" + (StringUtils.isEmpty(encodedNick) ? "" : encodedNick);
     }
+
+    @Override
+    public String getUserUrl(String userId) {
+        return "/users/" + userId;
+    }
+
+
 }

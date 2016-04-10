@@ -81,6 +81,8 @@ public class UserController extends BaseController {
     @ResponseBody
     public Object setName(@RequestBody NickEditRequest nickEditRequest) {
         String nick=nickEditRequest.getNick();
+        if(nick.equals(super.getCombiqUser().getNick()))
+            return new SuccessBean(false,"Это ваш текущий Ник!");
         userService.updateNick(super.getUc().getUserId(), nick);
         super.getCombiqUser().setNick(nick);
         return new SuccessBean();
