@@ -19,7 +19,7 @@ public class CombiqUser extends User {
     private String email;
     private String name;
     private Set<String> roles;
-    private String nickName;
+    private String nick;
 
     public UserType getType() {
         return type;
@@ -40,12 +40,12 @@ public class CombiqUser extends User {
         this.roles = Sets.newHashSet(roles);
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNick() {
+        return nick;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 
     public String getLogin() {

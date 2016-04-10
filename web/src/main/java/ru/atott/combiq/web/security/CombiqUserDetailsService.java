@@ -42,7 +42,7 @@ public class CombiqUserDetailsService implements UserDetailsService {
                 combiqUser.setAvatarUrl(user.getAvatarUrl());
                 combiqUser.setEmail(user.getEmail());
                 combiqUser.setName(user.getName());
-                combiqUser.setNickName(user.getNickName());
+                combiqUser.setNick(user.getNick());
                 return combiqUser;
             }
         } catch (Exception e) {

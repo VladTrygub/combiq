@@ -1,13 +1,13 @@
 package ru.atott.combiq.web.request;
 
 public class NickEditRequest {
-    String nickName;
+    String nick;
 
-    public String getNickName() {
-        return nickName;
+    public String getNick() {
+        return nick;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 }

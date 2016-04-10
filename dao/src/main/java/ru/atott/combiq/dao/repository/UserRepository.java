@@ -14,5 +14,5 @@ public interface UserRepository extends ElasticsearchRepository<UserEntity, Stri
 
     long countByRegisterDateGreaterThanEqual(Date since);
 
-    List<UserEntity> findByNickName(String nickName);
+    List<UserEntity> findByNick(String nickName);
 }

@@ -38,13 +38,17 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+
         <script src="/static/js/lib/knockout.js"></script>
         <script src="/static/js/lib/knockout.dialog.js?v=${resourceVersion}"></script>
         <script src="/static/js/lib/knockout.bindings.js?v=${resourceVersion}"></script>
+        <#--<script src="/static/js/lib/knockout.validation.min.js"></script>
+        <script src="/static/js/lib/knockout.validation.js"></script>-->
         <script src="/static/js/lib/jquery-resizable.min.js"></script>
         <script src="/static/js/lib/tooltipster/jquery.tooltipster.min.js"></script>
         <script src="/static/js/lib/ace/ace.js"></script>
         <script src="/static/js/site.js?v=${resourceVersion}"></script>
+
         <script type="text/javascript" src="//vk.com/js/api/openapi.js?117"></script>
 
         <!--[if lt IE 9]>
@@ -56,12 +60,15 @@
                 paths: {
                     text: 'js/lib/text',
                     css: 'js/lib/css',
-                    ajax: 'js/lib/ajax'
+                    ajax: 'js/lib/ajax',
+                    knockoutValidation:'js/lib/knockout.validation'
                 },
                 urlArgs: '${resourceVersion}'
             });
 
-            define('jquery', [], function() { return $; });
+
+
+
 
             window.co = {
                 userId: ${if(userId??, '"' + (userId!'') + '"', 'null')},

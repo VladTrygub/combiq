@@ -1,5 +1,6 @@
 package ru.atott.combiq.service.user;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +15,6 @@ import ru.atott.combiq.service.bean.UserQualifier;
 import ru.atott.combiq.service.bean.UserType;
 import ru.atott.combiq.service.mapper.UserMapper;
 import ru.atott.combiq.service.site.EventService;
-import ru.atott.combiq.service.user.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -285,17 +285,16 @@ public class UserServiceImpl implements UserService {
         return findEntityByLoginAndType(userQualifier.getLogin(), userQualifier.getType());
     }
 
-    public void updateNickName(String id, String nickName){
-        UserEntity userEntity=userRepository.findOne(id);
-        userEntity.setNickName(nickName);
-        userRepository.save(userEntity);
+    public synchronized void updateNick(String id, String nick){
+        if (!StringUtils.isEmpty(nick)&&nick.matches("^[a-zA-Z0-9][a-zA-Z0-9 ]{1,40}")&&isNickUniq(nick)){
+            nick = nick.trim();
+            UserEntity userEntity = userRepository.findOne(id);
+            userEntity.setNick(nick);
+            userRepository.save(userEntity);
+        } else throw new ServiceException(String.format("Nick %s is incorrect", nick));
     }
 
-    public boolean isNickNameUniq(String nickName){
-        List<UserEntity> userEntities=userRepository.findByNickName(nickName);
-        for(UserEntity user:userEntities){
-            if(user.getNickName().equals(nickName)) return false;
-        }
-        return true;
+    public boolean isNickUniq(String nick){
+        return !userRepository.findByNick(nick).stream().anyMatch(obj -> obj.getNick().equals(nick));
     }
 }

@@ -40,7 +40,7 @@
                                 <li class="co-auth">
                                     <div class="hidden-xs btn-group co-profile-button">
                                         <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <a class="co-inline" href="${urlResolver.getUserUrl(user.id,user.nickName)}">
+                                            <a class="co-inline" href="${urlResolver.getUserUrl(userEntity)}">
                                                 <#if user.headAvatarUrl??>
                                                     <img style="margin-top: -20px; margin-bottom: -15px;" width="46" height="46" src="${user.headAvatarUrl!}">
                                                 </#if>
@@ -49,7 +49,7 @@
                                         </button>
                                         <ul class="dropdown-menu pull-right">
                                             <li>
-                                                <a href="${urlResolver.getUserUrl(user.id,user.nickName)}">Мой профиль</a>
+                                                <a href="${urlResolver.getUserUrl(userEntity)}">Мой профиль</a>
                                             </li>
                                             <li role="separator" class="divider"></li>
                                             <li>
@@ -58,7 +58,7 @@
                                         </ul>
                                     </div>
 
-                                    <a class="visible-xs" href="${urlResolver.getUserUrl(user.id,user.nickName)}">Мой профиль</a>
+                                    <a class="visible-xs" href="${urlResolver.getUserUrl(userEntity)}">Мой профиль</a>
                                 </li>
                             <#else>
                                 <li class="co-auth">

@@ -1,14 +1,17 @@
 package ru.atott.combiq.web.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.question.AskedQuestionService;
-import ru.atott.combiq.service.user.UserService;
 import ru.atott.combiq.service.question.FavoriteQuestionService;
+import ru.atott.combiq.service.site.UrlResolver;
+import ru.atott.combiq.service.user.UserService;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.request.NickEditRequest;
 import ru.atott.combiq.web.utils.ViewUtils;
@@ -43,28 +46,28 @@ public class UserController extends BaseController {
         return new SuccessBean();
     }
 
-    @RequestMapping(value = {"/users/{userId}","/users/{userId}/{nickName}"})
+    @RequestMapping(value = {"/users/{userId}","/users/{userId}/{nick}"})
     public ModelAndView profile(@PathVariable("userId") String userId,
-                                @PathVariable Optional<String> nickName) {
+                                @PathVariable Optional<String> nick) {
         User user = userService.findById(userId);
-
         if (user == null) {
             return notFound();
         }
-        if(!nickName.isPresent()&&user.getNickName()!=null){
-            return notFound();
+        String userNick=UrlResolver.encodeUrlComponent(user.getNick());
+        if(userNick != null && (!nick.isPresent() || !userNick.equals(nick.get()))){
+            return new ModelAndView(new RedirectView("/users/" + user.getId() + "/" + userNick));
         }
-        if(nickName.isPresent()&&(user.getNickName()==null||!user.getNickName().equals(nickName.get()))){
-            return notFound();
+        if(nick.isPresent() && (userNick == null)){
+            return new ModelAndView(new RedirectView("/users/" + user.getId()));
         }
 
         ModelAndView modelAndView = new ModelAndView("user/profile");
         modelAndView.addObject("headAvatarUrl", ViewUtils.getHeadAvatarUrl(user.getType(), user.getAvatarUrl()));
         modelAndView.addObject("userName", user.getName());
-        if(!(user.getNickName()==null)&&!user.getNickName().isEmpty())
-            modelAndView.addObject("nickName",user.getNickName());
+        if(!StringUtils.isEmpty(user.getNick()))
+            modelAndView.addObject("nick",user.getNick());
         else
-            modelAndView.addObject ("nickName","Не выбран");
+            modelAndView.addObject ("nick","Не выбран");
         modelAndView.addObject("userRegisterDate", user.getRegisterDate());
         return modelAndView;
     }
@@ -74,19 +77,13 @@ public class UserController extends BaseController {
         askedQuestionService.addAskedCount(getUc(), questionId);
     }
 
-    @RequestMapping(value = "/users/setNickName", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/setNick", method = RequestMethod.POST)
     @ResponseBody
-    public Object setName(@RequestBody NickEditRequest nickNameEditRequest) {
-        String nickName=nickNameEditRequest.getNickName();
-        if(nickName==null||!nickName.matches("^[a-zA-Z0-9][a-zA-Z0-9 ]{1,40}"))
-            return new SuccessBean(false,"Ник должен состоять из латинских букв, цифр, пробелов и быть не более 40 символов");
-        if(userService.isNickNameUniq(nickName)){
-            userService.updateNickName(super.getUc().getUserId(), nickName);
-            super.getCombiqUser().setNickName(nickName);
-            return new SuccessBean();
-        } else if(super.getCombiqUser().getNickName().equals(nickName))
-            return new SuccessBean(false, "Это ваш текущий Ник name, вы можете выбрать другой");
-        return new SuccessBean(false,"Этот Ник занят, выберите пожалуйста другой");
+    public Object setName(@RequestBody NickEditRequest nickEditRequest) {
+        String nick=nickEditRequest.getNick();
+        userService.updateNick(super.getUc().getUserId(), nick);
+        super.getCombiqUser().setNick(nick);
+        return new SuccessBean();
     }
 
 

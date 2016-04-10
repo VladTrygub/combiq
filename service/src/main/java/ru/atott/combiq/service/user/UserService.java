@@ -44,7 +44,7 @@ public interface UserService {
 
     void revokeRole(UserQualifier userQualifier, String role) throws UserNotFoundException;
 
-    void updateNickName(String id, String nickName);
+    void updateNick(String id, String nick);
 
-    boolean isNickNameUniq(String nickName);
+    boolean isNickUniq(String nickName);
 }
