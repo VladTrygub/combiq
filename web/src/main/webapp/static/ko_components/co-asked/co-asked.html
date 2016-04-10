@@ -1,8 +1,11 @@
-<div>
-<button class="btn btn-primary" data-bind="click: ask, visible: !asked()">
-    Меня это спрашивали
+<button title="Подтвердить, что вас спрашивали этот вопрос на одном из собеседований" class="btn btn-default co-asked" data-bind="click: ask, visible: !asked()">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+    <!-- ko text: askedCount --><!-- /ko -->
+    <span class="co-asked-label">+1 Меня спрашивали</span>
 </button>
-<div data-bind="visible: askedCount" class="text-center" title="Количество пользователей, которым задавали этот вопрос">
-    <span class="co-small" data-bind="text: askedCount"></span>
-</div>
-</div>
+<span data-bind="visible: asked" title="Количество пользователей, которых спрашивали этот вопрос на собеседованиях">
+    <span class="co-search-asked">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+        <!-- ko text: askedCount --><!-- /ko -->
+    </span>
+</span>

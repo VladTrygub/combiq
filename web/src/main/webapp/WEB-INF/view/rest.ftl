@@ -12,7 +12,7 @@
     <#-- @ftlvariable name="documentIndex" type="ru.atott.combiq.rest.doc.RestDocumentIndex" -->
 
     <div class="container">
-        <h1>Combiq REST API документация</h1>
+        <h1>Combiq REST API</h1>
 
         <div>
             <h2>Для разработчиков</h2>
@@ -136,7 +136,7 @@
         <#-- Запрос -->
         <#if (method.parameters?? && method.parameters?size != 0) || method.acceptableRepresentation??>
 
-            <h3>Запрос</h3>
+            <h3>Request</h3>
 
             <div style="margin-left: 50px;">
                 <#-- Параметры запроса -->
@@ -179,14 +179,14 @@
                 <#if method.acceptableRepresentation??>
                     <h4>Пример тела запроса</h4>
 
-                    <pre><code class="json hljs">${method.acceptableRepresentation}</code></pre>
+                    <pre><code class="json hljs">${method.acceptableRepresentation?html}</code></pre>
                 </#if>
             </div>
         </#if>
 
         <#-- Ответ -->
         <#if method.representations?? && method.representations?size != 0>
-            <h3>Ответ</h3>
+            <h3>Response</h3>
 
             <div style="margin-left: 50px;">
                 <div>
@@ -209,7 +209,7 @@
                                     <div>
                                         <h4>Пример ответа</h4>
 
-                                        <pre><code class="json hljs">${example.value}</code></pre>
+                                        <pre><code class="json hljs">${example.value?html}</code></pre>
                                     </div>
                                 </#list>
                             </div>

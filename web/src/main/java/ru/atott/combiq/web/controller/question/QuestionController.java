@@ -3,14 +3,15 @@ package ru.atott.combiq.web.controller.question;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.atott.combiq.service.question.AskedQuestionService;
-import ru.atott.combiq.service.site.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
+import ru.atott.combiq.service.question.AskedQuestionService;
+import ru.atott.combiq.service.question.FavoriteQuestionService;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.question.TagService;
 import ru.atott.combiq.service.search.comment.LatestComment;
@@ -18,18 +19,17 @@ import ru.atott.combiq.service.search.comment.LatestCommentSearchService;
 import ru.atott.combiq.service.search.question.GetQuestionContext;
 import ru.atott.combiq.service.search.question.GetQuestionResponse;
 import ru.atott.combiq.service.search.question.SearchService;
-import ru.atott.combiq.service.markdown.MarkdownService;
-import ru.atott.combiq.service.question.FavoriteQuestionService;
-import ru.atott.combiq.web.bean.SuccessBean;
-import ru.atott.combiq.web.controller.BaseController;
-import ru.atott.combiq.web.request.ContentRequest;
-import ru.atott.combiq.web.request.EditCommentRequest;
-import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.service.site.RequestUrlResolver;
+import ru.atott.combiq.service.site.UrlResolver;
+import ru.atott.combiq.web.controller.BaseController;
+import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.view.QuestionViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 public class QuestionController extends BaseController {
@@ -117,27 +117,6 @@ public class QuestionController extends BaseController {
         return viewBuilder.build();
     }
 
-    @RequestMapping(value = "/questions/{questionId}/content", method = RequestMethod.POST)
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('sa','contenter')")
-    public Object postContent(@PathVariable("questionId") String questionId,
-                              @RequestBody ContentRequest contentRequest) {
-        questionService.saveQuestionBody(getUc(), questionId, contentRequest.getContent());
-        return new SuccessBean();
-    }
-
-    @RequestMapping(value = "/questions/{questionId}/comment", method = RequestMethod.POST)
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('user')")
-    public Object postComment(@PathVariable("questionId") String questionId,
-                              @RequestBody EditCommentRequest request) {
-        if (request.getCommentId() == null) {
-            questionService.saveComment(getUc(), questionId, request.getContent());
-        } else {
-            questionService.updateComment(getUc(), questionId, request.getCommentId(), request.getContent());
-        }
-        return new SuccessBean();
-    }
 
     private RedirectView redirectToCanonicalUrlIfNeed(String questionId,
                                                       String humanUrlTitle,
@@ -165,30 +144,5 @@ public class QuestionController extends BaseController {
         }
 
         return null;
-    }
-
-    @RequestMapping(value = "/questions/{questionId}/delete", method = RequestMethod.POST)
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('sa','contenter')")
-    public SuccessBean deleteQuestion(@PathVariable("questionId") String questionId) {
-        questionService.deleteQuestion(getUc(),questionId);
-        return new SuccessBean(true);
-    }
-
-    @RequestMapping(value = "/questions/{questionId}/restore", method = RequestMethod.POST)
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('sa','contenter')")
-    public SuccessBean restoreQuestion(@PathVariable("questionId") String questionId) {
-        questionService.restoreQuestion(getUc(),questionId);
-        return new SuccessBean(true);
-    }
-
-    @RequestMapping(value = "/questions/{questionId}/comment/{commentId}/delete", method = RequestMethod.POST)
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('user')")
-    public SuccessBean deleteComment(@PathVariable("questionId") String questionId,
-                                     @PathVariable("commentId") String commentId) {
-        questionService.deleteComment(getUc(), questionId, commentId);
-        return new SuccessBean(true);
     }
 }

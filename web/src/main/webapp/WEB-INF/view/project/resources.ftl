@@ -6,7 +6,7 @@
 
         <#-- Gihub -->
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-1 hidden-sm hidden-xs">
                 <div class="co-project-resource">
                     <img src="/static/images/site/Octocat.png" style="margin-top: 10px;">
                 </div>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-1 hidden-sm hidden-xs">
                 <div class="co-project-resource">
                     <img src="/static/images/site/jira.png">
                 </div>
@@ -45,7 +45,7 @@
 
         <#-- Test resources -->
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-1 hidden-sm hidden-xs">
                 <div class="co-project-resource">
                     <img src="/static/images/image.png">
                 </div>
@@ -67,7 +67,7 @@
 
         <#-- Rest resources -->
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-1 hidden-sm hidden-xs">
                 <div class="co-project-resource">
                     <img src="/static/images/site/teamcity.png">
                 </div>
@@ -75,6 +75,10 @@
             <div class="col-md-11">
                 <h2>Другое</h2>
                 <ul>
+                    <li>
+                        <a href="http://forum.combiq.ru/">http://forum.combiq.ru/</a> - здесь мы обсуждаем любые
+                        вопросы связанные с проектом Combiq.ru.
+                    </li>
                     <li>
                         <a href="http://teamcity.combiq.ru/">http://teamcity.combiq.ru/</a> - здесь мы собираем и
                         деплоим наш проект.

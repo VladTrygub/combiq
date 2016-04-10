@@ -4,6 +4,14 @@ import ru.atott.combiq.dao.entity.MarkdownContent;
 
 public class MarkdownContentBean {
 
+    public static MarkdownContentBean EXAMPLE;
+
+    static {
+        EXAMPLE = new MarkdownContentBean();
+        EXAMPLE.setMarkdown("Привет");
+        EXAMPLE.setHtml("<p>Привет</p>");
+    }
+
     private String markdown;
 
     private String html;

@@ -1,0 +1,17 @@
+.co-asked {
+    color: #E91E63;
+    border-color: #F8BBD0;
+    padding: 1px 4px;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding-right: 5px;
+    margin-left: 10px;
+    line-height: 16px;
+    vertical-align: text-top;
+    border-radius: 2px;
+}
+
+.co-asked-label {
+    display: inline-block;
+    margin-left: 5px;
+}

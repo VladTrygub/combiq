@@ -47,6 +47,7 @@
         <slf4j.version>1.7.18</slf4j.version>
         <logstash.logback.version>4.6</logstash.logback.version>
         <dom4j.version>1.6.1</dom4j.version>
+        <jsoup.version>1.8.3</jsoup.version>
     </properties>
 
     <dependencyManagement>
@@ -145,6 +146,11 @@
                 <groupId>dom4j</groupId>
                 <artifactId>dom4j</artifactId>
                 <version>${dom4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

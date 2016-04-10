@@ -1,6 +1,9 @@
 package ru.atott.combiq.service.markdown;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.safety.Whitelist;
 import org.pegdown.LinkRenderer;
 import org.pegdown.PegDownProcessor;
 import org.pegdown.ToHtmlSerializer;
@@ -57,6 +60,8 @@ public class MarkdownServiceImpl implements MarkdownService {
         if (StringUtils.isBlank(markdown)) {
             return "";
         }
+
+        // markdown = Jsoup.clean(markdown, Whitelist.simpleText());
 
         PegDownProcessor processor = new PegDownProcessor(0);
         RootNode rootNode = processor.parseMarkdown(markdown.toCharArray());

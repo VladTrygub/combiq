@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.rest.doc.RestDocumentIndex;
+import ru.atott.combiq.rest.v1.question.CommentRestController;
 import ru.atott.combiq.rest.v1.question.QuestionRestController;
 
 import java.util.List;
@@ -14,7 +15,10 @@ import java.util.List;
 public class RestController extends BaseController {
 
     private static List<List<Class>> restControllerBuckets = Lists.<List<Class>>newArrayList(
-            Lists.newArrayList(QuestionRestController.class)
+            Lists.newArrayList(
+                    QuestionRestController.class,
+                    CommentRestController.class
+            )
     );
 
     private volatile RestDocumentIndex documentIndex;
