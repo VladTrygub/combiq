@@ -12,7 +12,7 @@ define(['knockout', 'ajax', 'knockoutValidation'], function(ko, ajax, validation
             minLength: {params: 1, message: 'Минимум 1 символ'},
             maxLength: {params: 40, message: 'Максимум 40 символов'},
             pattern: {params: '^[A-Za-z0-9]{1}[A-Za-z0-9 ]{0,39}$',
-                      message: 'Ник должен состоять только из латинских букв и цифр'}
+                message: 'Ник должен состоять только из латинских букв и цифр'}
         });
     }
 

@@ -62,7 +62,6 @@ public class UserController extends BaseController {
         if (nick.isPresent() && (userNick == null)) {
             return new ModelAndView(new RedirectView(urlResolver.getUserUrl(userId)));
         }
-
         ModelAndView modelAndView = new ModelAndView("user/profile");
         modelAndView.addObject("headAvatarUrl", ViewUtils.getHeadAvatarUrl(user.getType(), user.getAvatarUrl()));
         modelAndView.addObject("userName", user.getName());
