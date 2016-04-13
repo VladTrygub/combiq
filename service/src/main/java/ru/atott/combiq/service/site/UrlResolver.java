@@ -3,7 +3,6 @@ package ru.atott.combiq.service.site;
 import org.apache.commons.lang3.StringUtils;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
-import ru.atott.combiq.service.bean.User;
 
 import java.net.URLEncoder;
 
@@ -22,8 +21,6 @@ public interface UrlResolver {
     String getQuestionnaireUrl(QuestionnaireHead questionnaire);
 
     String getQuestionnaireUrl(QuestionnaireHead questionnaire, String queryString);
-
-    String getUserUrl(User user);
 
     String getUserUrl(String userId);
 

@@ -1,4 +1,4 @@
-define(['knockout', 'ajax','knockoutValidation'], function(ko, ajax, validation) {
+define(['knockout', 'ajax', 'knockoutValidation'], function(ko, ajax, validation) {
 
     function ViewModel(params) {
         this.width = 460;
@@ -8,16 +8,17 @@ define(['knockout', 'ajax','knockoutValidation'], function(ko, ajax, validation)
         this.sticked = true;
         this.posting = ko.wrap(false);
         this.nick = ko.observable().extend({
-            required: { params: true, message: 'Ник не может быть пустым' },
-            minLength: {params: 2, message: 'Минимум 2 символа'},
+            required: {params: true, message: 'Ник не может быть пустым'},
+            minLength: {params: 1, message: 'Минимум 1 символ'},
             maxLength: {params: 40, message: 'Максимум 40 символов'},
-            pattern: {params: '^[A-Za-z0-9 ]{1}[A-Za-z0-9 ]{2,40}$',
-                message: 'Ник должен состоять только из латинских букв и цифр'}});
+            pattern: {params: '^[A-Za-z0-9]{1}[A-Za-z0-9 ]{0,39}$',
+                      message: 'Ник должен состоять только из латинских букв и цифр'}
+        });
     }
 
     ViewModel.prototype.editButtonClick = function() {
 
-        var url = "/users/"+window.co.userId+"/"+this.nick().trim();
+        var url = "/users/" + window.co.userId + "/" + this.nick().trim();
         if(this.nick.isValid()) {
             this
                 .save()

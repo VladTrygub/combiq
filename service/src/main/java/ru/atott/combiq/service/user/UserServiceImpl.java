@@ -285,16 +285,22 @@ public class UserServiceImpl implements UserService {
         return findEntityByLoginAndType(userQualifier.getLogin(), userQualifier.getType());
     }
 
-    public synchronized void updateNick(String id, String nick){
-        if (!StringUtils.isEmpty(nick) && nick.matches("^[a-zA-Z0-9][a-zA-Z0-9 ]{1,40}") && isNickUniq(nick)){
+    public synchronized void updateNick(String id, String nick) throws ServiceException {
+        if (!isNickUniq(nick)) {
+            throw new ServiceException(String.format("Ник %s занят, придумайте другой.", nick));
+        }
+        if (!StringUtils.isEmpty(nick) && nick.matches("^[A-Za-z0-9]{1}[A-Za-z0-9 ]{0,39}$")) {
             nick = nick.trim();
             UserEntity userEntity = userRepository.findOne(id);
             userEntity.setNick(nick);
             userRepository.save(userEntity);
-        } else throw new ServiceException(String.format("Nick %s is incorrect", nick));
+        }
+        else {
+            throw new ServiceException(String.format("Ник %s не корректный", nick));
+        }
     }
 
-    public boolean isNickUniq(String nick){
+    public boolean isNickUniq(String nick) {
         return !userRepository.findByNick(nick).stream().anyMatch(obj -> obj.getNick().equals(nick));
     }
 }

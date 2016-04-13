@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.search.comment.LatestCommentSearchService;
 import ru.atott.combiq.service.site.RequestUrlResolver;
 import ru.atott.combiq.service.site.UrlResolver;
@@ -88,11 +87,6 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
                 && !modelAndView.getModel().containsKey(INJECTED)) {
 
             CombiqUser user = authService.getUser();
-            User userEntity = null;
-            if (user != null) {
-                userEntity= userService.findById(user.getId());
-            }
-
 
             UrlResolver urlResolver = new RequestUrlResolver(request);
 
@@ -105,7 +99,6 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
             modelAndView.addObject("env", System.getProperty("env"));
             modelAndView.addObject("resourceVersion", resourceVersion);
             modelAndView.addObject("user", user);
-            modelAndView.addObject("userEntity", userEntity);
 
             modelAndView.addObject("userId", authService.getUserId());
             modelAndView.addObject("roles", roles);

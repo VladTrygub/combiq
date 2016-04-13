@@ -3,7 +3,6 @@ package ru.atott.combiq.service.site;
 import org.apache.commons.lang3.StringUtils;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
-import ru.atott.combiq.service.bean.User;
 
 public class HostPortUrlResolver implements UrlResolver {
 
@@ -85,12 +84,6 @@ public class HostPortUrlResolver implements UrlResolver {
         } else {
             return "/questionnaire/" + questionnaire.getId() + "?" + queryString;
         }
-    }
-
-    @Override
-    public String getUserUrl(User user) {
-        String encodedNick = UrlResolver.encodeUrlComponent(user.getNick());
-        return "/users/" + user.getId() + "/" + (StringUtils.isEmpty(encodedNick) ? "" : encodedNick);
     }
 
     @Override
