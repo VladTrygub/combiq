@@ -23,7 +23,7 @@
                  Ник: ${nick}  <a href="" onclick="ko.openDialog('co-editnick'); return false;">Изменить</a>
             </div>
             <#else>
-                <a href="" onclick="ko.openDialog('co-edit-nick'); return false;">Выберите себе Ник</a>
+                <a href="" onclick="ko.openDialog('co-editnick'); return false;">Выберите себе Ник</a>
             </#if>
             <co-questionssearch params="
                 title: 'Избранные вопросы',
