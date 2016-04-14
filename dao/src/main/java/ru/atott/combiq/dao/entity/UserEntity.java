@@ -2,6 +2,9 @@ package ru.atott.combiq.dao.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldIndex;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.Date;
 import java.util.List;
@@ -15,6 +18,8 @@ public class UserEntity {
     @Id
     private String id;
     private String name;
+    @Field(index = FieldIndex.not_analyzed, type = FieldType.String)
+    private String nick;
     private String email;
     private String password;
     private String login;
@@ -26,6 +31,14 @@ public class UserEntity {
     private Date registerDate;
     private Set<String> favoriteQuestions;
     private Set<String> askedQuestions;
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
 
     public String getLogin() {
         return login;

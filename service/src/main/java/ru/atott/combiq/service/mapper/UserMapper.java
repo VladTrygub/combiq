@@ -23,6 +23,7 @@ public class UserMapper implements Mapper<UserEntity, User> {
         user.setAvatarUrl(source.getAvatarUrl());
         user.setRegisterDate(source.getRegisterDate());
         user.setFavoriteQuestions(source.getFavoriteQuestions());
+        user.setNick(source.getNick());
 
         ArrayList<String> roles = new ArrayList<>();
 

@@ -8,6 +8,7 @@ import ru.atott.combiq.service.site.UserContext;
 import ru.atott.combiq.web.aop.CommonViewAttributesInjector;
 import ru.atott.combiq.web.filter.RequestHolderFilter;
 import ru.atott.combiq.web.security.AuthService;
+import ru.atott.combiq.web.security.CombiqUser;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +22,10 @@ public class BaseController {
 
     protected int getZeroBasedPage(int page) {
         return Math.max(0, page - 1);
+    }
+
+    protected CombiqUser getCombiqUser() {
+        return authService.getUser();
     }
 
     protected UserContext getUc() {

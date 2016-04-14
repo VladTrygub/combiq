@@ -54,7 +54,8 @@
                 baseUrl: '/static',
                 paths: {
                     text: 'js/lib/text',
-                    ajax: 'js/lib/ajax'
+                    ajax: 'js/lib/ajax',
+                    knockoutValidation:'js/lib/knockout.validation'
                 },
                 urlArgs: '${resourceVersion}'
             });

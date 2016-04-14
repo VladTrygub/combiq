@@ -18,7 +18,13 @@
                     Зарегистрировался ${userRegisterDate?string["dd MMM yyyy г."]}
                 </div>
             </#if>
-
+            <#if nick??>
+            <div>
+                 Ник: ${nick}  <a href="" onclick="ko.openDialog('co-editnick'); return false;">Изменить</a>
+            </div>
+            <#else>
+                <a href="" onclick="ko.openDialog('co-editnick'); return false;">Выберите себе Ник</a>
+            </#if>
             <co-questionssearch params="
                 title: 'Избранные вопросы',
                 dsl: 'favorite:true',

@@ -1,8 +1,5 @@
 package ru.atott.combiq.dao.repository;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Component;
 import ru.atott.combiq.dao.entity.UserEntity;
@@ -16,4 +13,6 @@ public interface UserRepository extends ElasticsearchRepository<UserEntity, Stri
     List<UserEntity> findByLoginAndType(String login, String type);
 
     long countByRegisterDateGreaterThanEqual(Date since);
+
+    List<UserEntity> findByNick(String nickName);
 }

@@ -7,11 +7,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.atott.combiq.service.site.UrlResolver;
 import ru.atott.combiq.service.search.comment.LatestCommentSearchService;
+import ru.atott.combiq.service.site.RequestUrlResolver;
+import ru.atott.combiq.service.site.UrlResolver;
+import ru.atott.combiq.service.user.UserService;
 import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.security.CombiqUser;
-import ru.atott.combiq.service.site.RequestUrlResolver;
 import ru.atott.combiq.web.utils.ViewUtils;
 import ru.atott.combiq.web.view.InstantMessageHolder;
 
@@ -32,6 +33,9 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private UserService userService;
 
     @Value("${auth.github.clientId}")
     private String githubClientId;
@@ -83,6 +87,7 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
                 && !modelAndView.getModel().containsKey(INJECTED)) {
 
             CombiqUser user = authService.getUser();
+
             UrlResolver urlResolver = new RequestUrlResolver(request);
 
             Set<String> roles = Collections.emptySet();
@@ -94,6 +99,7 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
             modelAndView.addObject("env", System.getProperty("env"));
             modelAndView.addObject("resourceVersion", resourceVersion);
             modelAndView.addObject("user", user);
+
             modelAndView.addObject("userId", authService.getUserId());
             modelAndView.addObject("roles", roles);
             modelAndView.addObject("userEmail", user != null ? user.getEmail() : null);

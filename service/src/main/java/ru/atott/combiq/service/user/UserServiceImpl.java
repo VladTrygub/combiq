@@ -1,5 +1,6 @@
 package ru.atott.combiq.service.user;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +15,6 @@ import ru.atott.combiq.service.bean.UserQualifier;
 import ru.atott.combiq.service.bean.UserType;
 import ru.atott.combiq.service.mapper.UserMapper;
 import ru.atott.combiq.service.site.EventService;
-import ru.atott.combiq.service.user.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -283,5 +283,24 @@ public class UserServiceImpl implements UserService {
 
     private UserEntity findEntityByQualifier(UserQualifier userQualifier) {
         return findEntityByLoginAndType(userQualifier.getLogin(), userQualifier.getType());
+    }
+
+    public synchronized void updateNick(String id, String nick) throws ServiceException {
+        if (!isNickUniq(nick)) {
+            throw new ServiceException(String.format("Ник %s занят, придумайте другой.", nick));
+        }
+        if (!StringUtils.isEmpty(nick) && nick.matches("^[A-Za-z0-9]{1}[A-Za-z0-9 ]{0,39}$")) {
+            nick = nick.trim();
+            UserEntity userEntity = userRepository.findOne(id);
+            userEntity.setNick(nick);
+            userRepository.save(userEntity);
+        }
+        else {
+            throw new ServiceException(String.format("Ник %s не корректный", nick));
+        }
+    }
+
+    public boolean isNickUniq(String nick) {
+        return !userRepository.findByNick(nick).stream().anyMatch(obj -> obj.getNick().equals(nick));
     }
 }

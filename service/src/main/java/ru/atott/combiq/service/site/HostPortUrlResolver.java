@@ -90,4 +90,6 @@ public class HostPortUrlResolver implements UrlResolver {
     public String getUserUrl(String userId) {
         return "/users/" + userId;
     }
+
+
 }

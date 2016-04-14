@@ -17,6 +17,15 @@ public class User {
     private List<String> roles;
     private Date registerDate;
     private Set<String> favoriteQuestions;
+    private String nick;
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
 
     public String getId() {
         return id;
