@@ -91,5 +91,8 @@ public class HostPortUrlResolver implements UrlResolver {
         return "/users/" + userId;
     }
 
-
+    @Override
+    public String getConfirmationUrl(String confirmationId) {
+        return "/confirmation/" + UrlResolver.encodeUrlComponent(confirmationId);
+    }
 }

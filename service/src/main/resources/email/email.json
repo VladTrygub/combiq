@@ -1,0 +1,7 @@
+[
+  {
+    "type": "changeProfileEmailConfirmation",
+    "title": "Подтверждение email",
+    "html": false
+  }
+]

@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.rest.doc.RestDocumentIndex;
 import ru.atott.combiq.rest.v1.question.CommentRestController;
 import ru.atott.combiq.rest.v1.question.QuestionRestController;
+import ru.atott.combiq.rest.v1.user.ProfileRestController;
 
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class RestController extends BaseController {
             Lists.newArrayList(
                     QuestionRestController.class,
                     CommentRestController.class
+            ),
+            Lists.newArrayList(
+                    ProfileRestController.class
             )
     );
 

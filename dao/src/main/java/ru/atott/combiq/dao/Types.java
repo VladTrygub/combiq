@@ -20,4 +20,5 @@ public interface Types {
     String content = "content";
     String subscription = "subscription";
     String event = "event";
+    String confirmation = "confirmation";
 }

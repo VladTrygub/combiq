@@ -65,8 +65,10 @@ public class UserController extends BaseController {
         ModelAndView modelAndView = new ModelAndView("user/profile");
         modelAndView.addObject("headAvatarUrl", ViewUtils.getHeadAvatarUrl(user.getType(), user.getAvatarUrl()));
         modelAndView.addObject("userName", user.getName());
+        modelAndView.addObject("profileUserId", user.getId());
         modelAndView.addObject("nick", user.getNick());
         modelAndView.addObject("userRegisterDate", user.getRegisterDate());
+        modelAndView.addObject("email", user.getEmail());
         return modelAndView;
     }
 

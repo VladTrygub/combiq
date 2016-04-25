@@ -5,17 +5,15 @@
 
 <@common.userLayout>
 
-    <div class="row">
-        <div class="col-md-3">
-            <div class="co-userphoto pull-right">
-                <img src="${headAvatarUrl}">
-            </div>
+    <div>
+        <div class="co-userphoto pull-right">
+            <img src="${headAvatarUrl}">
         </div>
-        <div class="col-md-9">
+        <div>
             <h1>${userName}</h1>
             <#if userRegisterDate??>
                 <div>
-                    Зарегистрировался ${userRegisterDate?string["dd MMM yyyy г."]}
+                    Зарегистрировался ${userRegisterDate?string["dd MMMM yyyy г."]}
                 </div>
             </#if>
             <#if nick??>
@@ -32,5 +30,26 @@
             </co-questionssearch>
         </div>
     </div>
+        </div>
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input readonly type="text" value="${email!?html}">
+
+        <button onclick="
+                ko.openDialog('co-editprofileemail', {
+                    email: '${email!?js_string}',
+                    userId: '${profileUserId?js_string}'
+                })">
+            Изменить email
+        </button>
+    </div>
+
+    <co-questionssearch params="
+        title: 'Избранные вопросы',
+        dsl: 'favorite:true',
+        size: 5">
+    </co-questionssearch>
 
 </@common.userLayout>

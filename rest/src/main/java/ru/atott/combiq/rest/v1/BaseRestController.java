@@ -31,6 +31,10 @@ public class BaseRestController {
         return response(HttpStatus.NOT_FOUND);
     }
 
+    protected Object responseForbidden() {
+        return response(HttpStatus.FORBIDDEN);
+    }
+
     protected Object responseOk() {
         return response(HttpStatus.OK);
     }
