@@ -61,7 +61,7 @@ public class MarkdownServiceImpl implements MarkdownService {
             return "";
         }
 
-        // markdown = Jsoup.clean(markdown, Whitelist.simpleText());
+        markdown = Jsoup.clean(markdown, Whitelist.simpleText());
 
         PegDownProcessor processor = new PegDownProcessor(0);
         RootNode rootNode = processor.parseMarkdown(markdown.toCharArray());
