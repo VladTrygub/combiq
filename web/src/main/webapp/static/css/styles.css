@@ -964,6 +964,10 @@ ul.co-component-question-tags > li {
 
 .co-menu-top {
     background-color: #ededed;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
 }
 
 .co-menu-top-items {
